@@ -3,6 +3,14 @@ import java.io.*;
 public class ImageEditor
 {
 	private Pixel[][] PixelMap;
+	private int height;
+	private int width;
+	public ImageEditor()
+	{
+		height = 0;
+		width = 0;
+	}
+
 	public static void main(String[] args)
 	{
 		int argc = args.length;
@@ -13,14 +21,17 @@ public class ImageEditor
 		else
 		{
 			// parse input file
-			read_input_ppm(args[0]);
+			ImageEditor editor = new ImageEditor();
+			editor.read_input_ppm(args[0]);
 
 			// then determine and perform the required image transformation
 			switch (args[2])
 			{
 				case "grayscale":
+					editor.grayscale();
 					break;
 				case "invert":
+					editor.invert();
 					break;
 				case "emboss":
 					break;
@@ -33,6 +44,8 @@ public class ImageEditor
 				default:
 					verbose_die("Invalid third argument " + args[2]+ " given, see usage.");
 			}
+
+			editor.save(args[1]);
 		}
 
 		System.out.println("Number of arguments: " + args.length);
@@ -50,11 +63,9 @@ public class ImageEditor
 		die_with_usage();
 	}
 
-	private static void read_input_ppm(String filename)
+	private void read_input_ppm(String filename)
 	{
 		int[] temp = new int[3]; //a temporary array to hold the last three pixel values
-		int width = 0;
-		int height = 0;
 
 		try {
 			File fil = new File(filename);
@@ -86,6 +97,7 @@ public class ImageEditor
 				}
 			}
 
+			PixelMap = new Pixel[width][height];
 			int row, col,i;
 			for (row = 0; row < height; row++)
 			{
@@ -97,22 +109,60 @@ public class ImageEditor
 						s = f.readLine();
 					}
 					//now add new pixel
-					System.out.println(temp[0] + " " + temp[1] + " " + temp[2] + " ");
+					PixelMap[row][col] = new Pixel(temp[0], temp[1], temp[2]);
 				}
 			}
 
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			verbose_die("Something went wrong when reading file: " + filename +
 				".\nError Message: " + e.getMessage());
 		}
-		finally
+	}
+
+	public void save(outfile)
+	{
+		//Each int value is represented with a maximum of three digits, plus a separating whitespace
+		//There are 3 values in a pixel, width*height pixels, and hence 12*width*height characters are needed for the pixels.
+		//3 bytes are needed for the initial P3\n
+		StringBuilder res = new StringBuilder(width*height*12+20);
+		res.append("P3\n");
+	}
+
+	public void invert()
+	{
+		int i,j;
+		for (i = 0; i < height; i++)
 		{
-			System.out.println("Survived");
+			for (j = 0; j < width; j++)
+			{
+				PixelMap[i][j].invert();
+			}
 		}
 	}
 
+	public void grayscale()
+	{
+		int i,j;
+		for (i = 0; i < height; i++)
+		{
+			for (j = 0; j < width; j++)
+			{
+				PixelMap[i][j].grayscale();
+			}
+		}
+	}
+
+	public void emboss()
+	{
+
+	}
+
+	public void motionblur()
+	{
+
+	}
 
 
 }
