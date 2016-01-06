@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class ImageEditor
 {
@@ -52,7 +53,7 @@ public class ImageEditor
 			editor.save(args[1]);
 		}
 
-		System.out.println("Number of arguments: " + args.length);
+//		System.out.println("Number of arguments: " + args.length);
 	}
 
 	private static void die_with_usage()
@@ -74,35 +75,14 @@ public class ImageEditor
 		try {
 			File fil = new File(filename);
 			FileReader freader = new FileReader(filename);
-			BufferedReader f = new BufferedReader(freader);
-			String s = f.readLine();
-			String[] t_arr; // temporary array for strings
-
-			// get height and width
-			while (s != null)
-			{
-				t_arr = s.split("\\s+");
-				s = f.readLine();
-				if(t_arr.length >= 2)
-				{
-					try
-					{
-						width = Integer.parseInt(t_arr[0].trim());
-						height = Integer.parseInt(t_arr[1].trim());
-						System.out.println(width + " " + height);
-					}
-					catch (Exception e)
-					{
-						continue;
-					}
-
-					if (height==0 || width==0)	continue;
-					break; // if we reached this point, we're ready to move on
-				}
-			}
-
-			f.readLine(); //skip max color value
+			BufferedReader fb = new BufferedReader(freader);
+			Scanner f = new Scanner(fb);
+			f.next(); //skip the P3
+			f.useDelimiter("(\\s+)(#[^\\n]*\\n)?(\\s*)|(#[^\\n]*\\n)(\\s*)");			
+			width = f.nextInt();
+			height = f.nextInt();
 			System.out.println("H: "+height + " W: " + width );
+			f.next(); //skip max color value
 			PixelMap = new Pixel[height][width];
 			int row, col,i;
 			for (row = 0; row < height; row++)
@@ -111,11 +91,10 @@ public class ImageEditor
 				{
 					for (i = 0; i < 3; i++)
 					{
-						temp[i] = Integer.parseInt(s.trim());
-						s = f.readLine();
+						temp[i] = f.nextInt();
 					}
 					//now add new pixel
-// 					System.out.println(temp[0]+ " " + temp[1] + " " + temp[2]);
+ //					System.out.println(temp[0]+ " " + temp[1] + " " + temp[2]);
 					PixelMap[row][col] = new Pixel(temp[0], temp[1], temp[2]);
 				}
 			}
@@ -208,7 +187,7 @@ public class ImageEditor
 					rd = PixelMap[i][j].r.val - PixelMap[i-1][j-1].r.val;
 					gd = PixelMap[i][j].g.val - PixelMap[i-1][j-1].g.val;
 					bd = PixelMap[i][j].b.val - PixelMap[i-1][j-1].b.val;
-					if (Math.abs(rd) > Math.abs(gd)) {
+					if (Math.abs(rd) >= Math.abs(gd)) {
 						if (Math.abs(bd) > Math.abs(rd)) V = bd + 128;
 						else V = rd + 128;
 					}
@@ -218,8 +197,8 @@ public class ImageEditor
 					}
 					if (V<0) V = 0;
 					if (V>255) V = 255;
-					PixelMap[i][j].reset(V,V,V);
 				}
+				PixelMap[i][j].reset(V,V,V);
 			}
 		}
 	}
@@ -231,11 +210,11 @@ public class ImageEditor
 
 		for (i = 0;i<height; i++)
 		{
-			for (j = 0; j < height; j++)
+			for (j = 0; j < width; j++)
 			{
 				int[] t_arr = {0,0,0};
 				//ensure we don't go off the image
-				off = Math.min(blur,height-j);
+				off = Math.min(blur,width-j);
 				for (k = j; k < j+off; k++)
 				{
 					t_arr[0] += PixelMap[i][k].r.val;
