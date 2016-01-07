@@ -1,11 +1,11 @@
 package spell;
 
-import java.io.IOException;
+public class SpellCorrector implements ISpellCorrector {
 
-public interface ISpellCorrector {
-
-	@SuppressWarnings("serial")
-	public static class NoSimilarWordFoundException extends Exception {
+	private Words dict;
+	public SpellCorrector()
+	{
+		dict = new Words();
 	}
 
 	/**
@@ -14,7 +14,10 @@ public interface ISpellCorrector {
 	 * @param dictionaryFileName File containing the words to be used
 	 * @throws IOException If the file cannot be read
 	 */
-	public void useDictionary(String dictionaryFileName) throws IOException;
+	public void useDictionary(String dictionaryFileName) throws IOException
+	{
+
+	}
 
 	/**
 	 * Suggest a word from the dictionary that most closely matches
@@ -23,7 +26,9 @@ public interface ISpellCorrector {
 	 * @return The suggestion
 	 * @throws NoSimilarWordFoundException If no similar word is in the dictionary
 	 */
-	public String suggestSimilarWord(String inputWord) throws NoSimilarWordFoundException;
+	public String suggestSimilarWord(String inputWord) throws NoSimilarWordFoundException
+	{
+
+	}
 
 }
-
