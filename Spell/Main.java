@@ -2,7 +2,7 @@ package spell;
 
 import java.io.IOException;
 
-//import spell.ISpellCorrector.NoSimilarWordFoundException;
+import spell.ISpellCorrector.NoSimilarWordFoundException;
 
 /**
  * A simple main class for running the spelling corrector. This class is not

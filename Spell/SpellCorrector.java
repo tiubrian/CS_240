@@ -1,5 +1,7 @@
 package spell;
 
+import java.io.IOException;
+
 public class SpellCorrector implements ISpellCorrector {
 
 	private Words dict;
@@ -28,7 +30,7 @@ public class SpellCorrector implements ISpellCorrector {
 	 */
 	public String suggestSimilarWord(String inputWord) throws NoSimilarWordFoundException
 	{
-
+		return " ";
 	}
 
 }

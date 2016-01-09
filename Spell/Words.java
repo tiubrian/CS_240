@@ -3,6 +3,7 @@ package spell;
 public class Words implements ITrie {
 
 	public WordNode root;
+	public static final int mod = 1000000007; // a prime
 
 	public Words()
 	{
@@ -10,30 +11,29 @@ public class Words implements ITrie {
 	}
 
 	public void add(String word) {
-		Wordnode curr_node = root;
+		WordNode curr_node = root;
 		char c;
 
 		for (int i = 0; i < word.length(); i++) {
 			c = word.charAt(i);
-			if (curr_node[c] == null) {
-				curr_node[c] = new WordNode();
+			if (curr_node.getn(c) == null) {
+				curr_node.setn(c, new WordNode());
 			}
-			curr_node = curr_node[c];
+			curr_node = curr_node.getn(c);
 		}
 		curr_node.count++;
 	}
 
 	public ITrie.INode find(String word) {
-		Wordnode curr_node = root;
-		public static final int mod = 1000000007; // a prime
+		WordNode curr_node = root;
 		char c;
 
 		for (int i = 0; i < word.length(); i++) {
 			c = word.charAt(i);
-			if (curr_node[c] == null) {
+			if (curr_node.getn(c) == null) {
 				return null; //word not in Trie
 			}
-			curr_node = curr_node[c];
+			curr_node = curr_node.getn(c);
 		}
 
 		if (curr_node.count == 0) return null;
@@ -48,30 +48,30 @@ public class Words implements ITrie {
 		return recNodeCount(root);
 	}
 
-	public static recNodeCount(WordNode start)
+	public static int recNodeCount(WordNode start)
 	{
 		if (start == null) return 0;
 		int tot = 1;
 
-		for (i='a';i<='z';i++) {
-			tot += recNodeCount(start.nodes[i]);
+		for (char i='a';i<='z';i++) {
+			tot += recNodeCount(start.getn(i));
 		}
 		return tot;
 	}
 
-	public static recWordCount(WordNode start)
+	public static int recWordCount(WordNode start)
 	{
 		if (start == null) return 0;
 		int tot = start.count;
 
-		for (i='a';i<='z';i++) {
-			tot += recWordCount(start.nodes[i]);
+		for (char i='a';i<='z';i++) {
+			tot += recWordCount(start.getn(i));
 		}
 		return tot;
 	}
 
 	@Override
-	public String toString() {  }
+	public String toString() { return " "; }
 
 	@Override
 	public int hashCode() {
@@ -83,7 +83,7 @@ public class Words implements ITrie {
 		if (start == null) return 1;
 		int tot = 0;
 		for (int i='a';i<='z';i++) {
-			tot += i*recHashCode(start.nodes[i]);
+			tot += i*recHashCode(start.getn((char)i));
 			tot = tot % mod;
 		}
 		return tot;
@@ -91,8 +91,8 @@ public class Words implements ITrie {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof Itrie.Inode) {
-			return recEquals(o.root,root);
+		if (o instanceof Words) {
+			return recEquals(((Words)o).root,root);
 		}
 		else return false;
 	}
@@ -104,32 +104,11 @@ public class Words implements ITrie {
 		}
 		if (start_o.count != start.count) return false;
 
-		for (i='a';i<='z';i++) {
-			if (! recEquals(start_o.nodes[i],start.nodes[i]) return false;
+		for (char i='a';i<='z';i++) {
+			if (! recEquals(start_o.getn(i),start.getn(i))) return false;
 		}
 
 		return true;
 	}
 
-}
-
-public class WordNode implements ITrie.INode {
-
-	WordNode[] nodes;
-	public int count;
-
-	public WordNode()
-	{
-		nodes = new WordNode['z'+1];
-		int i;
-		for (i = 0; i < 26; i++)
-		{
-			nodes['a'+i] = null;
-		}
-		count = 0;
-	}
-
-	public int getValue() {
-		return count;
-	}
 }
