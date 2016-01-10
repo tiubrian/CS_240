@@ -32,7 +32,6 @@ public class SpellCorrector implements ISpellCorrector {
 		while (s.hasNext()) {
 			String w = s.next();
 			dict.add(w);
-			System.out.println(w+ " " + (dict.find(w)).getValue());
 		}
 
 	}
@@ -77,7 +76,7 @@ public class SpellCorrector implements ISpellCorrector {
 		for (int i = 0; i < edits.size(); i++)
 		{
 			List<String> edits2 = gen_edits(edits.get(i));
-			for (int j = 0; j <= edits2.size(); j++)
+			for (int j = 0; j < edits2.size(); j++)
 			{
 				temp = edits2.get(j);
 				if ((tcount=word_count(temp))>0)
@@ -96,7 +95,8 @@ public class SpellCorrector implements ISpellCorrector {
 		}
 
 		if (best_val > 0) return best_cand;
-		else throw NoSimilarWordFoundException;
+//		else throw NoSimilarWordFoundException;
+		return "Word Not Found.";
 	}
 
 	public static List<String> gen_edits(String word)
@@ -142,6 +142,7 @@ public class SpellCorrector implements ISpellCorrector {
 	{
 		WordNode w = (WordNode)dict.find(word);
 		if (w != null) return w.getValue();
+		return 0;
 	}
 
 }
