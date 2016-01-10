@@ -13,6 +13,7 @@ public class Words implements ITrie {
 	public void add(String word) {
 		WordNode curr_node = root;
 		char c;
+		word = word.toLowerCase();
 
 		for (int i = 0; i < word.length(); i++) {
 			c = word.charAt(i);
