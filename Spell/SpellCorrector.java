@@ -45,6 +45,7 @@ public class SpellCorrector implements ISpellCorrector {
 	 */
 	public String suggestSimilarWord(String inputWord) throws NoSimilarWordFoundException
 	{
+		inputWord = inputWord.toLowerCase();
 		if (word_count(inputWord) > 0) return inputWord;
 
 		List<String> edits = gen_edits(inputWord);
@@ -95,7 +96,7 @@ public class SpellCorrector implements ISpellCorrector {
 		}
 
 		if (best_val > 0) return best_cand;
-//		else throw NoSimilarWordFoundException;
+		else throw NoSimilarWordFoundException;
 		return "Word Not Found.";
 	}
 
