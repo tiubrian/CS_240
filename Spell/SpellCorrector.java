@@ -33,7 +33,7 @@ public class SpellCorrector implements ISpellCorrector {
 			String w = s.next();
 			dict.add(w);
 		}
-
+		test_counts();
 	}
 
 	/**
@@ -96,8 +96,7 @@ public class SpellCorrector implements ISpellCorrector {
 		}
 
 		if (best_val > 0) return best_cand;
-		else throw NoSimilarWordFoundException;
-		return "Word Not Found.";
+		else throw new NoSimilarWordFoundException();
 	}
 
 	public static List<String> gen_edits(String word)
@@ -144,6 +143,11 @@ public class SpellCorrector implements ISpellCorrector {
 		WordNode w = (WordNode)dict.find(word);
 		if (w != null) return w.getValue();
 		return 0;
+	}
+
+	public void test_counts()
+	{
+		System.out.println("Wc: " + dict.getWordCount() + "nc: " +dict.getNodeCount());
 	}
 
 }
