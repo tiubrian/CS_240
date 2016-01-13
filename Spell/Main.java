@@ -28,7 +28,7 @@ public class Main {
 		String suggestion = corrector.suggestSimilarWord(inputWord);
 
 		System.out.println("Suggestion is: " + suggestion);
-		//((SpellCorrector)corrector).test_counts();
+//		((SpellCorrector)corrector).test_counts();
 	}
 
 }

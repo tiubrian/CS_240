@@ -78,7 +78,29 @@ public class Words implements ITrie {
 	}
 
 	@Override
-	public String toString() { return " "; }
+	public String toString()
+	{
+		StringBuilder curr_w = new StringBuilder(10);
+		StringBuilder res = new StringBuilder(getWordCount()*6);
+		recToString(curr_w,res,root);
+		return res.toString();
+	}
+
+	private void recToString(StringBuilder curr_w, StringBuilder curr_res, WordNode curr_node)
+	{
+		if (curr_node == null) return;
+		if (curr_node.getValue() > 0) {
+			curr_res.append(curr_w);
+			curr_res.append('\n');
+		}
+
+		for (char i = 'a'; i<='z'; i++)
+		{
+			curr_w.append(i);
+			recToString(curr_w, curr_res, curr_node.getn(i));
+			curr_w.deleteCharAt(curr_w.length()-1);
+		}
+	}
 
 	@Override
 	public int hashCode() {
@@ -98,7 +120,9 @@ public class Words implements ITrie {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof Words) {
+		if (o != null && o instanceof Words) {
+			Words w = (Words)o;
+			if (w.getWordCount() != getWordCount() || w.getNodeCount() != getNodeCount()) return false;
 			return recEquals(((Words)o).root,root);
 		}
 		else return false;

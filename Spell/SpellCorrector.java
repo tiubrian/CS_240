@@ -150,7 +150,7 @@ public class SpellCorrector implements ISpellCorrector {
 		System.out.println("hashcode " + dict.hashCode());
 		System.out.println("toString " + dict.toString());
 		SpellCorrector spell_test = new SpellCorrector();
-		try { spell_test.useDictionary("words.txt");
+		try { spell_test.useDictionary("test.txt");
 		spell_test.dict.add("kvyoopy");
 		System.out.println(spell_test.dict.getWordCount()+" "+dict.equals(spell_test.dict));
 		}
