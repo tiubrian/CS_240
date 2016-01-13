@@ -1,0 +1,12 @@
+foo
+bar
+act
+bat
+rat
+gtk
+gdb
+gre
+the
+the
+the
+cat

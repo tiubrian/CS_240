@@ -1,13 +1,17 @@
 package hangman;
 
-import java.io.File;
+import java.io.*;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Scanner;
+import hangman.IEvilHangmanGame.GuessAlreadyMadeException;
 
-public interface IEvilHangmanGame {
+public class EvilHangmanGame implements IEvilHangmanGame {
 
-	@SuppressWarnings("serial")
-	public static class GuessAlreadyMadeException extends Exception {
-	}
+	private Set<String> words;
+	private int wlen;
+	private Set<String> guessed;
 
 	/**
 	 * Starts a new game of evil hangman using words from <code>dictionary</code>
@@ -20,7 +24,31 @@ public interface IEvilHangmanGame {
 	 * @param dictionary Dictionary of words to use for the game
 	 * @param wordLength Number of characters in the word to guess
 	 */
-	public void startGame(File dictionary, int wordLength);
+	public void startGame(File dictionary, int wordLength)
+	{
+		wlen = wordLength;
+		guessed = new HashSet<String>();
+		words = new HashSet<String>();
+		try {
+			FileReader freader = new FileReader(dictionary);
+			BufferedReader fbuf = new BufferedReader(freader);
+			Scanner s = new Scanner(fbuf);
+			while (s.hasNext())
+			{
+				words.add(s.next());
+			}
+
+			Iterator<String> it = words.iterator();
+			while (it.hasNext())
+			{
+				System.out.println(it.next());
+			}
+		}
+		catch (IOException e)
+		{
+			System.out.println("Error occured when reading input file "+dictionary+ " "+e.toString());
+		}
+	}
 
 
 	/**
@@ -35,6 +63,9 @@ public interface IEvilHangmanGame {
 	 * @throws GuessAlreadyMadeException If the character <code>guess</code>
 	 * has already been guessed in this game.
 	 */
-	public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException;
+	public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException
+	{
+		return null;
+	}
 
 }
