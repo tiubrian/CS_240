@@ -33,7 +33,6 @@ public class SpellCorrector implements ISpellCorrector {
 			String w = s.next();
 			dict.add(w);
 		}
-		test_counts();
 	}
 
 	/**
@@ -147,7 +146,15 @@ public class SpellCorrector implements ISpellCorrector {
 
 	public void test_counts()
 	{
-		System.out.println("Wc: " + dict.getWordCount() + "nc: " +dict.getNodeCount());
+		System.out.println("Wc: " + dict.getWordCount() + " nc: " +dict.getNodeCount());
+		System.out.println("hashcode " + dict.hashCode());
+		System.out.println("toString " + dict.toString());
+		SpellCorrector spell_test = new SpellCorrector();
+		try { spell_test.useDictionary("words.txt");
+		spell_test.dict.add("kvyoopy");
+		System.out.println(spell_test.dict.getWordCount()+" "+dict.equals(spell_test.dict));
+		}
+		catch (Exception e) {}
 	}
 
 }

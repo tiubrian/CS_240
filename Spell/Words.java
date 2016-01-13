@@ -4,10 +4,14 @@ public class Words implements ITrie {
 
 	public WordNode root;
 	public static final int mod = 1000000007; // a prime
+	private int wordCount;
+	private int nodeCount;
 
 	public Words()
 	{
 		root = new WordNode();
+		wordCount = 0;
+		nodeCount = 1;
 	}
 
 	public void add(String word) {
@@ -19,10 +23,12 @@ public class Words implements ITrie {
 			c = word.charAt(i);
 			if (curr_node.getn(c) == null) {
 				curr_node.setn(c, new WordNode());
+				nodeCount++;
 			}
 			curr_node = curr_node.getn(c);
 		}
 		curr_node.count++;
+		wordCount++;
 	}
 
 	public ITrie.INode find(String word) {
@@ -42,11 +48,11 @@ public class Words implements ITrie {
 	}
 
 	public int getWordCount() {
-		return recWordCount(root);
+		return wordCount;
 	}
 
 	public int getNodeCount() {
-		return recNodeCount(root);
+		return nodeCount;
 	}
 
 	public static int recNodeCount(WordNode start)
@@ -112,6 +118,6 @@ public class Words implements ITrie {
 		return true;
 	}
 
-	
+
 
 }
