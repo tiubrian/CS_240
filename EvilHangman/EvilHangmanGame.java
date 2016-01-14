@@ -118,6 +118,11 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 		}
 	}
 
+	public int num_words()
+	{
+		return words.size();
+	}
+
 	public void print_word()
 	{
 		System.out.print("Word: ");

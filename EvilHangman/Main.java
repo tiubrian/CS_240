@@ -33,6 +33,12 @@ public class Main {
 
 		EvilHangmanGame game = new EvilHangmanGame();
 		game.startGame(new File(args[0]),nwords);
+		if (game.num_words() == 0)
+		{
+			System.out.println("There are no words of length "+nwords+" in the dictionary.");
+			print_usage();
+			return;
+		}
 
 		while (nguess>0)
 		{
