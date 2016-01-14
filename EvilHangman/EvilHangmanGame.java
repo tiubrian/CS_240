@@ -66,14 +66,82 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	 */
 	public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException
 	{
-		if (guessed.contains(new Character(guess))) throw new GuessAlreadyMadeException();
+		Character cg = new Character(guess);
+		if (guessed.contains(cg)) throw new GuessAlreadyMadeException();
 		guessed.add(guess);
-		HashMap<Integer, Set<String>> partitions = new HashMap<Integer, Set<String>>();
+		HashMap<Integer, Set<String>> partition = new HashMap<Integer, Set<String>>();
 
-		//choose set to
+		print_set(words);
+		//generate partitions
+		Iterator<String> it  = words.iterator();
+		while (it.hasNext())
+		{
+			add_to_partition(it.next(),partition,guess);
+		}
 
+		int best_ind = -1;
+		Iterator<Integer> itp = partition.keySet().iterator();
+		while (itp.hasNext())
+		{
+			int ind = itp.next();
+			if (is_better_part(ind,best_ind,partition)) best_ind = ind;
+		}
 
+		words = partition.get(best_ind);
+		System.out.println("Best Index: "+best_ind);
+		print_set(words);
 		return words;
+	}
+
+	//Is p1 better than p2?
+	public boolean is_better_part(int p1_num, int p2_num, HashMap<Integer, Set<String>> partition)
+	{
+		if (p2_num < 0) return true; //parition not initialized
+		int p1_size = partition.get(p1_num).size();
+		int p2_size = partition.get(p2_num).size();
+
+		if (p1_size > p2_size) return true;
+		else if (p1_size < p2_size) return false;
+		if (p1_num == 0) return true;
+		if (p2_num == 0) return false;
+		return (p1_num > p2_num);
+	}
+
+	public static int partition_letters(int partition_num)
+	{
+		int tot = 0;
+		while (partition_num !=0)
+		{
+			tot += partition_num%2;
+			partition_num /= 2;
+		}
+		return tot;
+	}
+
+	//adds word to the proper partition
+	public static void add_to_partition(String word, HashMap<Integer, Set<String>> partition, char guess)
+	{
+		//get the index of the partition
+		int i = partition_num(word, guess);
+		if (!partition.containsKey(i)) partition.put(i, new HashSet<String>());
+		(partition.get(i)).add(word);
+	}
+
+  //First: map all chars in word to 1 if they are guess, 0 otherwise
+	//Interpret the result as a binary number, reading right to left
+	//This is to make comparisons between two word classes easier later on
+	public static int partition_num(String word, char guess)
+	{
+		int num = 0;
+		for (int i = word.length()-1; i >=0; i--)
+		{
+			num *= 2;
+			if (word.charAt(i) == guess)
+			{
+				num += 1;
+			}
+		}
+		return num;
 	}
 
 	public void print_guessed()
@@ -84,5 +152,17 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 			System.out.print(it.next() + " ");
 		}
 		System.out.print("\n");
+	}
+
+	//debugging helper
+	public static void print_set(Set<String> s)
+	{
+		Iterator<String> it = s.iterator();
+		System.out.print("\nset([");
+		while(it.hasNext())
+		{
+			System.out.print(it.next()+" ");
+		}
+		System.out.println("])");
 	}
 }
