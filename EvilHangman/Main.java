@@ -14,6 +14,16 @@ public class Main {
 		{
 			nguess = Integer.parseInt(args[2].trim());
 			nwords = Integer.parseInt(args[1].trim());
+			if (nguess < 1) {
+				System.out.println("guess must be an integer greater than 0.");
+				print_usage();
+				return;
+			}
+			if (nwords < 2) {
+				System.out.println("wordlength must be and integer greater than 2;");
+				print_usage();
+				return;
+			}
 		}
 		catch (Exception e)
 		{
@@ -29,8 +39,9 @@ public class Main {
 			if (nguess > 1) System.out.println("\nYou have "+nguess+" guesses remaining.");
 			else System.out.println("\nYou have 1 guess remaining.");
 
-			System.out.print("Guessed: ");
+			System.out.print("Used letters: ");
 			game.print_guessed();
+			game.print_word();
 			String g = null;
 
 			while (!validate(g))
@@ -52,8 +63,27 @@ public class Main {
 				}
 			}
 
-			nguess--;
+			int letters = game.lastGuessLetters();
+			if (letters == 0)
+			{
+				System.out.println("Sorry, there are no "+g+"'s");
+				nguess--;
+			}
+			else
+			{
+				System.out.println("Yes, there are "+letters+ " "+g+"'s");
+			}
+
+			if (game.isWon())
+			{
+				System.out.println("You win!");
+				game.print_word();
+				return;
+			}
 		}
+
+		//if we got to this point, the game is lost
+		System.out.println("You lose!\nThe word was "+game.randWord());
 	}
 
 	public static boolean validate(String s)
