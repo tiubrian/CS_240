@@ -13,6 +13,8 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	private Set<String> words;
 	private int wlen;
 	private Set<Character> guessed;
+	private String constraint_str; //a string of known letters in the word
+	private int constraint_map; // a bitmap of available positions
 
 	/**
 	 * Starts a new game of evil hangman using words from <code>dictionary</code>
@@ -36,7 +38,8 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 			Scanner s = new Scanner(fbuf);
 			while (s.hasNext())
 			{
-				words.add(s.next());
+				String next = s.next();
+				if (next.length() == wlen)	words.add(s.next());
 			}
 
 			// Iterator<String> it = words.iterator();
