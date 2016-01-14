@@ -1,6 +1,8 @@
 package hangman;
 import java.io.*;
 
+import hangman.IEvilHangmanGame.GuessAlreadyMadeException;
+
 public class Main {
 
 	public static void main(String[] args)
@@ -22,15 +24,35 @@ public class Main {
 		EvilHangmanGame game = new EvilHangmanGame();
 		game.startGame(new File(args[0]),nwords);
 
-		while (nguess>=0)
+		while (nguess>0)
 		{
+			if (nguess > 1) System.out.println("\nYou have "+nguess+" guesses remaining.");
+			else System.out.println("\nYou have 1 guess remaining.");
+
+			System.out.print("Guessed: ");
+			game.print_guessed();
 			String g = null;
+
 			while (!validate(g))
 			{
-				g = c.readLine("Enter Next Guess: ");
 				if (g != null) System.out.println("Invalid Input");
+				g = c.readLine("Enter Next Guess: ");
 			}
-			System.out.println("You entered " + g + " , a string of length " + g.length());
+
+			while (true)
+			{
+				try {
+					game.makeGuess(g.charAt(0));
+					break;
+				}
+				catch (GuessAlreadyMadeException e)
+				{
+					System.out.println("Letter " + g + " already guessed.");
+					g = c.readLine("Enter Next Guess: ");
+				}
+			}
+
+			nguess--;
 		}
 	}
 

@@ -5,13 +5,14 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.HashMap;
 import hangman.IEvilHangmanGame.GuessAlreadyMadeException;
 
 public class EvilHangmanGame implements IEvilHangmanGame {
 
 	private Set<String> words;
 	private int wlen;
-	private Set<String> guessed;
+	private Set<Character> guessed;
 
 	/**
 	 * Starts a new game of evil hangman using words from <code>dictionary</code>
@@ -27,7 +28,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	public void startGame(File dictionary, int wordLength)
 	{
 		wlen = wordLength;
-		guessed = new HashSet<String>();
+		guessed = new HashSet<Character>();
 		words = new HashSet<String>();
 		try {
 			FileReader freader = new FileReader(dictionary);
@@ -38,11 +39,11 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 				words.add(s.next());
 			}
 
-			Iterator<String> it = words.iterator();
-			while (it.hasNext())
-			{
-				System.out.println(it.next());
-			}
+			// Iterator<String> it = words.iterator();
+			// while (it.hasNext())
+			// {
+			// 	System.out.println(it.next());
+			// }
 		}
 		catch (IOException e)
 		{
@@ -65,7 +66,23 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 	 */
 	public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException
 	{
-		return null;
+		if (guessed.contains(new Character(guess))) throw new GuessAlreadyMadeException();
+		guessed.add(guess);
+		HashMap<Integer, Set<String>> partitions = new HashMap<Integer, Set<String>>();
+
+		//choose set to
+
+
+		return words;
 	}
 
+	public void print_guessed()
+	{
+		Iterator<Character> it = guessed.iterator();
+		while (it.hasNext())
+		{
+			System.out.print(it.next() + " ");
+		}
+		System.out.print("\n");
+	}
 }
