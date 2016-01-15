@@ -43,7 +43,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 			while (s.hasNext())
 			{
 				String next = s.next();
-				if (next.length() == wlen)	words.add(s.next());
+				if (next.length() == wlen)	words.add(next);
 			}
 
 			constraint_str = new char[wlen];
