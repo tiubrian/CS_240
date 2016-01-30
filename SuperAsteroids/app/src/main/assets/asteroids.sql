@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS level_object
 CREATE TABLE IF NOT EXISTS level
 (
 number int,
-title int,
+title String,
 hint String,
 width int,
 height int,
@@ -33,7 +33,7 @@ music String
 
 CREATE TABLE IF NOT EXISTS level_asteroid
 (
- number int,
+ levelnumber int,
  asteroidId int
 );
 
