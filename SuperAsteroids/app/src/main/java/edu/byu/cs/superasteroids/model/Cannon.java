@@ -9,4 +9,10 @@ public class Cannon {
  public int imageHeight;
  public GameImage attackImage;
  public String attackSoundFile;
+ 
+ public Cannon()
+ {
+ }
+
+
 }
