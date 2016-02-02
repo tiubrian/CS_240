@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 public class ModelDAO {
 /*
  * "Dao called Dao is not Dao" -- The Dao De Ching (or the Tao Te Ching), first line of the first chapter. 
@@ -16,6 +18,37 @@ public class ModelDAO {
 	public ModelDAO(SQLiteDatabase db)
 	{
 		this.db = db;
+	}
+	
+	public Level getLevelByNumber(int number)
+	{
+		Level result = new Level();
+		return result;
+	}
+	
+	public ArrayList<Engine> getEngines()
+	{
+		ArrayList<Engine> result = new ArrayList<Engine>();
+		return result;
+	}
+	
+	public ArrayList<ExtraPart> getExtraParts()
+	{
+		ArrayList<ExtraPart> result = new ArrayList<ExtraPart>();
+		return result;
+
+	}
+	
+	public ArrayList<MainBody> getMainBodies()
+	{
+		ArrayList<MainBody> result = new ArrayList<MainBody>();
+		return result;
+	}
+	
+	public ArrayList<Cannon> getCannons()
+	{
+		ArrayList<Cannon> result = new ArrayList<Cannon>();
+		return result;
 	}
 	
 	public boolean addLevel(Level level)

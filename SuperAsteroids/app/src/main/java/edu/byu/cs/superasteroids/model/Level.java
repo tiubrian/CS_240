@@ -10,6 +10,11 @@ public class Level {
 	public String height;
 	public ArrayList<LevelAsteroid> level_asteroids;
 
+	public Level()
+	{
+		level_asteroids = new ArrayList<LevelAsteroid>();
+	}
+	
 	public void add_asteroid(LevelAsteroid asteroid)
 	{
 		level_asteroids.add(asteroid);

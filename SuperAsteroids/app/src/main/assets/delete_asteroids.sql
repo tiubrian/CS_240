@@ -1,0 +1,19 @@
+
+DELETE TABLE IF EXISTS asteroid_type; 
+
+DELETE TABLE IF EXISTS background_object;
+
+DELETE TABLE IF EXISTS level_object;
+
+DELETE TABLE IF EXISTS level;
+
+DELETE TABLE IF EXISTS level_asteroid;
+
+DELETE TABLE IF EXISTS main_body;
+
+DELETE TABLE IF EXISTS cannon;
+DELETE TABLE IF EXISTS extra_part;
+
+DELETE TABLE IF EXISTS engine;
+
+DELETE TABLE IF EXISTS power_core;
