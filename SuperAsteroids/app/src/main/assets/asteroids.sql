@@ -48,7 +48,8 @@ CREATE TABLE IF NOT EXISTS main_body
  imageHeight int
 );
 
-CREATE TABLE IF NOT EXISTS cannon(
+CREATE TABLE IF NOT EXISTS cannon
+(
  attachPoint String,
  emitPoint String,
  image text,

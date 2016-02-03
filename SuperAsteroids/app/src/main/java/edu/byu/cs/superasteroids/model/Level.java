@@ -7,7 +7,6 @@ public class Level {
 	public int height;
 	public String musicFile;
 	public String hint;
-	public String height;
 	public ArrayList<LevelAsteroid> level_asteroids;
 
 	public Level()
