@@ -27,14 +27,14 @@ public class Level {
 	 */
 	public String hint;
 	/**
-	 * A list of level asteroid relations, which are combinations of asteroid types and the number of that type to create.
-	 * This holds all of the information I need to instantiate a level.
+	 * A list of asteroids.
 	 */
-	public ArrayList<LevelAsteroid> level_asteroids;
+	public ArrayList<Asteroid> asteroids;
+	public ArrayList<BackgroundObject> background_objects;
 
 	public Level()
 	{
-		level_asteroids = new ArrayList<LevelAsteroid>();
+		asteroids = new ArrayList<Asteroid>();
 	}
 
 	/**
