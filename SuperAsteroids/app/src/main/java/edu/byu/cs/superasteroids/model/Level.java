@@ -37,14 +37,17 @@ public class Level {
 		asteroids = new ArrayList<Asteroid>();
 	}
 
-	/**
-	 * Adds a leevel-asteroidType relationship to the level_asteroids list.
-	 * @param asteroid
-	 */
-	public void addLevelAsteroid(LevelAsteroid asteroid)
+	public void update()
 	{
-		level_asteroids.add(asteroid);
+
 	}
+
+	public void draw()
+	{
+
+	}
+
+
 
 	public int getNumber() {
 		return number;

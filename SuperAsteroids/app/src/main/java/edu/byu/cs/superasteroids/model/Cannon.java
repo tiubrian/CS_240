@@ -1,5 +1,5 @@
 package edu.byu.cs.superasteroids.model;
-
+import java.util.ArrayList;
 /**
  * The cannon of the ship (where all the fun stuff happens).
  * Shoots projectiles to destroy defenseless (but dangerous nonetheless) asteroids.
@@ -26,10 +26,26 @@ public class Cannon {
   * The cannon noise.
   */
  public String attackSoundFile;
- 
+
+ /**
+  * The list of projectiles currently in motion.
+  */
+ public ArrayList<Projectile> projectiles;
+
  public Cannon()
  {
  }
+
+ public void update()
+ {
+
+ }
+
+ public void draw()
+ {
+
+ }
+
 
  public GameImage getImage() {
   return image;

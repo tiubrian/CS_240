@@ -18,6 +18,18 @@ public class MainBody {
  public Coordinate extraAttach;
  public GameImage image;
 
+ public void update()
+ {
+
+ }
+
+ public void draw()
+ {
+
+ }
+
+
+
  public Coordinate getCannonAttach() {
   return cannonAttach;
  }

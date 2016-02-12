@@ -5,7 +5,7 @@ package edu.byu.cs.superasteroids.model;
  * It reduces code redundancy and provides a useful place to stick future coordinate geometry functions.
  */
 
-class Coordinate {
+public class Coordinate {
  public int x;
  public int y;
 

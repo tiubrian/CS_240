@@ -8,13 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-public class ModelDAO {
 /**
  * This class contains all methods to access the database.
  * "Dao called Dao is not Dao" -- The Dao De Ching (or the Tao Te Ching), first line of the first chapter.
  * So I call it ModelDAO :).
  *
-*/
+ */
+
+public class ModelDAO {
 	private SQLiteDatabase db;
 
 	public ModelDAO(SQLiteDatabase db)
@@ -48,13 +49,13 @@ public class ModelDAO {
 				engine.baseSpeed = cursor.getInt(0);
 				engine.baseTurnRate = cursor.getInt(1);
 				engine.attachPoint = new Coordinate(cursor.getString(2));
-				engine.image = new GameImage(cursor.getString(3),cursor.getInt(4),cursor.getInt(5));
+				engine.image = new GameImage(cursor.getString(3), cursor.getInt(4), cursor.getInt(5));
 
 				cursor.add(engine);
 
 				cursor.moveToNext();
 			}
-
+		}
 		finally {
 			cursor.close();
 		}
@@ -77,13 +78,13 @@ public class ModelDAO {
 				ExtraPart extra_part = new ExtraPart();
 
 				extra_part.attachPoint = new Coordinate(cursor.getString(0));
-				extra_part.image = new GameImage(cursor.getString(1),cursor.getInt(2),cursor.getInt(3));
+				extra_part.image = new GameImage(cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
 
 				cursor.add(extra_part);
 
 				cursor.moveToNext();
 			}
-
+		}
 		finally {
 			cursor.close();
 		}
@@ -103,13 +104,13 @@ public class ModelDAO {
 				main_body.cannonAttach = new Coordinate(cursor.getString(0));
 				main_body.engineAttach = new Coordinate(cursor.getString(1));
 				main_body.extraAttach = new Coordinate(cursor.getString(2));
-				main_body.image = new GameImage(cursor.getString(3),cursor.getInt(4), cursor.getInt(5));
+				main_body.image = new GameImage(cursor.getString(3), cursor.getInt(4), cursor.getInt(5));
 
 				cursor.add(main_body);
 
 				cursor.moveToNext();
 			}
-
+		}
 		finally {
 			cursor.close();
 		}
@@ -141,7 +142,7 @@ public class ModelDAO {
 
 				cursor.moveToNext();
 			}
-
+		}
 		finally {
 			cursor.close();
 		}
@@ -157,7 +158,7 @@ public class ModelDAO {
 		values.put("objectId", level_object.objectId);
 		values.put("position", level_object.position);
 
-		 long id = db.insert"level_object", null, values);
+		 long id = db.insert("level_object", null, values);
 		if (id >= 0) {
 			return true;
 		}
@@ -174,7 +175,7 @@ public class ModelDAO {
 		values.put("imageWidth", extra_part.imageWidth);
 		values.put("imageHeight", extra_part.imageHeight);
 
-		 long id = db.insert"extra_part", null, values);
+		 long id = db.insert("extra_part", null, values);
 		if (id >= 0) {
 			return true;
 		}
@@ -193,7 +194,7 @@ public class ModelDAO {
 		values.put("imageWidth", main_body.imageWidth);
 		values.put("imageHeight", main_body.imageHeight);
 
-		 long id = db.insert"main_body", null, values);
+		 long id = db.insert("main_body", null, values);
 		if (id >= 0) {
 			return true;
 		}
@@ -216,7 +217,7 @@ public class ModelDAO {
 		values.put("attackSound", cannon.attackSound);
 		values.put("damage", cannon.damage);
 
-		 long id = db.insert"cannon", null, values);
+		 long id = db.insert("cannon", null, values);
 		if (id >= 0) {
 			return true;
 		}
@@ -232,7 +233,7 @@ public class ModelDAO {
 		values.put("engineBoost", power_core.engineBoost);
 		values.put("image", power_core.image);
 
-		long id = db.insert"power_core", null, values);
+		long id = db.insert("power_core", null, values);
 		if (id >= 0) {
 			return true;
 		}
@@ -251,7 +252,7 @@ public class ModelDAO {
 		values.put("imageWidth", engine.imageWidth);
 		values.put("imageHeight", engine.imageHeight);
 
-		long id = db.insert"engine", null, values);
+		long id = db.insert("engine", null, values);
 		if (id >= 0) {
 			return true;
 		}
@@ -270,7 +271,7 @@ public class ModelDAO {
 		values.put("imageHeight", asteroid_type.imageHeight);
 		values.put("type", asteroid_type.type);
 
-		long id = db.insert"asteroid_type", null, values);
+		long id = db.insert("asteroid_type", null, values);
 		if (id >= 0) {
 			return true;
 		}

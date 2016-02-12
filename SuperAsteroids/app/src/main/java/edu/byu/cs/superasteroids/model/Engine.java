@@ -12,6 +12,18 @@ public class Engine {
  public Coordinate attachPoint;
  public GameImage image;
 
+ public void update()
+ {
+
+ }
+
+ public void draw()
+ {
+
+ }
+
+
+
  public int getBaseSpeed() {
   return baseSpeed;
  }

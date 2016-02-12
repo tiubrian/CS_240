@@ -8,4 +8,16 @@ public class ExtraPart
 {
 	public GameImage image;
   public Coordinate attachPoint;
+
+  public void update()
+  {
+
+  }
+
+  public void draw()
+  {
+
+  }
+
+
 }

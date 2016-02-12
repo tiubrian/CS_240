@@ -32,4 +32,15 @@ public class PowerCore {
  public void setImage(GameImage image) {
   this.image = image;
  }
+
+ public void update()
+ {
+
+ }
+
+ public void draw()
+ {
+
+ }
+
 }
