@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import edu.byu.cs.superasteroids.R;
@@ -21,6 +22,7 @@ public class GameActivity extends ActivityView {
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// remove title bar.
         requestWindowFeature(Window.FEATURE_NO_TITLE);

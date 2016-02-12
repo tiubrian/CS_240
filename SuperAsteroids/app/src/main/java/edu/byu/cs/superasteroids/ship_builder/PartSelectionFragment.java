@@ -92,7 +92,7 @@ public class PartSelectionFragment extends FragmentView {
     public void setArrow(IShipBuildingView.ViewDirection arrow, boolean visible, String text) {
 
         if(text == null)
-            text = "foo";
+            text = "";
 
         ImageView arrowImage = null;
         TextView textView = null;

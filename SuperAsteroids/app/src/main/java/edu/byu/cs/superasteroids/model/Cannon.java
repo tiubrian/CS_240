@@ -47,13 +47,24 @@ public class Cannon {
  }
 
 
- public GameImage getImage() {
-  return image;
+ public String getImageName() {
+  return image.getName();
  }
 
- public void setImage(GameImage image) {
-  this.image = image;
+ public void setImageName(String name) {
+  this.image.setName(name);
  }
+
+ public int getImageHeight()
+ {
+  return image.getHeight();
+ }
+
+ public int getImageWidth()
+ {
+  return image.getWidth();
+ }
+
 
  public int getDamage() {
   return damage;

@@ -25,6 +25,15 @@ public class GraphicsUtils {
     }
 
     /**
+     * Converts an angle measured in degrees to the equivalent angle measured in radians
+     * @param angleDegrees The angle measured in degrees
+     * @return The equivalent angle measured in radians
+     */
+    public static double degreesToRadians(double angleDegrees){
+        return Math.toRadians(angleDegrees);
+    }
+
+    /**
      * Adds two points together
      * @param p1 First point
      * @param p2 Second point
