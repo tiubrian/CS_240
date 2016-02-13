@@ -40,7 +40,7 @@ public class ModelDAO {
 		final String SQL = "select baseSpeed, baseTurnRate, attachPoint, image, imageWidth, imageHeight"
 			+ "from engine";
 
-		Cursor cursor = db.rawQuery(SQL);
+		Cursor cursor = db.rawQuery(SQL,null);
 		try {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
@@ -51,7 +51,7 @@ public class ModelDAO {
 				engine.attachPoint = new Coordinate(cursor.getString(2));
 				engine.image = new GameImage(cursor.getString(3), cursor.getInt(4), cursor.getInt(5));
 
-				cursor.add(engine);
+				result.add(engine);
 
 				cursor.moveToNext();
 			}
@@ -71,7 +71,7 @@ public class ModelDAO {
 		ArrayList<ExtraPart> result = new ArrayList<ExtraPart>();
 		final String SQL = "select attachPoint, image, imageWidth, imageHeight from extra_part";
 
-		Cursor cursor = db.rawQuery(SQL);
+		Cursor cursor = db.rawQuery(SQL, null);
 		try {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
@@ -80,7 +80,7 @@ public class ModelDAO {
 				extra_part.attachPoint = new Coordinate(cursor.getString(0));
 				extra_part.image = new GameImage(cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
 
-				cursor.add(extra_part);
+				result.add(extra_part);
 
 				cursor.moveToNext();
 			}
@@ -95,7 +95,9 @@ public class ModelDAO {
 	public ArrayList<MainBody> getMainBodies()
 	{
 		ArrayList<MainBody> result = new ArrayList<MainBody>();
-		Cursor cursor = db.rawQuery(SQL);
+		final String SQL = "select cannonAttach, engineAttach, extraAttach, image, imageWidth, imageHeight from main_body";
+
+		Cursor cursor = db.rawQuery(SQL, null);
 		try {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
@@ -106,7 +108,7 @@ public class ModelDAO {
 				main_body.extraAttach = new Coordinate(cursor.getString(2));
 				main_body.image = new GameImage(cursor.getString(3), cursor.getInt(4), cursor.getInt(5));
 
-				cursor.add(main_body);
+				result.add(main_body);
 
 				cursor.moveToNext();
 			}
@@ -120,25 +122,22 @@ public class ModelDAO {
 	public ArrayList<Cannon> getCannons()
 	{
 		ArrayList<Cannon> result = new ArrayList<Cannon>();
+		final String SQL = "select attachPoint, emitPoint, image, imageWidth, imageHeight, attackImage, attackImageWidth, attackImageHeight, attackSound, damage from cannon";
 
-		Cursor cursor = db.rawQuery(SQL);
+		Cursor cursor = db.rawQuery(SQL,null);
 		try {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
 				Cannon cannon = new Cannon();
 
-				cannon.attachPoint = cursor.getString(0);
-				cannon.emitPoint = cursor.getString(1);
-				cannon.image = cursor.getString(2);
-				cannon.imageWidth = cursor.getInt(3);
-				cannon.imageHeight = cursor.getInt(4);
-				cannon.attackImage = cursor.getString(5);
-				cannon.attackImageWidth = cursor.getInt(6);
-				cannon.attackImageHeight = cursor.getInt(7);
+				cannon.attachPoint = new Coordinate(cursor.getString(0));
+				cannon.emitPoint = new Coordinate(cursor.getString(1));
+				cannon.image = new GameImage(cursor.getString(2), cursor.getInt(3), cursor.getInt(4));
+				cannon.attackImage = new GameImage(cursor.getString(5),cursor.getInt(6), cursor.getInt(7));
 				cannon.attackSound = cursor.getString(8);
 				cannon.damage = cursor.getInt(9);
 
-				cursor.add(cannon);
+				result.add(cannon);
 
 				cursor.moveToNext();
 			}
@@ -152,28 +151,29 @@ public class ModelDAO {
 
 	public boolean addLevel(Level level)
 	{
-		ContentValues values = new ContentValues();
-		values.put("level_number", level_object.level_number);
-		values.put("scale", level_object.scale);
-		values.put("objectId", level_object.objectId);
-		values.put("position", level_object.position);
-
-		 long id = db.insert("level_object", null, values);
-		if (id >= 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+//		ContentValues values = new ContentValues();
+//		values.put("level_number", level_object.level_number);
+//		values.put("scale", level_object.scale);
+//		values.put("objectId", level_object.objectId);
+//		values.put("position", level_object.position);
+//
+//		 long id = db.insert("level_object", null, values);
+//		if (id >= 0) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+		return false;
 	}
 
 	public boolean addExtraPart(ExtraPart extra_part)
 	{
 		ContentValues values = new ContentValues();
-		values.put("attachPoint", extra_part.attachPoint);
-		values.put("image", extra_part.image);
-		values.put("imageWidth", extra_part.imageWidth);
-		values.put("imageHeight", extra_part.imageHeight);
+		values.put("attachPoint", extra_part.attachPoint.toString());
+		values.put("image", extra_part.getImageName());
+		values.put("imageWidth", extra_part.getImageWidth());
+		values.put("imageHeight", extra_part.getImageHeight());
 
 		 long id = db.insert("extra_part", null, values);
 		if (id >= 0) {
@@ -187,12 +187,12 @@ public class ModelDAO {
 	public boolean addMainBody(MainBody main_body)
 	{
 		ContentValues values = new ContentValues();
-		values.put("cannonAttach", main_body.cannonAttach);
-		values.put("engineAttach", main_body.engineAttach);
-		values.put("extraAttach", main_body.extraAttach);
-		values.put("image", main_body.image);
-		values.put("imageWidth", main_body.imageWidth);
-		values.put("imageHeight", main_body.imageHeight);
+		values.put("cannonAttach", main_body.cannonAttach.toString());
+		values.put("engineAttach", main_body.engineAttach.toString());
+		values.put("extraAttach", main_body.extraAttach.toString());
+		values.put("image", main_body.getImageName());
+		values.put("imageWidth", main_body.getImageWidth());
+		values.put("imageHeight", main_body.getImageHeight());
 
 		 long id = db.insert("main_body", null, values);
 		if (id >= 0) {
@@ -206,14 +206,14 @@ public class ModelDAO {
 	public boolean addCannon(Cannon cannon)
 	{
 		ContentValues values = new ContentValues();
-		values.put("attachPoint", cannon.attachPoint);
-		values.put("emitPoint", cannon.emitPoint);
-		values.put("image", cannon.image);
-		values.put("imageWidth", cannon.imageWidth);
-		values.put("imageHeight", cannon.imageHeight);
-		values.put("attackImage", cannon.attackImage);
-		values.put("attackImageWidth", cannon.attackImageWidth);
-		values.put("attackImageHeight", cannon.attackImageHeight);
+		values.put("attachPoint", cannon.attachPoint.toString());
+		values.put("emitPoint", cannon.emitPoint.toString());
+		values.put("image", cannon.getImageName());
+		values.put("imageWidth", cannon.getImageWidth());
+		values.put("imageHeight", cannon.getImageHeight());
+		values.put("attackImage", cannon.getAttackImageName());
+		values.put("attackImageWidth", cannon.getAttackImageWidth());
+		values.put("attackImageHeight", cannon.getAttackImageHeight());
 		values.put("attackSound", cannon.attackSound);
 		values.put("damage", cannon.damage);
 
@@ -231,7 +231,7 @@ public class ModelDAO {
 		ContentValues values = new ContentValues();
 		values.put("cannonBoost", power_core.cannonBoost);
 		values.put("engineBoost", power_core.engineBoost);
-		values.put("image", power_core.image);
+		values.put("image", power_core.getImageName());
 
 		long id = db.insert("power_core", null, values);
 		if (id >= 0) {
@@ -244,13 +244,13 @@ public class ModelDAO {
 
 	public boolean addEngine(Engine engine)
 	{
-		ontentValues values = new ContentValues();
+		ContentValues values = new ContentValues();
 		values.put("baseSpeed", engine.baseSpeed);
 		values.put("baseTurnRate", engine.baseTurnRate);
-		values.put("attachPoint", engine.attachPoint);
-		values.put("image", engine.image);
-		values.put("imageWidth", engine.imageWidth);
-		values.put("imageHeight", engine.imageHeight);
+		values.put("attachPoint", engine.attachPoint.toString());
+		values.put("image", engine.getImageName());
+		values.put("imageWidth", engine.getImageWidth());
+		values.put("imageHeight", engine.getImageHeight());
 
 		long id = db.insert("engine", null, values);
 		if (id >= 0) {
@@ -266,9 +266,9 @@ public class ModelDAO {
 		ContentValues values = new ContentValues();
 		values.put("id", asteroid_type.id);
 		values.put("name", asteroid_type.name);
-		values.put("image", asteroid_type.image);
-		values.put("imageWidth", asteroid_type.imageWidth);
-		values.put("imageHeight", asteroid_type.imageHeight);
+		values.put("image", asteroid_type.getImageName());
+		values.put("imageWidth", asteroid_type.getImageWidth());
+		values.put("imageHeight", asteroid_type.getImageHeight());
 		values.put("type", asteroid_type.type);
 
 		long id = db.insert("asteroid_type", null, values);

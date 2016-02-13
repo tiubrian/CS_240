@@ -25,7 +25,7 @@ public class Cannon {
  /**
   * The cannon noise.
   */
- public String attackSoundFile;
+ public String attackSound;
 
  /**
   * The list of projectiles currently in motion.
@@ -46,6 +46,23 @@ public class Cannon {
 
  }
 
+ public String getAttackImageName() {
+  return image.getName();
+ }
+
+ public void setAttackImageName(String name) {
+  this.image.setName(name);
+ }
+
+ public int getAttackImageHeight()
+ {
+  return image.getHeight();
+ }
+
+ public int getAttackImageWidth()
+ {
+  return image.getWidth();
+ }
 
  public String getImageName() {
   return image.getName();
@@ -98,11 +115,11 @@ public class Cannon {
   this.attackImage = attackImage;
  }
 
- public String getAttackSoundFile() {
-  return attackSoundFile;
+ public String getAttackSound() {
+  return attackSound;
  }
 
- public void setAttackSoundFile(String attackSoundFile) {
-  this.attackSoundFile = attackSoundFile;
+ public void setAttackSound(String attackSound) {
+  this.attackSound = attackSound;
  }
 }

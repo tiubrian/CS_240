@@ -9,6 +9,22 @@ public class Coordinate {
  public int x;
  public int y;
 
+ public Coordinate(String s)
+ {
+   String[] res = s.split(",");
+   x = Integer.parseInt(res[0]);
+   y = Integer.parseInt(res[1]);
+ }
+
+ public String toString()
+ {
+  StringBuilder res = new StringBuilder();
+  res.append(x);
+  res.append(",");
+  res.append(y);
+  return res.toString();
+ }
+
  public int getX() {
   return x;
  }

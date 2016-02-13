@@ -54,10 +54,19 @@ class sqlParser:
             res += "else {\n\treturn false;\n}\n\n"
         return res
 
+    def selects(self):
+        res = ""
+        for n in self.tables:
+             tbl = self.tables[n]
+             res += "final String SQL = \"select " +", ".join([f.name for f in tbl])+" from "+n+"\";"
+             res += "\n"
+        return res
+
 s = sqlParser(sys.argv[1])
+res = s.selects()
 if len(sys.argv) > 2:
     f = open(sys.argv[2],"w")
-    f.write(s.put())
+    f.write(res)
     f.close()
 else:
-    print s.put()
+    print res

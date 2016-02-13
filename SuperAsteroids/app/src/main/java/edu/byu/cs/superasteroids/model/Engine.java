@@ -22,6 +22,26 @@ public class Engine {
 
  }
 
+ public String getImageName() {
+  return image.getName();
+ }
+
+ public void setImageName(String name) {
+  this.image.setName(name);
+ }
+
+ public int getImageHeight()
+ {
+  return image.getHeight();
+ }
+
+ public int getImageWidth()
+ {
+  return image.getWidth();
+ }
+
+
+
 
 
  public int getBaseSpeed() {
