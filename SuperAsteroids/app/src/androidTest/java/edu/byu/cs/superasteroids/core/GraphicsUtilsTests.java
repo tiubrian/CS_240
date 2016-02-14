@@ -3,11 +3,13 @@ package edu.byu.cs.superasteroids.core;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.test.AndroidTestCase;
-
+import org.junit.*;
 import static edu.byu.cs.superasteroids.core.GraphicsUtils.*;
 
+@RunWith(AndroidJUnit4.class)
 public class GraphicsUtilsTests extends AndroidTestCase {
 
+		@Test
     public void testRadiansToDegrees() {
         assertEquals(0.0, radiansToDegrees(ZERO));
         assertEquals(90.0, radiansToDegrees(HALF_PI));

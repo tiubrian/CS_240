@@ -16,7 +16,12 @@ class field:
 def cap_first_let(s):
     return s[0].upper()+s[1:]
 
-
+def class_name(s):
+ arr = s.split("_")
+ arr = map(cap_first_let,arr)
+ print arr
+ return "".join(arr)
+    
 class sqlParser:
     def __init__(self, fname):
         self.tables = {}
@@ -61,9 +66,39 @@ class sqlParser:
              res += "final String SQL = \"select " +", ".join([f.name for f in tbl])+" from "+n+"\";"
              res += "\n"
         return res
+    
+    def json_init(self):
+      res = " "
+      for n in self.tables:
+        tbl = self.tables[n]
+        res += "public "+ class_name(n) + "(JSONObject obj) {\n"
+        for f in tbl:
+          res += self.json_field_init(f)
+          res += '\n'
+        res += "\n}\n\n"
+      return res
+    
+    def json_field_init(self, f):
+      res = f.name + " = "
+      if "image" in f.name.lower():
+        if (f.name[-5:]).lower() == "image":
+          res += 'new GameImage(obj.getString("'+f.name+'"),'
+          res += '\n\t\t\tInteger.parseInt(obj.getString("'+f.name+'Width")),'
+          res += '\n\t\t\tInteger.parseInt(obj.getString("'+f.name+'Height")'
+          res += ');'
+          print f.name, res
+          return res
+        else:
+         return ""
+      if "int" in f.type.lower():
+        return res+"Integer.parseInt(obj.getString(\""+f.name+"\"));"
+      if "attach" in f.name.lower():
+        return res+'new Coordinate(obj.getString("'+f.name+'"));'
+      return res+"obj.getString(\""+f.name+"\");"
+      
 
 s = sqlParser(sys.argv[1])
-res = s.selects()
+res = s.json_init()
 if len(sys.argv) > 2:
     f = open(sys.argv[2],"w")
     f.write(res)

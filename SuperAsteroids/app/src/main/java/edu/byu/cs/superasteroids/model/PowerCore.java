@@ -8,6 +8,13 @@ public class PowerCore {
  public int engineBoost;
  public GameImage image;
 
+	public PowerCore(JSONObject obj) {
+		cannonBoost = Integer.parseInt(obj.getString("cannonBoost"));
+		engineBoost = Integer.parseInt(obj.getString("engineBoost"));
+		image = new GameImage(obj.getString("image"), 0, 0);
+
+	}
+ 
  public String getImageName() {
   return image.getName();
  }

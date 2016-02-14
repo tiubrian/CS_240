@@ -9,6 +9,14 @@ public class AsteroidType {
  public GameImage image;
  public int id;
 
+	public AsteroidType(JSONObject obj) {
+		name = obj.getString("name");
+		image = new GameImage(obj.getString("image"),
+					Integer.parseInt(obj.getString("imageWidth")),
+					Integer.parseInt(obj.getString("imageHeight"));
+		type = obj.getString("type");
+	} 
+ 
  public void update()
  {
 

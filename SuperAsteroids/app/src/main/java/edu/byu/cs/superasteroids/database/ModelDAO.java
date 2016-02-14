@@ -17,10 +17,12 @@ import java.util.ArrayList;
 
 public class ModelDAO {
 	private SQLiteDatabase db;
+	private long lastInsertID;
 
 	public ModelDAO(SQLiteDatabase db)
 	{
 		this.db = db;
+		lastInsertId = -1;
 	}
 
 	/**
@@ -175,8 +177,8 @@ public class ModelDAO {
 		values.put("imageWidth", extra_part.getImageWidth());
 		values.put("imageHeight", extra_part.getImageHeight());
 
-		 long id = db.insert("extra_part", null, values);
-		if (id >= 0) {
+		 lastInsertID = db.insert("extra_part", null, values);
+		if (lastInsertID >= 0) {
 			return true;
 		}
 		else {
@@ -194,8 +196,8 @@ public class ModelDAO {
 		values.put("imageWidth", main_body.getImageWidth());
 		values.put("imageHeight", main_body.getImageHeight());
 
-		 long id = db.insert("main_body", null, values);
-		if (id >= 0) {
+		  lastInsertID = db.insert("main_body", null, values);
+		if (lastInsertID >= 0) {
 			return true;
 		}
 		else {
@@ -217,8 +219,8 @@ public class ModelDAO {
 		values.put("attackSound", cannon.attackSound);
 		values.put("damage", cannon.damage);
 
-		 long id = db.insert("cannon", null, values);
-		if (id >= 0) {
+		  lastInsertID = db.insert("cannon", null, values);
+		if (lastInsertID >= 0) {
 			return true;
 		}
 		else {
@@ -233,8 +235,8 @@ public class ModelDAO {
 		values.put("engineBoost", power_core.engineBoost);
 		values.put("image", power_core.getImageName());
 
-		long id = db.insert("power_core", null, values);
-		if (id >= 0) {
+		 lastInsertID = db.insert("power_core", null, values);
+		if (lastInsertID >= 0) {
 			return true;
 		}
 		else {
@@ -252,8 +254,8 @@ public class ModelDAO {
 		values.put("imageWidth", engine.getImageWidth());
 		values.put("imageHeight", engine.getImageHeight());
 
-		long id = db.insert("engine", null, values);
-		if (id >= 0) {
+		lastInsertID = db.insert("engine", null, values);
+		if (lastInsertID >= 0) {
 			return true;
 		}
 		else {
@@ -271,8 +273,8 @@ public class ModelDAO {
 		values.put("imageHeight", asteroid_type.getImageHeight());
 		values.put("type", asteroid_type.type);
 
-		long id = db.insert("asteroid_type", null, values);
-		if (id >= 0) {
+		lastInsertID = db.insert("asteroid_type", null, values);
+		if (lastInsertID >= 0) {
 			return true;
 		}
 		else {
@@ -280,4 +282,9 @@ public class ModelDAO {
 		}
 	}
 
+	public long getLastInsertID()
+	{
+		return lastInsertID;
+	}
+	
 }

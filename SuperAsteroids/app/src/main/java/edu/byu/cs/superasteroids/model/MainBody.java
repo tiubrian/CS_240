@@ -18,6 +18,16 @@ public class MainBody {
  public Coordinate extraAttach;
  public GameImage image;
 
+	public MainBody(JSONObject obj) {
+		cannonAttach = new Coordinate(obj.getString("cannonAttach"));
+		engineAttach = new Coordinate(obj.getString("engineAttach"));
+		extraAttach = new Coordinate(obj.getString("extraAttach"));
+		image = new GameImage(obj.getString("image"),
+					Integer.parseInt(obj.getString("imageWidth")),
+					Integer.parseInt(obj.getString("imageHeight"));
+	}
+
+ 
  public void update()
  {
 

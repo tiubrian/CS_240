@@ -9,6 +9,14 @@ public class ExtraPart
 	public GameImage image;
   public Coordinate attachPoint;
 
+	public ExtraPart(JSONObject obj) {
+		attachPoint = new Coordinate(obj.getString("attachPoint"));
+		image = new GameImage(obj.getString("image"),
+					Integer.parseInt(obj.getString("imageWidth")),
+					Integer.parseInt(obj.getString("imageHeight"));
+	}
+
+	
   public void update()
   {
 
