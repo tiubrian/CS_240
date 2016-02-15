@@ -9,6 +9,12 @@ public class Coordinate {
  public int x;
  public int y;
 
+ public Coordinate(int x_coord, int y_coord)
+ {
+	 x = x_coord;
+	 y = y_coord;
+ }
+ 
  public Coordinate(String s)
  {
    String[] res = s.split(",");
@@ -16,6 +22,11 @@ public class Coordinate {
    y = Integer.parseInt(res[1]);
  }
 
+ public boolean equals(Coordinate other)
+ {
+	 return (x == other.x) && (y == other.y); 
+ }
+ 
  public String toString()
  {
   StringBuilder res = new StringBuilder();

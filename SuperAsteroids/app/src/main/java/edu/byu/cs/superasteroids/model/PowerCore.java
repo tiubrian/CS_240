@@ -1,4 +1,5 @@
 package edu.byu.cs.superasteroids.model;
+import org.json.*;
 
 /**
  * A power core. A part of the space ship. This boosts the power of the engine and cannon.
@@ -8,7 +9,11 @@ public class PowerCore {
  public int engineBoost;
  public GameImage image;
 
-	public PowerCore(JSONObject obj) {
+ public PowerCore()
+ {
+ }
+ 
+	public PowerCore(JSONObject obj) throws JSONException {
 		cannonBoost = Integer.parseInt(obj.getString("cannonBoost"));
 		engineBoost = Integer.parseInt(obj.getString("engineBoost"));
 		image = new GameImage(obj.getString("image"), 0, 0);

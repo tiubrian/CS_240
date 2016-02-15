@@ -85,7 +85,7 @@ class sqlParser:
           res += 'new GameImage(obj.getString("'+f.name+'"),'
           res += '\n\t\t\tInteger.parseInt(obj.getString("'+f.name+'Width")),'
           res += '\n\t\t\tInteger.parseInt(obj.getString("'+f.name+'Height")'
-          res += ');'
+          res += '));'
           print f.name, res
           return res
         else:

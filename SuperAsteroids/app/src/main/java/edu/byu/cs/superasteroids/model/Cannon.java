@@ -1,6 +1,6 @@
 package edu.byu.cs.superasteroids.model;
 import java.util.ArrayList;
-import org.json.JSONObject;
+import org.json.*;
 /**
  * The cannon of the ship (where all the fun stuff happens).
  * Shoots projectiles to destroy defenseless (but dangerous nonetheless) asteroids.
@@ -33,22 +33,36 @@ public class Cannon {
   */
  public ArrayList<Projectile> projectiles;
 
-	public Cannon(JSONObject obj) {
+	public Cannon()
+	{
+	}
+ 
+	public Cannon(JSONObject obj) throws JSONException {
 		attachPoint = new Coordinate(obj.getString("attachPoint"));
 		emitPoint = new Coordinate(obj.getString("emitPoint"));
 		image = new GameImage(obj.getString("image"),
 					Integer.parseInt(obj.getString("imageWidth")),
-					Integer.parseInt(obj.getString("imageHeight"));
+					Integer.parseInt(obj.getString("imageHeight")));
 
 
 		attackImage = new GameImage(obj.getString("attackImage"),
 					Integer.parseInt(obj.getString("attackImageWidth")),
-					Integer.parseInt(obj.getString("attackImageHeight"));
+					Integer.parseInt(obj.getString("attackImageHeight")));
 		attackSound = obj.getString("attackSound");
 		damage = Integer.parseInt(obj.getString("damage"));
 
 	}
 
+	public boolean equals(Cannon other)
+	{
+		return (damage==other.damage)
+			&& (attackSound==other.attackSound)
+			&& (attackImage.equals(other.attackImage))
+			&& (image.equals(other.image))
+			&& (attachPoint.equals(other.attachPoint))
+			&& (emitPoint.equals(other.emitPoint));
+	}
+	
  public void update()
  {
 

@@ -1,4 +1,5 @@
 package edu.byu.cs.superasteroids.model;
+import org.json.*;
 
 /**
  * An asteroidType. Used to model different types of asteroids, without resorting to inheritance.
@@ -9,11 +10,11 @@ public class AsteroidType {
  public GameImage image;
  public int id;
 
-	public AsteroidType(JSONObject obj) {
+	public AsteroidType(JSONObject obj) throws JSONException {
 		name = obj.getString("name");
 		image = new GameImage(obj.getString("image"),
 					Integer.parseInt(obj.getString("imageWidth")),
-					Integer.parseInt(obj.getString("imageHeight"));
+					Integer.parseInt(obj.getString("imageHeight")));
 		type = obj.getString("type");
 	} 
  

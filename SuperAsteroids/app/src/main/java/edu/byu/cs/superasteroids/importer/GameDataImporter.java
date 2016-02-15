@@ -2,8 +2,11 @@ package edu.byu.cs.superasteroids.importer;
 import android.database.sqlite.SQLiteDatabase;
 import edu.byu.cs.superasteroids.database.*;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.*;
 /**
  * Imports the data needed to play the game.
  */
@@ -16,19 +19,20 @@ public class GameDataImporter implements IGameDataImporter {
      * @return TRUE if the data was imported successfully, FALSE if the data was not imported due
      * to any error.
      */
-    boolean importData(InputStreamReader dataInputReader)
+    public boolean importData(InputStreamReader dataInputReader)
 		{
-			ModelDAO DAO = new ModelDAO(new SQLiteDatabase());
-			
-			JSONObject root = new JSONObject(makeString(dataInputReader));
-			JSONObject data = root.getJSONObject("asteroidsGame");
-			JSONObject extraParts = data.getJSONArray("extraParts");
-			JSONObject cannons = data.getJSONArray("cannons");
-			JSONObject mainBodies = data.getJSONArray("mainBodies");
-			JSONObject powerCores = data.getJSONArray("PowerCores");
-			JSONObject engines = data.getJSONArray("engines");
-			JSONObject asteroidTypes = data.getJSONArray("asteroids");
-			JSONObject backgroundObjects = data.getJSONArray("objects");
+			//ModelDAO DAO = new ModelDAO(new SQLiteDatabase());
+		 	ModelDAO DAO = null;
+			try {
+				JSONObject root = new JSONObject(makeString(dataInputReader));
+				JSONObject data = root.getJSONObject("asteroidsGame");
+				JSONArray extraParts = data.getJSONArray("extraParts");
+				JSONArray cannons = data.getJSONArray("cannons");
+				JSONArray mainBodies = data.getJSONArray("mainBodies");
+				JSONArray powerCores = data.getJSONArray("PowerCores");
+				JSONArray engines = data.getJSONArray("engines");
+				JSONArray asteroidTypes = data.getJSONArray("asteroids");
+				JSONArray backgroundObjects = data.getJSONArray("objects");
 
 			int i;
 			long[] asteroidTypeIDs = new long[asteroidTypes.length()];
@@ -36,47 +40,55 @@ public class GameDataImporter implements IGameDataImporter {
 			
 			for (i = 0; i < extraParts.length(); i++)
 			{
-				DAO.addExtraPart(new ExtraPart(extraParts[i]));
+				//DAO.addExtraPart(new ExtraPart(extraParts[i]));
 			}
 
 			for (i = 0; i < cannons.length(); i++)
 			{
-				DAO.addCannon(new Cannon(cannons[i]));
+				//DAO.addCannon(new Cannon(cannons[i]));
 				
 			}
 			
 			for (i = 0; i < mainBodies.length(); i++)
 			{
-				DAO.addMainBody(new MainBody(mainBodies[i]));
+				//DAO.addMainBody(new MainBody(mainBodies[i]));
 				
 			}
 
 			for (i = 0; i < powerCores.length(); i++)
 			{
-				DAO.addPowerCore(new PowerCore(powerCores[i]));
+				//DAO.addPowerCore(new PowerCore(powerCores[i]));
 				
 			}
 
 			for (i = 0; i < engines.length(); i++)
 			{
-				DAO.addEngine(new Engine(engines[i]));
+				//DAO.addEngine(new Engine(engines[i]));
 				
 			}
 			
 			for (i = 0; i < asteroidTypes.length(); i++)
 			{
-				AsteroidType asteroid_type = new AsteroidType(asteroidTypes[i]);
-				DAO.addAsteroidType(asteroid_type);
+				//AsteroidType asteroid_type = new AsteroidType(asteroidTypes[i]);
+				//DAO.addAsteroidType(asteroid_type);
 				long id = DAO.getLastInsertID();
 				asteroidTypeIDs[i] = id; // save the inserted id
 			}
 
 			for (i = 0; i < backgroundObjects.length(); i++)
 			{
-				DAO.addBackgroundObject(new BackgroundObject(extraParts[i]));
+				//DAO.addBackgroundObject(new BackgroundObject(extraParts[i]));
 			}
-
-			
+				
+			}
+			catch (IOException e)
+			{
+				return false;
+			}
+			catch (JSONException e)
+			{
+			}
+			return true;
 		}
     
     /**

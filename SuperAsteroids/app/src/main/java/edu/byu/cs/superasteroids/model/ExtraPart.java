@@ -1,4 +1,5 @@
 package edu.byu.cs.superasteroids.model;
+import org.json.*;
 
 /**
  * A part of the spaceship
@@ -9,11 +10,15 @@ public class ExtraPart
 	public GameImage image;
   public Coordinate attachPoint;
 
-	public ExtraPart(JSONObject obj) {
+	public ExtraPart()
+	{
+	}
+	
+	public ExtraPart(JSONObject obj) throws JSONException {
 		attachPoint = new Coordinate(obj.getString("attachPoint"));
 		image = new GameImage(obj.getString("image"),
 					Integer.parseInt(obj.getString("imageWidth")),
-					Integer.parseInt(obj.getString("imageHeight"));
+					Integer.parseInt(obj.getString("imageHeight")));
 	}
 
 	

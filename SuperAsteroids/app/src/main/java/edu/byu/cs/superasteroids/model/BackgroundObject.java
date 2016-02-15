@@ -10,4 +10,8 @@ public class BackgroundObject
 	String image;
 	Float scale;
 	Coordinate position;
+	
+	public BackgroundObject()
+	{
+	}
 }

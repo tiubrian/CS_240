@@ -22,7 +22,7 @@ public class ModelDAO {
 	public ModelDAO(SQLiteDatabase db)
 	{
 		this.db = db;
-		lastInsertId = -1;
+		lastInsertID = -1;
 	}
 
 	/**
@@ -151,6 +151,16 @@ public class ModelDAO {
 		return result;
 	}
 
+	public void clearCannons()
+	{
+		db.rawQuery("delete from cannon;",null);
+	}
+	
+	public boolean addLevelAsteroid(LevelAsteroid level_asteroid)
+	{
+		return false;
+	}
+	
 	public boolean addLevel(Level level)
 	{
 //		ContentValues values = new ContentValues();

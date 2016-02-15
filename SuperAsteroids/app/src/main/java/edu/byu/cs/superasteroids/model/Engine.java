@@ -1,6 +1,5 @@
 package edu.byu.cs.superasteroids.model;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.*;
 /**
  * The engine of the space ship. Has a lateral speed, turnrate, and image.
  */
@@ -13,7 +12,11 @@ public class Engine {
  public Coordinate attachPoint;
  public GameImage image;
 
- public Engine(JSONObject obj)
+ public Engine()
+ {
+ }
+ 
+ public Engine(JSONObject obj) throws JSONException
  {
 	 baseSpeed = Integer.parseInt(obj.getString("baseSpeed"));
 	 baseTurnRate = Integer.parseInt(obj.getString("baseTurnRate"));
