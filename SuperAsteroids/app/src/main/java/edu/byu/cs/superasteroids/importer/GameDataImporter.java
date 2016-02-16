@@ -1,11 +1,11 @@
 package edu.byu.cs.superasteroids.importer;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.Context;
 import edu.byu.cs.superasteroids.database.*;
+import edu.byu.cs.superasteroids.model.*;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.IOException;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.*;
 /**
  * Imports the data needed to play the game.
@@ -21,8 +21,8 @@ public class GameDataImporter implements IGameDataImporter {
      */
     public boolean importData(InputStreamReader dataInputReader)
 		{
-			//ModelDAO DAO = new ModelDAO(new SQLiteDatabase());
-		 	ModelDAO DAO = null;
+			DbOpenHelper helper = new DbOpenHelper(getContext());
+			ModelDAO DAO = new ModelDAO(helper.getWritableDatabase());
 			try {
 				JSONObject root = new JSONObject(makeString(dataInputReader));
 				JSONObject data = root.getJSONObject("asteroidsGame");
@@ -33,53 +33,85 @@ public class GameDataImporter implements IGameDataImporter {
 				JSONArray engines = data.getJSONArray("engines");
 				JSONArray asteroidTypes = data.getJSONArray("asteroids");
 				JSONArray backgroundObjects = data.getJSONArray("objects");
+				JSONArray levels = data.getJSONArray("levels");
 
 			int i;
 			long[] asteroidTypeIDs = new long[asteroidTypes.length()];
-			
+			long[] bgObjectIDS = new long[backgroundObjects.length()];
+
 			
 			for (i = 0; i < extraParts.length(); i++)
 			{
-				//DAO.addExtraPart(new ExtraPart(extraParts[i]));
+				DAO.addExtraPart(new ExtraPart(extraParts.getJSONObject(i)));
 			}
 
 			for (i = 0; i < cannons.length(); i++)
 			{
-				//DAO.addCannon(new Cannon(cannons[i]));
+				DAO.addCannon(new Cannon(cannons.getJSONObject(i)));
 				
 			}
 			
 			for (i = 0; i < mainBodies.length(); i++)
 			{
-				//DAO.addMainBody(new MainBody(mainBodies[i]));
+				DAO.addMainBody(new MainBody(mainBodies.getJSONObject(i)));
 				
 			}
 
 			for (i = 0; i < powerCores.length(); i++)
 			{
-				//DAO.addPowerCore(new PowerCore(powerCores[i]));
+				DAO.addPowerCore(new PowerCore(powerCores.getJSONObject(i)));
 				
 			}
 
 			for (i = 0; i < engines.length(); i++)
 			{
-				//DAO.addEngine(new Engine(engines[i]));
+				DAO.addEngine(new Engine(engines.getJSONObject(i)));
 				
 			}
 			
 			for (i = 0; i < asteroidTypes.length(); i++)
 			{
-				//AsteroidType asteroid_type = new AsteroidType(asteroidTypes[i]);
-				//DAO.addAsteroidType(asteroid_type);
+				AsteroidType asteroid_type = new AsteroidType(asteroidTypes.getJSONObject(i));
+				DAO.addAsteroidType(asteroid_type);
 				long id = DAO.getLastInsertID();
 				asteroidTypeIDs[i] = id; // save the inserted id
 			}
 
 			for (i = 0; i < backgroundObjects.length(); i++)
 			{
-				//DAO.addBackgroundObject(new BackgroundObject(extraParts[i]));
+				DAO.addBackgroundObject(new BackgroundObject(backgroundObjects.getJSONObject(i)));
+				bgObjectIDS[i] = DAO.getLastInsertID();
 			}
-				
+
+
+			for (i = 0; i < levels.length(); i++)
+			{
+				JSONObject level_obj = level.getJSONObject(i);
+				Level level = new Level(levels.getJSONObject(i));
+				DAO.addLevel(level);
+				long level_db_id = level.number;
+
+				JSONArray level_asteroids = levels.getJSONObject(i).getJSONArray("levelAsteroids");
+				int j;
+				for (j = 0; j < level_asteroids.length(); j++)
+				{
+					int number_of_asteroids = level_asteroids[j].getInt("number");
+					int asteroid_index = level_asteroids[i].getInt("asteroidId") - 1;
+					int asteroid_db_id = asteroidTypeIDs[asteroid_index];
+					DAO.addLevelAsteroid(level_db_id, asteroid_db_id, number_of_asteroids);
+				}
+
+				JSONArray level_objects = levels[i].getJSONArray("levelObjects");
+				for (j = 0; j < level_objects.length(); j++)
+				{
+					String position = level_objects[j].getString("position");
+					Float scale = level_objects[j].getFloat("scale");
+					int object_index = level_objects[j].getInt("objectId");
+					int object_db_id = bgObjectIDS[object_index];
+					DAO.addLevelObject(level_db_id, object_db_id, position, scale);
+				}
+			}
+
 			}
 			catch (IOException e)
 			{

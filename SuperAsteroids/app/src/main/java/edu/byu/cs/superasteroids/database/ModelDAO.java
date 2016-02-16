@@ -159,27 +159,47 @@ public class ModelDAO {
 		db.rawQuery("delete from cannon;",null);
 	}
 	
-	public boolean addLevelAsteroid(LevelAsteroid level_asteroid)
+	public boolean addLevelAsteroid(long level_number, long asteroid_id, int number_of_asteroids)
 	{
-		return false;
+		ContentValues values = new ContentValues();
+		values.put("level_number", level_number);
+		values.put("number_of_asteroids", number_of_asteroids);
+		values.put("asteroidId", asteroid_id);
+		values.put("position", position);
+		return do_insert("level_object", values);
 	}
-	
+
+	public boolean addLevelObject(long level_number, long object_id, String position, Float scale)
+	{
+		ContentValues values = new ContentValues();
+		values.put("level_number", level_number);
+		values.put("scale", scale);
+		values.put("objectId", object_id);
+		values.put("position", position);
+		return do_insert("level_object", values);
+	}
+
+	private boolean do_insert(String tablename,ContentValues values)
+	{
+		lastInsertID = db.insert(tablename, null, values);
+		if (lastInsertID >= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean addLevel(Level level)
 	{
-//		ContentValues values = new ContentValues();
-//		values.put("level_number", level_object.level_number);
-//		values.put("scale", level_object.scale);
-//		values.put("objectId", level_object.objectId);
-//		values.put("position", level_object.position);
-//
-//		 long id = db.insert("level_object", null, values);
-//		if (id >= 0) {
-//			return true;
-//		}
-//		else {
-//			return false;
-//		}
-		return false;
+		ContentValues values = new ContentValues();
+		values.put("number", level.number);
+		values.put("title", level.title);
+		values.put("hint", level.hint);
+		values.put("width", level.width);
+		values.put("height", level.height);
+		values.put("music", level.music);
+		return do_insert("level", values);
 	}
 
 	public boolean addExtraPart(ExtraPart extra_part)
@@ -190,13 +210,7 @@ public class ModelDAO {
 		values.put("imageWidth", extra_part.getImageWidth());
 		values.put("imageHeight", extra_part.getImageHeight());
 
-		 lastInsertID = db.insert("extra_part", null, values);
-		if (lastInsertID >= 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return do_insert("extra_part", values);
 	}
 
 	public boolean addMainBody(MainBody main_body)

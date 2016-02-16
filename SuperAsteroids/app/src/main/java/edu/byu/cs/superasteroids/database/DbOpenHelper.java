@@ -77,7 +77,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 				final String create_level_asteroid = "CREATE TABLE IF NOT EXISTS level_asteroid" + 
 				"(" + 
 				"levelnumber int," + 
-				"asteroidId int" + 
+				"asteroidId int" +
+				"number_of_asteroids int" +
 				");";
 				db.execSQL(create_level_asteroid);
 				

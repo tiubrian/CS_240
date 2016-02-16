@@ -21,7 +21,7 @@ def class_name(s):
  arr = map(cap_first_let,arr)
  print arr
  return "".join(arr)
-    
+
 class sqlParser:
     def __init__(self, fname):
         self.tables = {}
@@ -66,7 +66,7 @@ class sqlParser:
              res += "final String SQL = \"select " +", ".join([f.name for f in tbl])+" from "+n+"\";"
              res += "\n"
         return res
-    
+
     def json_init(self):
       res = " "
       for n in self.tables:
@@ -77,7 +77,7 @@ class sqlParser:
           res += '\n'
         res += "\n}\n\n"
       return res
-    
+
     def json_field_init(self, f):
       res = f.name + " = "
       if "image" in f.name.lower():
@@ -95,7 +95,7 @@ class sqlParser:
       if "attach" in f.name.lower():
         return res+'new Coordinate(obj.getString("'+f.name+'"));'
       return res+"obj.getString(\""+f.name+"\");"
-      
+
 
 s = sqlParser(sys.argv[1])
 res = s.json_init()

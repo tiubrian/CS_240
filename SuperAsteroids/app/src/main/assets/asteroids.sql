@@ -2,11 +2,11 @@ CREATE TABLE IF NOT EXISTS asteroid_type
 (
  id integer not null primary key autoincrement,
  name String,
- image text, 
+ image text,
  imageWidth int,
  imageHeight int,
  type String
-); 
+);
 
 CREATE TABLE IF NOT EXISTS background_object
 (
@@ -35,7 +35,8 @@ music String
 CREATE TABLE IF NOT EXISTS level_asteroid
 (
  levelnumber int,
- asteroidId int
+ asteroidId int,
+ number_of_asteroids int
 );
 
 CREATE TABLE IF NOT EXISTS main_body
