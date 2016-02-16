@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 /**
  * This class contains all methods to access the database.
  * "Dao called Dao is not Dao" -- The Dao De Ching (or the Tao Te Ching), first line of the first chapter.
@@ -153,6 +155,7 @@ public class ModelDAO {
 
 	public void clearCannons()
 	{
+		Log.e("superasteroidsfoo","Clearing Cannon");
 		db.rawQuery("delete from cannon;",null);
 	}
 	

@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS asteroid_type
 (
- id int not null primary key autoincrement,
+ id integer not null primary key autoincrement,
  name String,
  image text, 
  imageWidth int,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS asteroid_type
 CREATE TABLE IF NOT EXISTS background_object
 (
  image string,
- Id int not null primary key autoincrement
+ Id integer not null primary key autoincrement
 );
 
 CREATE TABLE IF NOT EXISTS level_object
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS level_object
 
 CREATE TABLE IF NOT EXISTS level
 (
-number int not null primary key autoincrement,
+number integer not null primary key autoincrement,
 title String,
 hint String,
 width int,

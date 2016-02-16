@@ -7,6 +7,7 @@ import android.database.sqlite.*;
 import android.test.AndroidTestCase;
 import org.junit.*;
 import java.util.ArrayList;
+import android.util.Log;
 
 public class ModelDAOTests extends AndroidTestCase {
 
@@ -25,6 +26,9 @@ public class ModelDAOTests extends AndroidTestCase {
 		DAO.clearCannons();
 		DAO.addCannon(c);
 		ArrayList<Cannon> result = DAO.getCannons();
+		Log.e("superasteroidsfoo",c.toString());
+		Log.e("superasteroidsfoo",result.get(0).toString());
+		DAO.addCannon(result.get(0));
 		assertTrue(c.equals(result.get(0)));
 		DAO.clearCannons();
 	}

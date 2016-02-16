@@ -63,6 +63,14 @@ public class Cannon {
 			&& (emitPoint.equals(other.emitPoint));
 	}
 	
+	public String toString()
+	{
+		StringBuilder res = new StringBuilder("Damage ");
+		res.append(damage);
+		res.append("emitPoint "+emitPoint.toString()+" attachPoint "+attachPoint.toString()+" image "+image.toString() + " attackImage "+attackImage.toString());
+		return res.toString();
+	}
+	
  public void update()
  {
 
@@ -74,21 +82,21 @@ public class Cannon {
  }
 
  public String getAttackImageName() {
-  return image.getName();
+  return attackImage.getName();
  }
 
  public void setAttackImageName(String name) {
-  this.image.setName(name);
+  this.attackImage.setName(name);
  }
 
  public int getAttackImageHeight()
  {
-  return image.getHeight();
+  return attackImage.getHeight();
  }
 
  public int getAttackImageWidth()
  {
-  return image.getWidth();
+  return attackImage.getWidth();
  }
 
  public String getImageName() {

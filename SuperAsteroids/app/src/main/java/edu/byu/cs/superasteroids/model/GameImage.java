@@ -11,6 +11,15 @@ public class GameImage
  private int height;
  private int width;
 
+ public String toString()
+ {
+	 StringBuilder res = new StringBuilder();
+	 res.append(name);
+	 res.append(width);
+	 res.append(height);
+	 return res.toString();
+ }
+ 
  public boolean equals(GameImage other)
  {
 	 return (name==other.getName()) && (height==other.getHeight()) && (width==other.getWidth());
