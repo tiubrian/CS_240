@@ -29,12 +29,25 @@ public class Level {
 	/**
 	 * A list of asteroids.
 	 */
+	public String title;
+
 	public ArrayList<Asteroid> asteroids;
 	public ArrayList<BackgroundObject> background_objects;
 
 	public Level()
 	{
 		asteroids = new ArrayList<Asteroid>();
+	}
+
+	public Level(JSONObject obj) {
+		asteroids = new ArrayList<Asteroid>();
+		number = Integer.parseInt(obj.getString("number"));
+		title = obj.getString("title");
+		hint = obj.getString("hint");
+		width = Integer.parseInt(obj.getString("width"));
+		height = Integer.parseInt(obj.getString("height"));
+		musicFile = obj.getString("music");
+
 	}
 
 	public void update()

@@ -198,7 +198,7 @@ public class ModelDAO {
 		values.put("hint", level.hint);
 		values.put("width", level.width);
 		values.put("height", level.height);
-		values.put("music", level.music);
+		values.put("music", level.musicFile);
 		return do_insert("level", values);
 	}
 

@@ -86,8 +86,8 @@ public class GameDataImporter implements IGameDataImporter {
 
 			for (i = 0; i < levels.length(); i++)
 			{
-				JSONObject level_obj = level.getJSONObject(i);
-				Level level = new Level(levels.getJSONObject(i));
+				JSONObject level_obj = levels.getJSONObject(i);
+				Level level = new Level(level_obj);
 				DAO.addLevel(level);
 				long level_db_id = level.number;
 
@@ -95,19 +95,21 @@ public class GameDataImporter implements IGameDataImporter {
 				int j;
 				for (j = 0; j < level_asteroids.length(); j++)
 				{
-					int number_of_asteroids = level_asteroids[j].getInt("number");
-					int asteroid_index = level_asteroids[i].getInt("asteroidId") - 1;
-					int asteroid_db_id = asteroidTypeIDs[asteroid_index];
+					JSONObject level_ast = level_asteroids.getJSONObject(j);
+					int number_of_asteroids = level_ast.getInt("number");
+					int asteroid_index = level_ast.getInt("asteroidId") - 1;
+					long asteroid_db_id = asteroidTypeIDs[asteroid_index];
 					DAO.addLevelAsteroid(level_db_id, asteroid_db_id, number_of_asteroids);
 				}
 
 				JSONArray level_objects = levels[i].getJSONArray("levelObjects");
 				for (j = 0; j < level_objects.length(); j++)
 				{
-					String position = level_objects[j].getString("position");
-					Float scale = level_objects[j].getFloat("scale");
-					int object_index = level_objects[j].getInt("objectId");
-					int object_db_id = bgObjectIDS[object_index];
+					JSONObject level_object = level_objects.getJSONObject(j);
+					String position = level_object.getString("position");
+					Float scale = level_object.getFloat("scale");
+					int object_index = level_object.getInt("objectId");
+					long object_db_id = bgObjectIDS[object_index];
 					DAO.addLevelObject(level_db_id, object_db_id, position, scale);
 				}
 			}
