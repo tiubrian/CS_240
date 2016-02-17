@@ -34,7 +34,7 @@ music String
 
 CREATE TABLE IF NOT EXISTS level_asteroid
 (
- levelnumber int,
+ level_number int,
  asteroidId int,
  number_of_asteroids int
 );
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS extra_part
 (
  attachPoint String,
  image text,
- imageWidth int
+ imageWidth int,
  imageHeight int
 );
 

@@ -36,6 +36,7 @@ public class GameDataImporter implements IGameDataImporter {
 			Log.e(importtag,"called the importer");
 		DbOpenHelper helper = new DbOpenHelper(this.context);
 		SQLiteDatabase db = helper.getWritableDatabase();
+		helper.onCreate(db);
 		ModelDAO DAO = new ModelDAO(db);
 			try {
 				Log.e(importtag,"initialized the database");
@@ -111,7 +112,7 @@ public class GameDataImporter implements IGameDataImporter {
 
 			for (i = 0; i < backgroundObjects.length(); i++)
 			{
-				String bg_image = backgroundObjects.getJSONObject(i).getString("image");
+				String bg_image = backgroundObjects.getString(i);
 				DAO.addBackgroundObject(bg_image);
 				bgObjectIDS[i] = DAO.getLastInsertID();
 			}
@@ -121,6 +122,7 @@ public class GameDataImporter implements IGameDataImporter {
 			{
 				JSONObject level_obj = levels.getJSONObject(i);
 				Level level = new Level(level_obj);
+				Log.e("superasteroidsparse",level.toString());
 				DAO.addLevel(level);
 				long level_db_id = level.number;
 

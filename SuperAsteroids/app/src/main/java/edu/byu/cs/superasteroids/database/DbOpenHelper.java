@@ -16,6 +16,19 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
 //    @Override
     public void onCreate(SQLiteDatabase db) {
+			  //delete tables if exist
+			  db.execSQL("drop table if exists cannon;");
+			  db.execSQL("drop table if exists main_body;");
+			  db.execSQL("drop table if exists extra_part;");
+			  db.execSQL("drop table if exists power_core;");
+			  db.execSQL("drop table if exists level;");
+			  db.execSQL("drop table if exists asteroid_type;");
+			  db.execSQL("drop table if exists level_asteroid;");
+			  db.execSQL("drop table if exists level_object;");
+			  db.execSQL("drop table if exists engine;");
+			  db.execSQL("drop table if exists background_object;");
+					
+			  // create tables
 				final String create_cannon = "CREATE TABLE IF NOT EXISTS cannon" + 
 				"(" + 
 				"attachPoint String," + 
@@ -76,8 +89,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 				
 				final String create_level_asteroid = "CREATE TABLE IF NOT EXISTS level_asteroid" + 
 				"(" + 
-				"levelnumber int," + 
-				"asteroidId int" +
+				"level_number int," + 
+				"asteroidId int," +
 				"number_of_asteroids int" +
 				");";
 				db.execSQL(create_level_asteroid);
@@ -98,7 +111,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 				"(" + 
 				"attachPoint String," + 
 				"image text," + 
-				"imageWidth int" + 
+				"imageWidth int," + 
 				"imageHeight int" + 
 				");";
 

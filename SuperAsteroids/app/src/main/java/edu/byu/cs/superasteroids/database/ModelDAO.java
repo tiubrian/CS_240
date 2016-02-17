@@ -195,6 +195,7 @@ public class ModelDAO {
 	{
 		ContentValues values = new ContentValues();
 		values.put("image", image);
+		Log.e(dbtag, "adding bgobject");
 		return do_insert("background_object", values);
 	}
 
@@ -205,6 +206,11 @@ public class ModelDAO {
 		values.put("level_number", level_number);
 		values.put("number_of_asteroids", number_of_asteroids);
 		values.put("asteroidId", asteroid_id);
+		StringBuilder res = new StringBuilder();
+		res.append(asteroid_id);
+		res.append(" level num: ");
+		res.append(level_number);
+		Log.e(dbtag,res.toString());
 		return do_insert("level_object", values);
 	}
 
@@ -215,6 +221,7 @@ public class ModelDAO {
 		values.put("scale", scale);
 		values.put("objectId", object_id);
 		values.put("position", position);
+		Log.e(dbtag, "adding level object "+position);
 		return do_insert("level_object", values);
 	}
 
@@ -232,12 +239,12 @@ public class ModelDAO {
 	public boolean addLevel(Level level)
 	{
 		ContentValues values = new ContentValues();
-		values.put("number", level.number);
 		values.put("title", level.title);
 		values.put("hint", level.hint);
 		values.put("width", level.width);
 		values.put("height", level.height);
 		values.put("music", level.musicFile);
+		Log.e(dbtag, level.toString());
 		return do_insert("level", values);
 	}
 
@@ -250,7 +257,15 @@ public class ModelDAO {
 		values.put("imageWidth", extra_part.getImageWidth());
 		values.put("imageHeight", extra_part.getImageHeight());
 
-		return do_insert("extra_part", values);
+		lastInsertID = db.insert("extra_part", null, values);
+		if (lastInsertID >= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+//		return do_insert("extra_part", values);
 	}
 
 	public boolean addMainBody(MainBody main_body)
@@ -317,6 +332,7 @@ public class ModelDAO {
 	public boolean addEngine(Engine engine)
 	{
 		ContentValues values = new ContentValues();
+		Log.e(dbtag, engine.toString());
 		values.put("baseSpeed", engine.baseSpeed);
 		values.put("baseTurnRate", engine.baseTurnRate);
 		values.put("attachPoint", engine.attachPoint.toString());
@@ -336,7 +352,7 @@ public class ModelDAO {
 	public boolean addAsteroidType(AsteroidType asteroid_type)
 	{
 		ContentValues values = new ContentValues();
-		values.put("id", asteroid_type.id);
+		Log.e(dbtag, asteroid_type.toString());
 		values.put("name", asteroid_type.name);
 		values.put("image", asteroid_type.getImageName());
 		values.put("imageWidth", asteroid_type.getImageWidth());
