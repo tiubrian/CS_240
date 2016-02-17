@@ -211,7 +211,7 @@ public class ModelDAO {
 		res.append(" level num: ");
 		res.append(level_number);
 		Log.e(dbtag,res.toString());
-		return do_insert("level_object", values);
+		return do_insert("level_asteroid", values);
 	}
 
 	public boolean addLevelObject(long level_number, long object_id, String position, Double scale)
