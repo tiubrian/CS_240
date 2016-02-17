@@ -7,5 +7,6 @@ package edu.byu.cs.superasteroids.model;
 public class Asteroid
 {
 	public AsteroidType type;
+	public MovingState state;
 
 }

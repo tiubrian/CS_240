@@ -1,5 +1,6 @@
 package edu.byu.cs.superasteroids.model;
 import java.util.ArrayList;
+import org.json.*;
 
 /**
  * This is the model class for a level in SuperAsteroids.
@@ -39,7 +40,7 @@ public class Level {
 		asteroids = new ArrayList<Asteroid>();
 	}
 
-	public Level(JSONObject obj) {
+	public Level(JSONObject obj) throws JSONException {
 		asteroids = new ArrayList<Asteroid>();
 		number = Integer.parseInt(obj.getString("number"));
 		title = obj.getString("title");
@@ -50,6 +51,24 @@ public class Level {
 
 	}
 
+	public String toString() {
+		StringBuilder res = new StringBuilder();
+		res.append(" number: ");
+		res.append(number);
+		res.append(" title: ");
+		res.append(title);
+		res.append(" hint: ");
+		res.append(hint);
+		res.append(" width: ");
+		res.append(width);
+		res.append(" height: ");
+		res.append(height);
+		res.append(" music: ");
+		res.append(musicFile);
+		return res.toString();
+}
+
+	
 	public void update()
 	{
 

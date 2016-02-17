@@ -1,8 +1,11 @@
 package edu.byu.cs.superasteroids.importer;
-import android.database.sqlite.SQLiteDatabase;
-import android.content.Context;
-import edu.byu.cs.superasteroids.database.*;
+
 import edu.byu.cs.superasteroids.model.*;
+import edu.byu.cs.superasteroids.database.*;
+import android.database.sqlite.*;
+import android.content.Context;
+import android.util.Log;
+
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.IOException;
@@ -12,6 +15,15 @@ import org.json.*;
  */
 public class GameDataImporter implements IGameDataImporter {
 
+			private Context context;
+			private final static String importtag = "superasteroidsimportfoo";
+	
+			public GameDataImporter(Context context)
+			{
+				Log.e(importtag,"initialized the importer");
+				this.context = context;
+			}
+			
 	    /**
      * Imports the data from the .json file the given InputStreamReader is connected to. Imported data
      * should be stored in a SQLite database for use in the ship builder and the game.
@@ -21,20 +33,40 @@ public class GameDataImporter implements IGameDataImporter {
      */
     public boolean importData(InputStreamReader dataInputReader)
 		{
-			DbOpenHelper helper = new DbOpenHelper(getContext());
-			ModelDAO DAO = new ModelDAO(helper.getWritableDatabase());
+			Log.e(importtag,"called the importer");
+		DbOpenHelper helper = new DbOpenHelper(this.context);
+		SQLiteDatabase db = helper.getWritableDatabase();
+		ModelDAO DAO = new ModelDAO(db);
 			try {
+				Log.e(importtag,"initialized the database");
 				JSONObject root = new JSONObject(makeString(dataInputReader));
-				JSONObject data = root.getJSONObject("asteroidsGame");
-				JSONArray extraParts = data.getJSONArray("extraParts");
-				JSONArray cannons = data.getJSONArray("cannons");
-				JSONArray mainBodies = data.getJSONArray("mainBodies");
-				JSONArray powerCores = data.getJSONArray("PowerCores");
-				JSONArray engines = data.getJSONArray("engines");
-				JSONArray asteroidTypes = data.getJSONArray("asteroids");
-				JSONArray backgroundObjects = data.getJSONArray("objects");
-				JSONArray levels = data.getJSONArray("levels");
 
+				Log.e(importtag,"Parsed ze root");
+				JSONObject data = root.getJSONObject("asteroidsGame");
+
+				Log.e(importtag,"Parsed up to the game");
+
+				JSONArray extraParts = data.getJSONArray("extraParts");
+				Log.e(importtag,"Parsed up to left wings");
+
+				JSONArray cannons = data.getJSONArray("cannons");
+				Log.e(importtag,"Parsed up to cannons");
+				JSONArray mainBodies = data.getJSONArray("mainBodies");
+				Log.e(importtag,"Parsed up to mainBodies");
+
+				JSONArray powerCores = data.getJSONArray("powerCores");
+				Log.e(importtag,"Parsed up to powerCores");
+
+				JSONArray engines = data.getJSONArray("engines");
+				Log.e(importtag,"Parsed up to engines");
+				JSONArray asteroidTypes = data.getJSONArray("asteroids");
+				Log.e(importtag,"Parsed up to asts");
+
+				JSONArray backgroundObjects = data.getJSONArray("objects");
+				Log.e(importtag,"Parsed up to bgos");
+
+				JSONArray levels = data.getJSONArray("levels");
+				Log.e(importtag,"Parse Successful");
 			int i;
 			long[] asteroidTypeIDs = new long[asteroidTypes.length()];
 			long[] bgObjectIDS = new long[backgroundObjects.length()];
@@ -79,7 +111,8 @@ public class GameDataImporter implements IGameDataImporter {
 
 			for (i = 0; i < backgroundObjects.length(); i++)
 			{
-				DAO.addBackgroundObject(new BackgroundObject(backgroundObjects.getJSONObject(i)));
+				String bg_image = backgroundObjects.getJSONObject(i).getString("image");
+				DAO.addBackgroundObject(bg_image);
 				bgObjectIDS[i] = DAO.getLastInsertID();
 			}
 
@@ -91,7 +124,7 @@ public class GameDataImporter implements IGameDataImporter {
 				DAO.addLevel(level);
 				long level_db_id = level.number;
 
-				JSONArray level_asteroids = levels.getJSONObject(i).getJSONArray("levelAsteroids");
+				JSONArray level_asteroids = level_obj.getJSONArray("levelAsteroids");
 				int j;
 				for (j = 0; j < level_asteroids.length(); j++)
 				{
@@ -102,12 +135,12 @@ public class GameDataImporter implements IGameDataImporter {
 					DAO.addLevelAsteroid(level_db_id, asteroid_db_id, number_of_asteroids);
 				}
 
-				JSONArray level_objects = levels[i].getJSONArray("levelObjects");
+				JSONArray level_objects = level_obj.getJSONArray("levelObjects");
 				for (j = 0; j < level_objects.length(); j++)
 				{
 					JSONObject level_object = level_objects.getJSONObject(j);
 					String position = level_object.getString("position");
-					Float scale = level_object.getFloat("scale");
+					Double scale = level_object.getDouble("scale");
 					int object_index = level_object.getInt("objectId");
 					long object_db_id = bgObjectIDS[object_index];
 					DAO.addLevelObject(level_db_id, object_db_id, position, scale);

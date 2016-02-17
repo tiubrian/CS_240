@@ -63,13 +63,31 @@ public class Cannon {
 			&& (emitPoint.equals(other.emitPoint));
 	}
 	
+	public String toString() {
+		StringBuilder res = new StringBuilder();
+		res.append(" attachPoint: ");
+		res.append(attachPoint.toString());
+		res.append(" emitPoint: ");
+		res.append(emitPoint.toString());
+		res.append(" image: ");
+		res.append(image.toString());
+		res.append(" attackImage: ");
+		res.append(attackImage.toString());
+		res.append(" attackSound: ");
+		res.append(attackSound);
+		res.append(" damage: ");
+		res.append(damage);
+		return res.toString();
+}
+
+/*	
 	public String toString()
 	{
 		StringBuilder res = new StringBuilder("Damage ");
 		res.append(damage);
 		res.append("emitPoint "+emitPoint.toString()+" attachPoint "+attachPoint.toString()+" image "+image.toString() + " attackImage "+attackImage.toString());
 		return res.toString();
-	}
+	}*/
 	
  public void update()
  {

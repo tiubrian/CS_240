@@ -14,8 +14,11 @@ public class GameImage
  public String toString()
  {
 	 StringBuilder res = new StringBuilder();
+	 res.append(" name: ");
 	 res.append(name);
+	 res.append(" width: ");
 	 res.append(width);
+	 res.append(" height: ");
 	 res.append(height);
 	 return res.toString();
  }

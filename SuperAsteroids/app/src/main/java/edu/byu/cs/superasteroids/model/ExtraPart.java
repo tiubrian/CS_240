@@ -32,6 +32,16 @@ public class ExtraPart
 
   }
 
+  public String toString() {
+		StringBuilder res = new StringBuilder();
+		res.append(" attachPoint: ");
+		res.append(attachPoint.toString());
+		res.append(" image: ");
+		res.append(image.toString());
+		return res.toString();
+	}
+
+  
   public String getImageName() {
     return image.getName();
   }

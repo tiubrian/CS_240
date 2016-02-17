@@ -17,7 +17,21 @@ public class AsteroidType {
 					Integer.parseInt(obj.getString("imageHeight")));
 		type = obj.getString("type");
 	} 
- 
+
+	public String toString() {
+		StringBuilder res = new StringBuilder();
+		res.append(" id: ");
+		res.append(id);
+		res.append(" name: ");
+		res.append(name);
+		res.append(" image: ");
+		res.append(image.toString());
+		res.append(" type: ");
+		res.append(type);
+		return res.toString();
+	}
+
+	
  public void update()
  {
 

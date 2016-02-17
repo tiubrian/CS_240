@@ -10,6 +10,7 @@ public class SpaceShip {
     public ExtraPart extra_part;
     public PowerCore power_core;
     public Cannon cannon;
+		public MovingState state;
 
     public void update()
     {

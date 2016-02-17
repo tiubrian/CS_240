@@ -43,6 +43,19 @@ public class MainBody {
 
  }
 
+ public String toString() {
+	StringBuilder res = new StringBuilder();
+	res.append(" cannonAttach: ");
+	res.append(cannonAttach.toString());
+	res.append(" engineAttach: ");
+	res.append(engineAttach.toString());
+	res.append(" extraAttach: ");
+	res.append(extraAttach.toString());
+	res.append(" image: ");
+	res.append(image.toString());
+	return res.toString();
+}
+ 
  public String getImageName() {
   return image.getName();
  }

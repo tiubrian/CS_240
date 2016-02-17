@@ -20,6 +20,7 @@ import android.util.Log;
 public class ModelDAO {
 	private SQLiteDatabase db;
 	private long lastInsertID;
+	public final static String dbtag = "superasteroidsdbfoo";
 
 	public ModelDAO(SQLiteDatabase db)
 	{
@@ -38,6 +39,7 @@ public class ModelDAO {
 		return result;
 	}
 
+	
 	public ArrayList<Engine> getEngines()
 	{
 		ArrayList<Engine> result = new ArrayList<Engine>();
@@ -67,6 +69,36 @@ public class ModelDAO {
 		return result;
 	}
 
+	
+	public ArrayList<PowerCore> getPowerCores()
+	{
+		ArrayList<PowerCore> result = new ArrayList<PowerCore>();
+		final String SQL = "select cannonBoost, engineBoost, image"
+			+ "from power_core";
+
+		Cursor cursor = db.rawQuery(SQL,null);
+		try {
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				PowerCore power_core = new PowerCore();
+
+				power_core.cannonBoost = cursor.getInt(0);
+				power_core.engineBoost = cursor.getInt(1);
+				power_core.image = new GameImage(cursor.getString(2), 0, 0);
+
+				result.add(power_core);
+
+				cursor.moveToNext();
+			}
+		}
+		finally {
+			cursor.close();
+		}
+
+		return result;
+	}
+
+	
 		/**
 		 * Really ought to have been called LeftWing, but ...
 		 */
@@ -155,9 +187,17 @@ public class ModelDAO {
 
 	public void clearCannons()
 	{
-		Log.e("superasteroidsfoo","Clearing Cannon");
+		Log.e(dbtag,"Clearing Cannon");
 		db.rawQuery("delete from cannon;",null);
 	}
+
+	public boolean addBackgroundObject(String image)
+	{
+		ContentValues values = new ContentValues();
+		values.put("image", image);
+		return do_insert("background_object", values);
+	}
+
 	
 	public boolean addLevelAsteroid(long level_number, long asteroid_id, int number_of_asteroids)
 	{
@@ -165,11 +205,10 @@ public class ModelDAO {
 		values.put("level_number", level_number);
 		values.put("number_of_asteroids", number_of_asteroids);
 		values.put("asteroidId", asteroid_id);
-		values.put("position", position);
 		return do_insert("level_object", values);
 	}
 
-	public boolean addLevelObject(long level_number, long object_id, String position, Float scale)
+	public boolean addLevelObject(long level_number, long object_id, String position, Double scale)
 	{
 		ContentValues values = new ContentValues();
 		values.put("level_number", level_number);
@@ -204,6 +243,7 @@ public class ModelDAO {
 
 	public boolean addExtraPart(ExtraPart extra_part)
 	{
+		Log.e(dbtag, extra_part.toString());
 		ContentValues values = new ContentValues();
 		values.put("attachPoint", extra_part.attachPoint.toString());
 		values.put("image", extra_part.getImageName());
@@ -215,6 +255,7 @@ public class ModelDAO {
 
 	public boolean addMainBody(MainBody main_body)
 	{
+		Log.e(dbtag, main_body.toString());
 		ContentValues values = new ContentValues();
 		values.put("cannonAttach", main_body.cannonAttach.toString());
 		values.put("engineAttach", main_body.engineAttach.toString());
@@ -234,6 +275,7 @@ public class ModelDAO {
 
 	public boolean addCannon(Cannon cannon)
 	{
+		Log.e(dbtag, cannon.toString());
 		ContentValues values = new ContentValues();
 		values.put("attachPoint", cannon.attachPoint.toString());
 		values.put("emitPoint", cannon.emitPoint.toString());
@@ -257,6 +299,7 @@ public class ModelDAO {
 
 	public boolean addPowerCore(PowerCore power_core)
 	{
+		Log.e(dbtag, power_core.toString());
 		ContentValues values = new ContentValues();
 		values.put("cannonBoost", power_core.cannonBoost);
 		values.put("engineBoost", power_core.engineBoost);

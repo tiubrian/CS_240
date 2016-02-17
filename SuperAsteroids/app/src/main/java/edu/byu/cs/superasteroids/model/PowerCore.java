@@ -20,6 +20,18 @@ public class PowerCore {
 
 	}
  
+ public String toString() {
+	StringBuilder res = new StringBuilder();
+	res.append(" cannonBoost: ");
+	res.append(cannonBoost);
+	res.append(" engineBoost: ");
+	res.append(engineBoost);
+	res.append(" image: ");
+	res.append(image.toString());
+	return res.toString();
+ }
+
+ 
  public String getImageName() {
   return image.getName();
  }

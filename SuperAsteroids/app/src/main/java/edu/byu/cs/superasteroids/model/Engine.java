@@ -24,9 +24,22 @@ public class Engine {
 	 image = new GameImage(obj.getString("image"), 
 								Integer.parseInt(obj.getString("imageHeight")),
 								Integer.parseInt(obj.getString("imageWidth")) );
+	 
  }
  
- 
+ public String toString() {
+	StringBuilder res = new StringBuilder();
+	res.append(" baseSpeed: ");
+	res.append(baseSpeed);
+	res.append(" baseTurnRate: ");
+	res.append(baseTurnRate);
+	res.append(" attachPoint: ");
+	res.append(attachPoint.toString());
+	res.append(" image: ");
+	res.append(image.toString());
+	return res.toString();
+}
+
  
  public void update()
  {

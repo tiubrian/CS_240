@@ -66,7 +66,33 @@ class sqlParser:
              res += "final String SQL = \"select " +", ".join([f.name for f in tbl])+" from "+n+"\";"
              res += "\n"
         return res
+    def tostring(self):
+      res = " "
+      for n in self.tables:
+        tbl = self.tables[n]
+        res += n+"\n"
+        res += "public String toString() {\n"
+        res += "StringBuilder res = new StringBuilder();\n"
+        for f in tbl:
+          res += self.tostring_field(f)
+        res += "return res.toString();"
+        res += "\n}\n\n"
+      return res
 
+    def tostring_field(self, f):
+      res = 'res.append(" '+f.name + ': ");\n'
+      l = f.name.lower()
+      #Check to see if l is an object
+      if ("image" in l and l[-5:]!="image"):
+        return ""
+      if ("image" in l and l[-5:]=="image") or "attach" in l or "point" in l:
+        res += 'res.append(' + f.name+'.toString());\n'
+        return res
+      else:
+        res += 'res.append(' + f.name + ');\n'
+        return res
+        
+        
     def json_init(self):
       res = " "
       for n in self.tables:
@@ -98,7 +124,7 @@ class sqlParser:
 
 
 s = sqlParser(sys.argv[1])
-res = s.json_init()
+res = s.tostring()
 if len(sys.argv) > 2:
     f = open(sys.argv[2],"w")
     f.write(res)
