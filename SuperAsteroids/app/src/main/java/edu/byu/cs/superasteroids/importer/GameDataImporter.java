@@ -20,7 +20,6 @@ public class GameDataImporter implements IGameDataImporter {
 	
 			public GameDataImporter(Context context)
 			{
-				Log.e(importtag,"initialized the importer");
 				this.context = context;
 			}
 			
@@ -33,41 +32,41 @@ public class GameDataImporter implements IGameDataImporter {
      */
     public boolean importData(InputStreamReader dataInputReader)
 		{
-			Log.e(importtag,"called the importer");
+//			Log.e(importtag,"called the importer");
 		DbOpenHelper helper = new DbOpenHelper(this.context);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		helper.onCreate(db);
 		ModelDAO DAO = new ModelDAO(db);
 			try {
-				Log.e(importtag,"initialized the database");
+//				Log.e(importtag,"initialized the database");
 				JSONObject root = new JSONObject(makeString(dataInputReader));
 
-				Log.e(importtag,"Parsed ze root");
+	//			Log.e(importtag,"Parsed ze root");
 				JSONObject data = root.getJSONObject("asteroidsGame");
 
-				Log.e(importtag,"Parsed up to the game");
+		//		Log.e(importtag,"Parsed up to the game");
 
 				JSONArray extraParts = data.getJSONArray("extraParts");
-				Log.e(importtag,"Parsed up to left wings");
+			//	Log.e(importtag,"Parsed up to left wings");
 
 				JSONArray cannons = data.getJSONArray("cannons");
-				Log.e(importtag,"Parsed up to cannons");
+				//Log.e(importtag,"Parsed up to cannons");
 				JSONArray mainBodies = data.getJSONArray("mainBodies");
-				Log.e(importtag,"Parsed up to mainBodies");
+//				Log.e(importtag,"Parsed up to mainBodies");
 
 				JSONArray powerCores = data.getJSONArray("powerCores");
-				Log.e(importtag,"Parsed up to powerCores");
+	//			Log.e(importtag,"Parsed up to powerCores");
 
 				JSONArray engines = data.getJSONArray("engines");
-				Log.e(importtag,"Parsed up to engines");
+		//		Log.e(importtag,"Parsed up to engines");
 				JSONArray asteroidTypes = data.getJSONArray("asteroids");
-				Log.e(importtag,"Parsed up to asts");
+			//	Log.e(importtag,"Parsed up to asts");
 
 				JSONArray backgroundObjects = data.getJSONArray("objects");
-				Log.e(importtag,"Parsed up to bgos");
+				//Log.e(importtag,"Parsed up to bgos");
 
 				JSONArray levels = data.getJSONArray("levels");
-				Log.e(importtag,"Parse Successful");
+				//Log.e(importtag,"Parse Successful");
 			int i;
 			long[] asteroidTypeIDs = new long[asteroidTypes.length()];
 			long[] bgObjectIDS = new long[backgroundObjects.length()];

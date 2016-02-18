@@ -39,6 +39,37 @@ public class ModelDAO {
 		return result;
 	}
 
+	public ArrayList<Level> getLevels()
+	{
+		ArrayList<Level> = res;
+		final string sel_SQL = "select number, title, hint, width, height, music, number"
+			+" from level";
+		
+		
+		Cursor cursor = db.rawQuery(sel_SQL, null);
+		try {
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				Engine engine = new Engine();
+
+				engine.baseSpeed = cursor.getInt(0);
+				engine.baseTurnRate = cursor.getInt(1);
+				engine.attachPoint = new Coordinate(cursor.getString(2));
+				engine.image = new GameImage(cursor.getString(3), cursor.getInt(4), cursor.getInt(5));
+
+				result.add(engine);
+
+				cursor.moveToNext();
+			}
+		}
+		finally {
+			cursor.close();
+		}
+
+		return result;
+		
+	}
+	
 	
 	public ArrayList<Engine> getEngines()
 	{

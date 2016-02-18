@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.StringBuilder;
 
 import android.util.Log;
 
@@ -40,6 +39,17 @@ public class ModelDAO {
 		return result;
 	}
 
+	public ArrayList<Level> getLevels()
+	{
+		ArrayList<Level> = res;
+		final string sel_SQL = "select number, title, hint, width, height, music, number"
+			+" from level";
+		
+		
+		Cursor cursor = db.rawQuery(sel_SQL, null);
+		
+	}
+	
 	
 	public ArrayList<Engine> getEngines()
 	{
@@ -212,7 +222,7 @@ public class ModelDAO {
 		res.append(" level num: ");
 		res.append(level_number);
 		Log.e(dbtag,res.toString());
-		return do_insert("level_object", values);
+		return do_insert("level_asteroid", values);
 	}
 
 	public boolean addLevelObject(long level_number, long object_id, String position, Double scale)
