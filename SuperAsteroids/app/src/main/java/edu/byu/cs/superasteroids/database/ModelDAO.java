@@ -41,8 +41,8 @@ public class ModelDAO {
 
 	public ArrayList<Level> getLevels()
 	{
-		ArrayList<Level> = res;
-		final string sel_SQL = "select number, title, hint, width, height, music, number"
+		ArrayList<Level> res = new ArrayList<Level>();
+		final String sel_SQL = "select number, title, hint, width, height, music, number"
 			+" from level";
 		
 		
@@ -50,15 +50,14 @@ public class ModelDAO {
 		try {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
-				Engine engine = new Engine();
-
-				engine.baseSpeed = cursor.getInt(0);
-				engine.baseTurnRate = cursor.getInt(1);
-				engine.attachPoint = new Coordinate(cursor.getString(2));
-				engine.image = new GameImage(cursor.getString(3), cursor.getInt(4), cursor.getInt(5));
-
-				result.add(engine);
-
+				Level level = new Level();
+//				level.number = cursor.getInteger(0);
+				level.title = cursor.getString(1);
+				level.hint = cursor.getString(2);
+				level.width = cursor.getInt(3);
+				level.height = cursor.getInt(4);
+				level.musicFile = cursor.getString(5);
+				
 				cursor.moveToNext();
 			}
 		}
@@ -66,7 +65,7 @@ public class ModelDAO {
 			cursor.close();
 		}
 
-		return result;
+		return res;
 		
 	}
 	

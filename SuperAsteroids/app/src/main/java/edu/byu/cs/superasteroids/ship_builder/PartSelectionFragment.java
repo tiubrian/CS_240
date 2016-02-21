@@ -18,6 +18,7 @@ import java.util.List;
 import edu.byu.cs.superasteroids.R;
 import edu.byu.cs.superasteroids.base.FragmentView;
 import edu.byu.cs.superasteroids.content.ContentManager;
+import android.util.Log;
 
 /**
  * This class represents a part selection fragment that can be reused for different ship parts.
@@ -30,16 +31,20 @@ public class PartSelectionFragment extends FragmentView {
     private View partChooserView;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			Log.e("superasteroidsfoo","Called onCreateView");
 
         partChooserView = inflater.inflate(R.layout.fragment_part_chooser, container, false);
         setStartGameButton(false);
 		
 		FrameLayout gameFrame = (FrameLayout)partChooserView.findViewById(R.id.part_chooser_frame);
+			Log.e("superasteroidsfoo","Called frameLayout");
 		gameView = new ShipBuilderShipView(getActivity(), getController());
+			Log.e("superasteroidsfoo","Called shipbuildershipview");
 		gameView.loadContent(ContentManager.getInstance());
+			Log.e("superasteroidsfoo","Called viewloadcontent");
 		gameFrame.addView(gameView);
         gameView.runLoop();
-
+			Log.e("superasteroidsfoo","addedgameview");
 		GridView partsList = (GridView)partChooserView.findViewById(R.id.part_chooser_parts_gridview);
 		partsList.setAdapter(partsAdapter);
 		partsList.setOnItemClickListener(new OnItemClickListener() {
