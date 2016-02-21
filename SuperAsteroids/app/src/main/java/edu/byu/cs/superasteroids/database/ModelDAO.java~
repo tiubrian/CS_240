@@ -41,12 +41,31 @@ public class ModelDAO {
 
 	public ArrayList<Level> getLevels()
 	{
-		ArrayList<Level> = res;
-		final string sel_SQL = "select number, title, hint, width, height, music, number"
+		ArrayList<Level> res = new ArrayList<Level>();
+		final String sel_SQL = "select number, title, hint, width, height, music, number"
 			+" from level";
 		
 		
 		Cursor cursor = db.rawQuery(sel_SQL, null);
+		try {
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				Level level = new Level();
+				level.number = cursor.getInteger(0);
+				level.title = cursor.getString(1);
+				level.hint = cursor.getString(2);
+				level.width = cursor.getInt(3);
+				level.height = cursor.getInt(4);
+				level.music = cursor.getString(5);
+				
+				cursor.moveToNext();
+			}
+		}
+		finally {
+			cursor.close();
+		}
+
+		return res;
 		
 	}
 	

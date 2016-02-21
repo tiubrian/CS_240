@@ -50,6 +50,14 @@ public class ModelDAO {
 		try {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
+				Level level = new Level();
+//				level.number = cursor.getInteger(0);
+				level.title = cursor.getString(1);
+				level.hint = cursor.getString(2);
+				level.width = cursor.getInt(3);
+				level.height = cursor.getInt(4);
+				level.musicFile = cursor.getString(5);
+				
 				cursor.moveToNext();
 			}
 		}
