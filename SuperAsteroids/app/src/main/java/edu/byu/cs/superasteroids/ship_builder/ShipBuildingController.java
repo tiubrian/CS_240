@@ -102,28 +102,26 @@ public class ShipBuildingController implements IShipBuildingController {
 					}
 					break;
 				case EXTRA_PART:
-					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.CANNON; 
-					else if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.MAIN_BODY; 
+					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.CANNON; 
+					else if (direction == ViewDirection.LEFT) nstate = PartSelectionView.MAIN_BODY; 
 					else return;
 					break;
 
 				case CANNON:
-					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.ENGINE; 
-					else if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.EXTRA_PART; 
+					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.ENGINE; 
+					else if (direction == ViewDirection.LEFT) nstate = PartSelectionView.EXTRA_PART; 
 					else return;
 					break;
 
 				case ENGINE:
-					activity.setArrow(state, ViewDirection.LEFT, true, "Power Core");
-					activity.setArrow(state, ViewDirection.RIGHT, true, "Cannon");			
-					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.POWER_CORE; 
-					else if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.CANNON; 
+					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.POWER_CORE; 
+					else if (direction == ViewDirection.LEFT) nstate = PartSelectionView.CANNON; 
 					else return;
 
 					break;
 				case POWER_CORE:
 				default:
-					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.ENGINE; 
+					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.ENGINE; 
 					else return;
 			}
 			state = nstate;

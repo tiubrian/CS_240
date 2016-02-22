@@ -10,6 +10,10 @@ public class AsteroidType {
  public GameImage image;
  public int id;
 
+  public AsteroidType()
+  {
+  }
+ 
 	public AsteroidType(JSONObject obj) throws JSONException {
 		name = obj.getString("name");
 		image = new GameImage(obj.getString("image"),

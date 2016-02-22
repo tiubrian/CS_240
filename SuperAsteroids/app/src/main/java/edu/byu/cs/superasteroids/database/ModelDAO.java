@@ -39,6 +39,19 @@ public class ModelDAO {
 		return result;
 	}
 
+	private AsteroidType getAsteroidTypeFromCursor(Cursor cursor)
+	{
+	  AsteroidType asteroid_type = new AsteroidType();
+	  asteroid_type.id = cursor.getInt(0);
+	  asteroid_type.name = cursor.getString(1);
+	  asteroid_type.image = new GameImage(cursor.getString(2),
+	   cursor.getInt(3),
+	   cursor.getInt(4));
+	  
+	  asteroid_type.type = cursor.getString(5);
+	  return asteroid_type;
+	}
+	
 	public ArrayList<Level> getLevels()
 	{
 		ArrayList<Level> res = new ArrayList<Level>();
@@ -51,13 +64,16 @@ public class ModelDAO {
 			cursor.moveToFirst();
 			while (!cursor.isAfterLast()) {
 				Level level = new Level();
-//				level.number = cursor.getInteger(0);
+				int number = cursor.getInt(0);
 				level.title = cursor.getString(1);
 				level.hint = cursor.getString(2);
 				level.width = cursor.getInt(3);
 				level.height = cursor.getInt(4);
 				level.musicFile = cursor.getString(5);
 				
+				addTypesToLevel(number, level);
+				addObjectsToLevel(number, level);
+				res.add(level);
 				cursor.moveToNext();
 			}
 		}
@@ -221,6 +237,47 @@ public class ModelDAO {
 		db.rawQuery("delete from cannon;",null);
 	}
 
+	public void addObjectsToLevel(int number, Level level)
+	{
+  	  String[] params = new String[] {Integer.toString(number)};
+	  final String sql = "select image, scale, position from object, level_object"
+	  + " where level_number = ? and objectId = Id";
+	  Cursor cur = db.rawQuery(sql, params);
+	  try {
+	    cur.moveToFirst();
+	    while (!cur.isAfterLast())
+	    {
+	      BackgroundObject obj = new BackgroundObject(cur.getString(0),
+	        (float)cur.getDouble(1),
+	        cur.getString(2));
+	      level.addBackgroundObject(obj);
+	      cur.moveToNext();
+	    }
+	  }
+	  finally {cur.close();}	
+	}
+	
+	public void addTypesToLevel(int number, Level level)
+	{
+	  String sql = "select name, image, imageWidth, imageHeight, type"
+	    + ", number_of_asteroids from level_asteroid, asteroid_type where "
+	    + " level_asteroid.asteroidId = asteroid_type.id and "
+	    + "level_asteroid.level_number = ?";
+	  String[] params = new String[] {Integer.toString(number)};
+	  Cursor cur =  db.rawQuery(sql, params);
+	  try {
+	    cur.moveToFirst();
+	    while (!cur.isAfterLast())
+	    {
+	      int num = cur.getInt(5);
+	      AsteroidType type = getAsteroidTypeFromCursor(cur);
+	      level.addAsteroids(type, num);		    
+	      cur.moveToNext();
+	    }
+	  }
+	  finally {cur.close();}
+	}
+
 	public boolean addBackgroundObject(String image)
 	{
 		ContentValues values = new ContentValues();
@@ -244,6 +301,8 @@ public class ModelDAO {
 		return do_insert("level_asteroid", values);
 	}
 
+	
+	
 	public boolean addLevelObject(long level_number, long object_id, String position, Double scale)
 	{
 		ContentValues values = new ContentValues();

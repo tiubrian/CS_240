@@ -21,7 +21,7 @@ public class AsteroidsModel
 	public void setContext(Context c)
 	{
 		this.context = c;
-  }
+	}
 	
 	public void populate()
 	{
@@ -36,4 +36,26 @@ public class AsteroidsModel
 		extra_parts = DAO.getExtraParts();
 		levels = DAO.getLevels();
 	}
+	
+/*	public ArrayList<Integer> getCannonImages()
+	{
+	}
+
+	public ArrayList<Integer> getEngineImages()
+	{
+	}
+
+	public ArrayList<Integer> getPowerCoreImages()
+	{
+	}
+
+	public ArrayList<Integer> getMainBodyImages()
+	{
+	}
+
+	public ArrayList<Integer> getExtraPartImages()
+	{
+	}*/
+
+	
 }

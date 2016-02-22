@@ -8,5 +8,15 @@ public class Asteroid
 {
 	public AsteroidType type;
 	public MovingState state;
+	public Asteroid()
+	{
+	  this.state = new MovingState();
+	}
 
+	public Asteroid(AsteroidType type)
+	{
+  	  this.state = new MovingState();
+	  this.type = type;
+	}
+	
 }

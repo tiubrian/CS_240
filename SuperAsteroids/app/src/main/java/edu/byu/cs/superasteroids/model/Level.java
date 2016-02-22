@@ -79,8 +79,22 @@ public class Level {
 
 	}
 
+	public void addAsteroids(AsteroidType type, int number)
+	{
+	  int i = 0;
+	  for (i=0; i<number; i++)
+	  {
+	    Asteroid a = new Asteroid(type);
+	    asteroids.add(a);
+	  }
+	}
 
-
+	public void addBackgroundObject(BackgroundObject obj)
+	{
+	  background_objects.add(obj);
+	}
+	
+	
 	public int getNumber() {
 		return number;
 	}
