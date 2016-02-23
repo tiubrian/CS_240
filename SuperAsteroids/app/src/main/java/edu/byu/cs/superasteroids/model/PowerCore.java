@@ -4,7 +4,7 @@ import org.json.*;
 /**
  * A power core. A part of the space ship. This boosts the power of the engine and cannon.
  */
-public class PowerCore {
+public class PowerCore  extends SpaceshipPart {
  public int cannonBoost;
  public int engineBoost;
  public GameImage image;

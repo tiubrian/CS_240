@@ -3,7 +3,7 @@ import org.json.*;
 /**
  * The engine of the space ship. Has a lateral speed, turnrate, and image.
  */
-public class Engine {
+public class Engine extends SpaceshipPart {
  public int baseSpeed;
  public int baseTurnRate;
  /**

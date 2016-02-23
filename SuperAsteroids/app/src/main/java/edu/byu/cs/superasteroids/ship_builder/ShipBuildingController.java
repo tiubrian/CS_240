@@ -21,6 +21,7 @@ public class ShipBuildingController implements IShipBuildingController {
 		public PartSelectionView state;
 		public ShipBuildingActivity activity;
 		public static String tag = "superasteroidscontrollerfoo";
+		private ContentManager manager;
     /**
      * The ship building view calls this function when a part selection view is loaded. This function
      * should be used to configure the part selection view. Example: Set the arrows for the view in
@@ -33,6 +34,7 @@ public class ShipBuildingController implements IShipBuildingController {
 			this.activity = activity;
 			state = PartSelectionView.MAIN_BODY;
 			Log.e("superasteroidsfoo","Called controller");
+			manager = ContentManager.getInstance();
 		}
 		
     public void onViewLoaded(PartSelectionView partView)
@@ -76,7 +78,13 @@ public class ShipBuildingController implements IShipBuildingController {
 	public void loadContent(ContentManager content)
 	{
 		Log.e("superasteroidsfoo","Called loadcontent");
-	//	AsteroidsModel.singleton.populate();
+		AsteroidsModel model = AsteroidsModel.getInstance();
+		model.populate(activity.getApplicationContext());
+		activity.setPartViewImageList(PartSelectionView.CANNON, model.getCannonImages());
+		activity.setPartViewImageList(PartSelectionView.ENGINE, model.getEngineImages());
+		activity.setPartViewImageList(PartSelectionView.POWER_CORE, model.getPowerCoreImages());
+		activity.setPartViewImageList(PartSelectionView.EXTRA_PART, model.getExtraPartImages());
+		activity.setPartViewImageList(PartSelectionView.MAIN_BODY, model.getMainBodyImages());
 	}
 
     /**
@@ -102,14 +110,14 @@ public class ShipBuildingController implements IShipBuildingController {
 					}
 					break;
 				case EXTRA_PART:
-					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.CANNON; 
-					else if (direction == ViewDirection.LEFT) nstate = PartSelectionView.MAIN_BODY; 
+					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.CANNON; 
+					else if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.MAIN_BODY; 
 					else return;
 					break;
 
 				case CANNON:
-					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.ENGINE; 
-					else if (direction == ViewDirection.LEFT) nstate = PartSelectionView.EXTRA_PART; 
+					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.ENGINE; 
+					else if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.EXTRA_PART; 
 					else return;
 					break;
 

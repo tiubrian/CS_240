@@ -1,4 +1,9 @@
 package edu.byu.cs.superasteroids.model;
+import edu.byu.cs.superasteroids.content.ContentManager;
+import android.util.Log;
+
+import java.util.ArrayList;
+
 
 /**
  * This class abstracts the notion of an image with height and width.
@@ -10,6 +15,7 @@ public class GameImage
  private String name;
  private int height;
  private int width;
+ private int id;
 
  public String toString()
  {
@@ -27,6 +33,8 @@ public class GameImage
  {
 	 return (name==other.getName()) && (height==other.getHeight()) && (width==other.getWidth());
  }
+
+ 
  
  public int getWidth() {
   return width;
@@ -57,14 +65,25 @@ public class GameImage
 
  public GameImage()
  {
-
+  id = -2;
  }
 
  public GameImage(String imagefile, int imageWidth, int imageHeight)
  {
+  this();
   name = imagefile;
   height = imageHeight;
   width = imageWidth;
  }
-
+ 
+ public int getImageId()
+ {
+  if (id < 0)
+  {
+    id = ContentManager.getInstance().getImageId(name);
+    return id;
+  }
+  else return id;
+ }
+ 
 }

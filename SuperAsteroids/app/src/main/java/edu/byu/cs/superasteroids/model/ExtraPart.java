@@ -5,7 +5,7 @@ import org.json.*;
  * A part of the spaceship
  * Really just the left wing, but for consistency its called extra part.
  */
-public class ExtraPart
+public class ExtraPart extends SpaceshipPart 
 {
 	public GameImage image;
   public Coordinate attachPoint;

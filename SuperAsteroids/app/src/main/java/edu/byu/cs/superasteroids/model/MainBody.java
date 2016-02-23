@@ -4,7 +4,7 @@ import org.json.*;
 /**
  * The main body of the ship. Has information on where to attach the other parts, and of course an image.
  */
-public class MainBody {
+public class MainBody  extends SpaceshipPart {
  /**
   * Where to attach the cannon.
   */
