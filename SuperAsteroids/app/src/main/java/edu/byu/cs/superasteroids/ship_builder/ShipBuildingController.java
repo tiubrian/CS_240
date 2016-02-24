@@ -140,6 +140,11 @@ public class ShipBuildingController implements IShipBuildingController {
 			activity.animateToView(nstate, direction);
 	}
 
+	
+	public static float shipX = (float)300.;
+	public static float shipY = (float)100.;
+	
+		
     /**
      * The part selection fragments call this function when a part is selected from the parts list. Respond
      * to the part selection in this function.
@@ -148,7 +153,29 @@ public class ShipBuildingController implements IShipBuildingController {
 	public void onPartSelected(int index)
 	{
 		Log.e("superasteroidsfoo","Called selectpart");
-		
+		AsteroidsModel model = AsteroidsModel.getInstance();		
+		switch (state)
+		{
+			case MAIN_BODY:
+				model.setShipMainBody(index);
+				break;
+			case EXTRA_PART:
+				model.setShipExtraPart(index);
+				break;
+
+			case CANNON:
+				model.setShipCannon(index);
+				break;
+
+			case ENGINE:
+				model.setShipEngine(index);
+				break;
+			case POWER_CORE:
+				model.setShipPowerCore(index);
+			default:
+			break;
+		}
+	
 	}
 
     /**
@@ -176,11 +203,12 @@ public class ShipBuildingController implements IShipBuildingController {
 		}
 		
 	public void draw() {
-		
+		Log.e(tag, "drawing");
+		AsteroidsModel.getInstance().ship.builder_draw(shipX, shipY);
 	}
 		
-		public void update(double elapsedTime){}
+	public void update(double elapsedTime){}
 		
-		public void unloadContent(ContentManager content){}
+	public void unloadContent(ContentManager content){}
 
 }

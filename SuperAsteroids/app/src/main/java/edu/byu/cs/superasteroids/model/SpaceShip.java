@@ -33,8 +33,8 @@ public class SpaceShip {
     }
 
     public static float builder_rot_degs = (float)0.0;
-    public static float builder_xscale = (float)1.;
-    public static float builder_yscale = (float)1.;
+    public static float builder_xscale = (float).5;
+    public static float builder_yscale = (float).5;
     public static int builder_alpha = 200;    
     
     public static void drawShipImage(Coordinate pos, int id)
@@ -56,11 +56,17 @@ public class SpaceShip {
     
     public void drawShipAttachment(Coordinate O, Coordinate attach, AttachablePart part)
     {
-     //do magic  
+     //do magic 
+      Coordinate offset = part.getOffset(body, attach);
+      drawShipImage(Coordinate.add(O, offset).scale(builder_xscale, builder_yscale),
+        part.getImageId());
     }
     
     public void draw()
     {
     }
 
+    
+
+    
 }

@@ -87,5 +87,10 @@ public class GameImage
   }
   else return id;
  }
+
+ public Coordinate Center()
+ {
+   return new Coordinate(width/2, height/2);
+ }
  
 }

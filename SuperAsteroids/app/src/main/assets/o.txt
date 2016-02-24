@@ -1,0 +1,210 @@
+
+final String SQL = "select id, name, image, imageWidth, imageHeight, type from asteroid_type
+
+asteroid_type.id = cursor.getInteger(0);
+asteroid_type.name = cursor.getString(1);
+asteroid_type.image = cursor.getString(2);
+asteroid_type.imageWidth = cursor.getInt(3);
+asteroid_type.imageHeight = cursor.getInt(4);
+asteroid_type.type = cursor.getString(5);
+
+ContentValues values = new ContentValues();
+values.put("id", asteroid_type.Integer);
+values.put("name", asteroid_type.String);
+values.put("image", asteroid_type.String);
+values.put("imageWidth", asteroid_type.Int);
+values.put("imageHeight", asteroid_type.Int);
+values.put("type", asteroid_type.String);
+
+long id = db.insert("asteroid_type", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select image, Id from background_object
+
+background_object.image = cursor.getString(0);
+background_object.Id = cursor.getInteger(1);
+
+ContentValues values = new ContentValues();
+values.put("image", background_object.String);
+values.put("Id", background_object.Integer);
+
+long id = db.insert("background_object", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select level_number, scale, objectId, position from level_object
+
+level_object.level_number = cursor.getInt(0);
+level_object.scale = cursor.getReal(1);
+level_object.objectId = cursor.getInt(2);
+level_object.position = cursor.getString(3);
+
+ContentValues values = new ContentValues();
+values.put("level_number", level_object.Int);
+values.put("scale", level_object.Real);
+values.put("objectId", level_object.Int);
+values.put("position", level_object.String);
+
+long id = db.insert("level_object", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select number, title, hint, width, height, music from level
+
+level.number = cursor.getInteger(0);
+level.title = cursor.getString(1);
+level.hint = cursor.getString(2);
+level.width = cursor.getInt(3);
+level.height = cursor.getInt(4);
+level.music = cursor.getString(5);
+
+ContentValues values = new ContentValues();
+values.put("number", level.Integer);
+values.put("title", level.String);
+values.put("hint", level.String);
+values.put("width", level.Int);
+values.put("height", level.Int);
+values.put("music", level.String);
+
+long id = db.insert("level", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select level_number, asteroidId, number_of_asteroids from level_asteroid
+
+level_asteroid.level_number = cursor.getInt(0);
+level_asteroid.asteroidId = cursor.getInt(1);
+level_asteroid.number_of_asteroids = cursor.getInt(2);
+
+ContentValues values = new ContentValues();
+values.put("level_number", level_asteroid.Int);
+values.put("asteroidId", level_asteroid.Int);
+values.put("number_of_asteroids", level_asteroid.Int);
+
+long id = db.insert("level_asteroid", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select cannonAttach, engineAttach, extraAttach, image, imageWidth, imageHeight from main_body
+
+main_body.cannonAttach = cursor.getString(0);
+main_body.engineAttach = cursor.getString(1);
+main_body.extraAttach = cursor.getString(2);
+main_body.image = cursor.getString(3);
+main_body.imageWidth = cursor.getInt(4);
+main_body.imageHeight = cursor.getInt(5);
+
+ContentValues values = new ContentValues();
+values.put("cannonAttach", main_body.String);
+values.put("engineAttach", main_body.String);
+values.put("extraAttach", main_body.String);
+values.put("image", main_body.String);
+values.put("imageWidth", main_body.Int);
+values.put("imageHeight", main_body.Int);
+
+long id = db.insert("main_body", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select attachPoint, emitPoint, image, imageWidth, imageHeight, attackImage, attackImageWidth, attackImageHeight, attackSound, damage from cannon
+
+cannon.attachPoint = cursor.getString(0);
+cannon.emitPoint = cursor.getString(1);
+cannon.image = cursor.getString(2);
+cannon.imageWidth = cursor.getInt(3);
+cannon.imageHeight = cursor.getInt(4);
+cannon.attackImage = cursor.getString(5);
+cannon.attackImageWidth = cursor.getInt(6);
+cannon.attackImageHeight = cursor.getInt(7);
+cannon.attackSound = cursor.getString(8);
+cannon.damage = cursor.getInt(9);
+
+ContentValues values = new ContentValues();
+values.put("attachPoint", cannon.String);
+values.put("emitPoint", cannon.String);
+values.put("image", cannon.String);
+values.put("imageWidth", cannon.Int);
+values.put("imageHeight", cannon.Int);
+values.put("attackImage", cannon.String);
+values.put("attackImageWidth", cannon.Int);
+values.put("attackImageHeight", cannon.Int);
+values.put("attackSound", cannon.String);
+values.put("damage", cannon.Int);
+
+long id = db.insert("cannon", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select attachPoint, image, imageWidth, imageHeight from extra_part
+
+extra_part.attachPoint = cursor.getString(0);
+extra_part.image = cursor.getString(1);
+extra_part.imageWidth = cursor.getInt(2);
+extra_part.imageHeight = cursor.getInt(3);
+
+ContentValues values = new ContentValues();
+values.put("attachPoint", extra_part.String);
+values.put("image", extra_part.String);
+values.put("imageWidth", extra_part.Int);
+values.put("imageHeight", extra_part.Int);
+
+long id = db.insert("extra_part", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select baseSpeed, baseTurnRate, attachPoint, image, imageWidth, imageHeight from engine
+
+engine.baseSpeed = cursor.getInt(0);
+engine.baseTurnRate = cursor.getInt(1);
+engine.attachPoint = cursor.getString(2);
+engine.image = cursor.getString(3);
+engine.imageWidth = cursor.getInt(4);
+engine.imageHeight = cursor.getInt(5);
+
+ContentValues values = new ContentValues();
+values.put("baseSpeed", engine.Int);
+values.put("baseTurnRate", engine.Int);
+values.put("attachPoint", engine.String);
+values.put("image", engine.String);
+values.put("imageWidth", engine.Int);
+values.put("imageHeight", engine.Int);
+
+long id = db.insert("engine", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;
+
+final String SQL = "select cannonBoost, engineBoost, image from power_core
+
+power_core.cannonBoost = cursor.getInt(0);
+power_core.engineBoost = cursor.getInt(1);
+power_core.image = cursor.getString(2);
+
+ContentValues values = new ContentValues();
+values.put("cannonBoost", power_core.Int);
+values.put("engineBoost", power_core.Int);
+values.put("image", power_core.String);
+
+long id = db.insert("power_core", null, values);
+if (id >= 0) {
+	return true;
+}
+else return false;

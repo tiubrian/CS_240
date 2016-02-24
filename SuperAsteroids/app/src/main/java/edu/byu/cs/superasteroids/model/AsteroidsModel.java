@@ -111,5 +111,28 @@ public class AsteroidsModel
 
 	}
 
+    public void setShipMainBody(int index){
+      ship.body = main_bodies.get(index);
+    }
+    
+    public void setShipExtraPart(int index){
+      ship.extra_part = extra_parts.get(index);
+    }
+    
+    public void setShipCannon(int index){
+      ship.cannon = cannons.get(index);
+
+    }
+    
+    public void setShipEngine(int index){
+      ship.engine = engines.get(index);
+
+    }
+    
+    public void setShipPowerCore(int index)
+    {
+      ship.power_core = power_cores.get(index);    
+    }
+
 	
 }

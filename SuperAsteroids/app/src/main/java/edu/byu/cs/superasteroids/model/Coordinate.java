@@ -29,9 +29,19 @@ public class Coordinate {
    y = Integer.parseInt(res[1]);
  }
 
- public static Coordinate sum(Coordinate a, Coordinate b)
+ public static Coordinate add(Coordinate a, Coordinate b)
  {
   return new Coordinate(a.x+b.x, a.y+b.y);
+ }
+
+ public static Coordinate subtract(Coordinate a, Coordinate b)
+ {
+  return new Coordinate(a.x-b.x, a.y-b.y);
+ }
+
+ public Coordinate scale(float xscale, float yscale)
+ {
+  return new Coordinate(x*xscale, y*yscale);
  }
  
  public Coordinate increment(Coordinate other)
