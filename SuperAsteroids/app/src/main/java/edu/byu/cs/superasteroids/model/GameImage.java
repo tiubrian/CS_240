@@ -16,6 +16,7 @@ public class GameImage
  private int height;
  private int width;
  private int id;
+ public static final String tag = "superasteroidsGameImage";
 
  public String toString()
  {
@@ -80,7 +81,8 @@ public class GameImage
  {
   if (id < 0)
   {
-    id = ContentManager.getInstance().getImageId(name);
+    id = ContentManager.getInstance().loadImage(name);
+    Log.e(tag, "Gave ContentManager "+name+" got "+Integer.toString(id));
     return id;
   }
   else return id;

@@ -6,7 +6,7 @@ import org.json.*;
  * Shoots projectiles to destroy defenseless (but dangerous nonetheless) asteroids.
  */
 public class Cannon  extends SpaceshipPart {
- public GameImage image;
+//  public GameImage image;
  /**
   * Damage dealt per projectile fired. Strongly correlated (coefficient=.9) with the awesomeness of the cannon.
   */

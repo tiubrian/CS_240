@@ -12,6 +12,8 @@ import java.util.List;
 
 import edu.byu.cs.superasteroids.content.ContentManager;
 
+import android.util.Log;
+
 /**
  * The list adapter used to adapt a list of image IDs to a list of views containing the images of the
  * image IDs.
@@ -20,6 +22,7 @@ public class PartsAdapter extends ArrayAdapter<Integer> {
 
 	private List<Integer> parts;
 	private Context context;
+	public static final String ltag = "superasteroidsadapter";
 	
 	public PartsAdapter(Context context, int resource, List<Integer> parts) {
 		super(context, resource, parts);
@@ -32,7 +35,10 @@ public class PartsAdapter extends ArrayAdapter<Integer> {
 		
 	    ImageView view = new ImageView(context);
         Bitmap image = ContentManager.getInstance().getImage(parts.get(position));
-		image = getResizedBitmap(image,1,1);
+        Log.e(ltag, "Called getView with position " + Integer.toString(position));
+        Log.e(ltag, "Called getImage with id " + Integer.toString(parts.get(position)));
+
+        image = getResizedBitmap(image,1,1);
         view.setImageBitmap(image);
 		//view.setRotation(45.0f);
         //view.setScaleX(0.35f);

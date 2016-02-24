@@ -7,7 +7,7 @@ import org.json.*;
 public class PowerCore  extends SpaceshipPart {
  public int cannonBoost;
  public int engineBoost;
- public GameImage image;
+//  public GameImage image;
 
  public PowerCore()
  {

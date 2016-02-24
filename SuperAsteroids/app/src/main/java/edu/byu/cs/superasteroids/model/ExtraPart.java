@@ -7,7 +7,7 @@ import org.json.*;
  */
 public class ExtraPart extends SpaceshipPart 
 {
-	public GameImage image;
+// 	public GameImage image;
   public Coordinate attachPoint;
 
 	public ExtraPart()

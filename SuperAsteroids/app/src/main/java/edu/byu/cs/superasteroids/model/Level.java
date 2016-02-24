@@ -38,10 +38,11 @@ public class Level {
 	public Level()
 	{
 		asteroids = new ArrayList<Asteroid>();
+		background_objects = new ArrayList<BackgroundObject>();
 	}
 
 	public Level(JSONObject obj) throws JSONException {
-		asteroids = new ArrayList<Asteroid>();
+		this();
 		number = Integer.parseInt(obj.getString("number"));
 		title = obj.getString("title");
 		hint = obj.getString("hint");
@@ -66,7 +67,7 @@ public class Level {
 		res.append(" music: ");
 		res.append(musicFile);
 		return res.toString();
-}
+	}
 
 	
 	public void update()

@@ -77,9 +77,11 @@ public class ShipBuildingController implements IShipBuildingController {
      */
 	public void loadContent(ContentManager content)
 	{
-		Log.e("superasteroidsfoo","Called loadcontent");
+		Log.e(tag,"Called loadcontent");
 		AsteroidsModel model = AsteroidsModel.getInstance();
+		Log.e(tag,"created asteroids model.");
 		model.populate(activity.getApplicationContext());
+		Log.e(tag,"populated model.");
 		activity.setPartViewImageList(PartSelectionView.CANNON, model.getCannonImages());
 		activity.setPartViewImageList(PartSelectionView.ENGINE, model.getEngineImages());
 		activity.setPartViewImageList(PartSelectionView.POWER_CORE, model.getPowerCoreImages());
@@ -122,14 +124,14 @@ public class ShipBuildingController implements IShipBuildingController {
 					break;
 
 				case ENGINE:
-					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.POWER_CORE; 
-					else if (direction == ViewDirection.LEFT) nstate = PartSelectionView.CANNON; 
+					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.POWER_CORE; 
+					else if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.CANNON; 
 					else return;
 
 					break;
 				case POWER_CORE:
 				default:
-					if (direction == ViewDirection.LEFT) nstate = PartSelectionView.ENGINE; 
+					if (direction == ViewDirection.RIGHT) nstate = PartSelectionView.ENGINE; 
 					else return;
 			}
 			state = nstate;

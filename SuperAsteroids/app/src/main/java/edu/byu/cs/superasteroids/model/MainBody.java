@@ -17,7 +17,7 @@ public class MainBody  extends SpaceshipPart {
   * Where to attach the extra part (AKA left wing).
   */
  public Coordinate extraAttach;
- public GameImage image;
+//  public GameImage image;
 
  public MainBody()
  {

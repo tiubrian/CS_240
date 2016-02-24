@@ -90,7 +90,7 @@ public class ModelDAO {
 	{
 		ArrayList<Engine> result = new ArrayList<Engine>();
 		final String SQL = "select baseSpeed, baseTurnRate, attachPoint, image, imageWidth, imageHeight"
-			+ "from engine";
+			+ " from engine";
 
 		Cursor cursor = db.rawQuery(SQL,null);
 		try {
@@ -120,7 +120,7 @@ public class ModelDAO {
 	{
 		ArrayList<PowerCore> result = new ArrayList<PowerCore>();
 		final String SQL = "select cannonBoost, engineBoost, image"
-			+ "from power_core";
+			+ " from power_core";
 
 		Cursor cursor = db.rawQuery(SQL,null);
 		try {
@@ -240,7 +240,7 @@ public class ModelDAO {
 	public void addObjectsToLevel(int number, Level level)
 	{
   	  String[] params = new String[] {Integer.toString(number)};
-	  final String sql = "select image, scale, position from object, level_object"
+	  final String sql = "select image, scale, position from background_object, level_object "
 	  + " where level_number = ? and objectId = Id";
 	  Cursor cur = db.rawQuery(sql, params);
 	  try {
@@ -259,10 +259,10 @@ public class ModelDAO {
 	
 	public void addTypesToLevel(int number, Level level)
 	{
-	  String sql = "select name, image, imageWidth, imageHeight, type"
+	  String sql = "select name, image, imageWidth, imageHeight, type "
 	    + ", number_of_asteroids from level_asteroid, asteroid_type where "
 	    + " level_asteroid.asteroidId = asteroid_type.id and "
-	    + "level_asteroid.level_number = ?";
+	    + " level_asteroid.level_number = ?";
 	  String[] params = new String[] {Integer.toString(number)};
 	  Cursor cur =  db.rawQuery(sql, params);
 	  try {

@@ -10,7 +10,7 @@ public class Engine extends SpaceshipPart {
   * Describes where to attach the engine image to the main body of the ship.
   */
  public Coordinate attachPoint;
- public GameImage image;
+//  public GameImage image;
 
  public Engine()
  {

@@ -18,6 +18,7 @@ public class AsteroidsModel
 	public ArrayList<PowerCore> power_cores;
 	public ArrayList<Level> levels;
 	public static ContentManager manager = ContentManager.getInstance();
+	public static String tag = "superasteroidsastmodel";
 	
 	public static AsteroidsModel getInstance()
 	{
@@ -32,13 +33,19 @@ public class AsteroidsModel
 		DbOpenHelper helper = new DbOpenHelper(context);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		ModelDAO DAO = new ModelDAO(db);
-		
+		Log.e(tag,"initialized database");
 		cannons = DAO.getCannons();
+		Log.e(tag,"initialized database");
 		main_bodies = DAO.getMainBodies();
+		Log.e(tag,"initialized database");
 		engines = DAO.getEngines();
+		Log.e(tag,"initialized database");
 		power_cores = DAO.getPowerCores();
+		Log.e(tag,"got power cores");
 		extra_parts = DAO.getExtraParts();
+		Log.e(tag,"got extras");
 		levels = DAO.getLevels();
+		Log.e(tag,"got levels");
 	}
 	
 	public ArrayList<Integer> getCannonImages()
