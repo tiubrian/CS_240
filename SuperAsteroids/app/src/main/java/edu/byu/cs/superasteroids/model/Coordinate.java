@@ -14,6 +14,13 @@ public class Coordinate {
 	 x = x_coord;
 	 y = y_coord;
  }
+
+ public Coordinate(float x_coord, float y_coord)
+ {
+	 x = (int)x_coord;
+	 y = (int)y_coord;
+ }
+
  
  public Coordinate(String s)
  {
@@ -22,6 +29,16 @@ public class Coordinate {
    y = Integer.parseInt(res[1]);
  }
 
+ public static Coordinate sum(Coordinate a, Coordinate b)
+ {
+  return new Coordinate(a.x+b.x, a.y+b.y);
+ }
+ 
+ public Coordinate increment(Coordinate other)
+ {
+  return new Coordinate(other.x+x, other.y+y);
+ }
+ 
  public boolean equals(Coordinate other)
  {
 	 return (x == other.x) && (y == other.y); 

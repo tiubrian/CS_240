@@ -11,6 +11,7 @@ import edu.byu.cs.superasteroids.model.*;
 import edu.byu.cs.superasteroids.base.IView;
 
 import android.util.Log;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 
 
 /**
@@ -174,7 +175,9 @@ public class ShipBuildingController implements IShipBuildingController {
 			return null;
 		}
 		
-		public void draw(){}
+	public void draw() {
+		
+	}
 		
 		public void update(double elapsedTime){}
 		

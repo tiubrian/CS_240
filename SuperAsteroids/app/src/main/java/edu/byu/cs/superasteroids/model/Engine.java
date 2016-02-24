@@ -3,13 +3,13 @@ import org.json.*;
 /**
  * The engine of the space ship. Has a lateral speed, turnrate, and image.
  */
-public class Engine extends SpaceshipPart {
+public class Engine extends AttachablePart {
  public int baseSpeed;
  public int baseTurnRate;
  /**
   * Describes where to attach the engine image to the main body of the ship.
   */
- public Coordinate attachPoint;
+// public Coordinate attachPoint;
 //  public GameImage image;
 
  public Engine()

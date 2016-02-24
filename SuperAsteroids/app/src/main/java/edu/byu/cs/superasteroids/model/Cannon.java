@@ -5,7 +5,7 @@ import org.json.*;
  * The cannon of the ship (where all the fun stuff happens).
  * Shoots projectiles to destroy defenseless (but dangerous nonetheless) asteroids.
  */
-public class Cannon  extends SpaceshipPart {
+public class Cannon  extends AttachablePart {
 //  public GameImage image;
  /**
   * Damage dealt per projectile fired. Strongly correlated (coefficient=.9) with the awesomeness of the cannon.
@@ -14,7 +14,7 @@ public class Cannon  extends SpaceshipPart {
  /**
   * Where the cannon attaches to the ship.
   */
- public Coordinate attachPoint;
+// public Coordinate attachPoint;
  /**
   * Where projectiles are fired from.
   */

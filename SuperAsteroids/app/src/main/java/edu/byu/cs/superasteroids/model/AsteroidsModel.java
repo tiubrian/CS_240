@@ -17,6 +17,7 @@ public class AsteroidsModel
 	public ArrayList<Engine> engines;
 	public ArrayList<PowerCore> power_cores;
 	public ArrayList<Level> levels;
+	public SpaceShip ship;
 	public static ContentManager manager = ContentManager.getInstance();
 	public static String tag = "superasteroidsastmodel";
 	
@@ -26,7 +27,10 @@ public class AsteroidsModel
 	  return singleton;
 	}
 	
-	
+	public AsteroidsModel()
+	{
+	  ship = new SpaceShip();
+	}
 	
 	public void populate(Context context)
 	{
