@@ -34,7 +34,7 @@ public class ShipBuildingController implements IShipBuildingController {
 		{
 			this.activity = activity;
 			state = PartSelectionView.MAIN_BODY;
-			Log.e("superasteroidsfoo","Called controller");
+			//Log.e("superasteroidsfoo","Called controller");
 			manager = ContentManager.getInstance();
 		}
 		
@@ -78,11 +78,11 @@ public class ShipBuildingController implements IShipBuildingController {
      */
 	public void loadContent(ContentManager content)
 	{
-		Log.e(tag,"Called loadcontent");
+		//Log.e(tag,"Called loadcontent");
 		AsteroidsModel model = AsteroidsModel.getInstance();
-		Log.e(tag,"created asteroids model.");
+		//Log.e(tag,"created asteroids model.");
 		model.populate(activity.getApplicationContext());
-		Log.e(tag,"populated model.");
+		//Log.e(tag,"populated model.");
 		activity.setPartViewImageList(PartSelectionView.CANNON, model.getCannonImages());
 		activity.setPartViewImageList(PartSelectionView.ENGINE, model.getEngineImages());
 		activity.setPartViewImageList(PartSelectionView.POWER_CORE, model.getPowerCoreImages());
@@ -97,19 +97,19 @@ public class ShipBuildingController implements IShipBuildingController {
      */
 	public void onSlideView(ViewDirection direction)
 	{
-		Log.e("superasteroidsfoo","Called slideview");
+		//Log.e(tag,"Called slideview");
 			PartSelectionView nstate = state;
 			switch (state)
 			{
 				case MAIN_BODY:
 					if (direction == ViewDirection.LEFT) {
-		Log.e("superasteroidsfoo","Setting view to extra_part");						
+		//Log.e(tag,"Setting view to extra_part");						
 						nstate = PartSelectionView.EXTRA_PART;} 
 					else if (direction == ViewDirection.RIGHT) {
-		Log.e("superasteroidsfoo","Setting view to right extra_part");						
+		//Log.e(tag,"Setting view to right extra_part");						
 						nstate = PartSelectionView.EXTRA_PART;} 
 					else {
-								Log.e("superasteroidsfoo","Setting view to nothing new in main_body");						
+								//Log.e("superasteroidsfoo","Setting view to nothing new in main_body");						
 					}
 					break;
 				case EXTRA_PART:
@@ -136,7 +136,7 @@ public class ShipBuildingController implements IShipBuildingController {
 					else return;
 			}
 			state = nstate;
-		Log.e("superasteroidsfoo","animating");						
+		//Log.e(tag,"animating");						
 			activity.animateToView(nstate, direction);
 	}
 
@@ -152,7 +152,7 @@ public class ShipBuildingController implements IShipBuildingController {
      */
 	public void onPartSelected(int index)
 	{
-		Log.e("superasteroidsfoo","Called selectpart");
+		//Log.e(tag,"Called selectpart");
 		AsteroidsModel model = AsteroidsModel.getInstance();		
 		switch (state)
 		{
@@ -168,6 +168,7 @@ public class ShipBuildingController implements IShipBuildingController {
 				break;
 
 			case ENGINE:
+				////Log.e(tag, "setting ship engine");
 				model.setShipEngine(index);
 				break;
 			case POWER_CORE:
@@ -176,6 +177,7 @@ public class ShipBuildingController implements IShipBuildingController {
 			break;
 		}
 	
+	activity.setStartGameButton(model.ship.isComplete());
 	}
 
     /**
@@ -183,32 +185,31 @@ public class ShipBuildingController implements IShipBuildingController {
      */
 	public void onStartGamePressed()
 	{
-		Log.e("superasteroidsfoo","Called startgame pressed");
+		//Log.e("superasteroidsfoo","Called startgame pressed");
+		activity.startGame();
 	}
 
     /**
      * The ShipBuildingView calls this function when ship building has resumed. Reset the Camera and
      * the ship position as needed when this is called.
      */
-    public void onResume()
-		{
-		}
+    public void onResume(){}
 		
-		public void setView(IView v)
-		{
-		}
+    public void setView(IView v)
+    {
+    }
+    
+    public IView getView() {
+	    return null;
+    }
 		
-		public IView getView() {
-			return null;
-		}
-		
-	public void draw() {
-		Log.e(tag, "drawing");
-		AsteroidsModel.getInstance().ship.builder_draw(shipX, shipY);
-	}
-		
-	public void update(double elapsedTime){}
-		
-	public void unloadContent(ContentManager content){}
+    public void draw() {
+	    ////Log.e(tag, "drawing");
+	    AsteroidsModel.getInstance().ship.builder_draw(shipX, shipY);
+    }
+	    
+    public void update(double elapsedTime){}
+	    
+    public void unloadContent(ContentManager content){}
 
 }

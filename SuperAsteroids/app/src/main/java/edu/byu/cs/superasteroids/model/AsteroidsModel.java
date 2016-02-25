@@ -126,6 +126,7 @@ public class AsteroidsModel
     
     public void setShipEngine(int index){
       ship.engine = engines.get(index);
+      Log.e(tag, "Set Ship Engine");
 
     }
     

@@ -1,6 +1,8 @@
 package edu.byu.cs.superasteroids.model;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 
+import android.util.Log;
+
 /**
  * The spaceship that meshes all of the parts.
  */
@@ -11,6 +13,7 @@ public class SpaceShip {
     public PowerCore power_core;
     public Cannon cannon;
     public MovingState state;
+    public final static String tag = "superasteroidsship";
 
     public SpaceShip()
     {
@@ -20,6 +23,14 @@ public class SpaceShip {
       PowerCore power_core = null;
       Cannon cannon = null;
       MovingState state = new MovingState();
+    }
+    
+    public boolean isComplete()
+    {
+     return ((body != null) &&
+     (engine != null) &&
+     (extra_part != null) &&
+     (power_core != null) && (cannon != null));
     }
     
     public void setCenter(int x, int y)
@@ -57,9 +68,10 @@ public class SpaceShip {
     public void drawShipAttachment(Coordinate O, Coordinate attach, AttachablePart part)
     {
      //do magic 
-      Coordinate offset = part.getOffset(body, attach);
-      drawShipImage(Coordinate.add(O, offset).scale(builder_xscale, builder_yscale),
-        part.getImageId());
+      Coordinate offset = part.getOffset(body, attach).scale(builder_xscale, builder_yscale);
+//      Log.e(tag, "Adding part "+part.toString()+ " with offset "+offset.toString());
+      drawShipImage(Coordinate.add(O, offset),
+        part.getImageId() );
     }
     
     public void draw()

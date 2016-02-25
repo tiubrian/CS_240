@@ -11,7 +11,7 @@ public abstract class AttachablePart extends SpaceshipPart
  public Coordinate getOffset(MainBody body, Coordinate attach)
  {
    Coordinate temp1 = Coordinate.subtract(attach,body.image.Center());
-   Coordinate temp2 = Coordinate.subtract(attach, image.Center());
+   Coordinate temp2 = Coordinate.subtract(image.Center(), attachPoint);
    return Coordinate.add(temp1, temp2);
  }
 

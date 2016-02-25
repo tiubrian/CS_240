@@ -35,7 +35,7 @@ public class GameActivity extends ActivityView {
         frame.addView(gameView);
 
         //TODO: Set the gameDelegate to an instance of your game controller.
-        //gameDelegate = Instance of your game controller
+        gameDelegate = new GameController(this);
 
         
         //Set the view's game delegate and have it load content
