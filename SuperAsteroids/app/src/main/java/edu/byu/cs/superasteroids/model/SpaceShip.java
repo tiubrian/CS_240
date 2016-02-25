@@ -37,6 +37,13 @@ public class SpaceShip {
     {
       state.setPos(x, y);
     }
+
+    public void setCenter(Coordinate c)
+    {
+      state.setPos(c.x, c.y);
+    }
+    
+    
     
     public void update()
     {

@@ -69,12 +69,21 @@ public class GameImage
   id = -2;
  }
 
+ public GameImage(String imagefile)
+ {
+  this();
+  name = imagefile;
+  width = 0;
+  height = 0;
+ }
+
+ 
  public GameImage(String imagefile, int imageWidth, int imageHeight)
  {
   this();
   name = imagefile;
-  height = imageHeight;
   width = imageWidth;
+  height = imageHeight;
  }
  
  public int getImageId()

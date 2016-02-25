@@ -18,22 +18,38 @@ public class MovingState {
      theta = (float)0.0;
      dx = (float)0.0;
      dy = (float)0.0;
+     pos = new Coordinate(0,0);
     }
     
     public MovingState(Float x_init, Float y_init)
     {
      this();
-     pos = new Coordinate(x_init, y_init);
+     pos.reset(x_init, y_init);
     }
 
     
     public MovingState(Float x_init, Float y_init, Float dx, Float dy)
     {
      this();
-     pos = new Coordinate(x_init, y_init);
+     pos.reset(x_init, y_init);
      this.dx = dx;
      this.dy = dy;
+    }	
+
+    public MovingState(int x_init, int y_init)
+    {
+     this();
+     pos.reset(x_init, y_init);
     }
+
+    
+    public MovingState(int x_init, int y_init, Float dx, Float dy)
+    {
+     this();
+     pos.reset(x_init, y_init);
+     this.dx = dx;
+     this.dy = dy;
+    }	
 
     
     public void update()

@@ -11,22 +11,25 @@ import android.util.Log;
 public class GameController implements IController, IGameDelegate {
 
 
-	public GameActivity activity;
-	public ContentManager manager;
-	public static String tag = "superasteroidsgame";
-	public GameController(GameActivity activity)
-	{
-		this.activity = activity;
-		Log.e(tag,"Called game controller");
-		manager = ContentManager.getInstance();
-	}
+    public GameActivity activity;
+    public ContentManager manager;
+    public static String tag = "superasteroidsgame";
+    AsteroidsModel model;
+    public GameController(GameActivity activity)
+    {
+	    this.activity = activity;
+	    Log.e(tag,"Called game controller");
+	    manager = ContentManager.getInstance();
+	    model = null;
+    }
 
-	public void loadContent(ContentManager content)
-	{
-		Log.e(tag,"Called loadcontent");
-		AsteroidsModel model = AsteroidsModel.getInstance();
-		Log.e(tag,"created asteroids model.");
-	}
+    public void loadContent(ContentManager content)
+    {
+	    Log.e(tag,"Called loadcontent");
+	    model = AsteroidsModel.getInstance();
+	    Log.e(tag,"created asteroids model.");
+	    model.initLevel(0);
+    }
 
 		
 		
@@ -39,11 +42,13 @@ public class GameController implements IController, IGameDelegate {
     }
 		
     public void draw() {
-	    ////Log.e(tag, "drawing");
-//	    AsteroidsModel.getInstance().ship.builder_draw(shipX, shipY);
+	    Log.e(tag, "drawing");
+	    if (model != null) model.draw();
     }
 	    
-    public void update(double elapsedTime){}
+    public void update(double elapsedTime){
+    	    if (model != null) model.update(elapsedTime);
+    }
 	    
     public void unloadContent(ContentManager content){}
 

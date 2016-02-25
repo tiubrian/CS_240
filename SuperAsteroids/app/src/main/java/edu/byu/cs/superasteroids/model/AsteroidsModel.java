@@ -17,9 +17,14 @@ public class AsteroidsModel
 	public ArrayList<Engine> engines;
 	public ArrayList<PowerCore> power_cores;
 	public ArrayList<Level> levels;
+	public Level level;
 	public SpaceShip ship;
+	public int currentLevelNum = -1;
+
+	
 	public static ContentManager manager = ContentManager.getInstance();
 	public static String tag = "superasteroidsastmodel";
+	public static GameImage backgroundImage = new GameImage("images/space.bmp");
 	
 	public static AsteroidsModel getInstance()
 	{
@@ -30,6 +35,33 @@ public class AsteroidsModel
 	public AsteroidsModel()
 	{
 	  ship = new SpaceShip();
+	}
+	
+	
+	public void initLevel(int levelInd)
+	{
+	  Log.e(tag, "Initiliazing level");
+	  if (levelInd >= levels.size()) return; //TODO: game over now
+	  level = levels.get(levelInd);
+	  ViewPort.setWorldDimensions((float)level.width, (float)level.height);
+	  Log.e(tag, "Set World Dimensions");
+	  ViewPort.setBackground(backgroundImage.getImageId());
+	  Log.e(tag, "Set background");
+	  ship.setCenter(ViewPort.getCenter());
+	  Log.e(tag, "Set Center");
+	}
+	
+	public void draw()
+	{
+	  ViewPort.drawBackground();
+	  level.draw();
+	  ship.draw();
+	}
+	
+	public void update(double elapsedTime)
+	{
+	  level.update();
+	  ship.update();
 	}
 	
 	public void populate(Context context)

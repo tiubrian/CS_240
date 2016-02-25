@@ -54,6 +54,18 @@ public class Coordinate {
 	 return (x == other.x) && (y == other.y); 
  }
  
+ public void reset(int x, int y)
+ {
+    this.x = x;
+    this.y = y;
+ }
+ 
+ public void reset(float x, float y)
+ {
+   this.x = (int)x;
+   this.y = (int)y;
+ }
+ 
  public String toString()
  {
   StringBuilder res = new StringBuilder();
