@@ -1,10 +1,11 @@
 package edu.byu.cs.superasteroids.model;
-
+import android.util.Log;
 /**
  * Represents the state of a moving object.
  */
 public class MovingState {
     public Coordinate pos;
+    public static final String tag = "superasteroidsstate";
     public Float dx;
     public Float dy;
     /**
@@ -73,6 +74,7 @@ public class MovingState {
     
     public void setPos(int x, int y)
     {
+     Log.e(tag, "setting pos to "+Integer.toString(x)+" "+Integer.toString(y));
      pos.setX(x);
      pos.setY(y);
     }

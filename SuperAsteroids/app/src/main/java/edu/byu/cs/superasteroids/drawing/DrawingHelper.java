@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 
 import edu.byu.cs.superasteroids.content.ContentManager;
+import android.util.Log;
 
 /**
  * A class that enables drawing to the game view without having to know anything about Android canvases
@@ -24,7 +25,8 @@ public class DrawingHelper {
     private static Paint fillPaint = new Paint();
     private static int viewWidth;
     private static int viewHeight;
-
+    private static final String tag = "superasteroidsDraw";
+    
 	public static void setCanvas(Canvas canvas) {
 		DrawingHelper.canvas = canvas;
 	}
@@ -70,6 +72,7 @@ public class DrawingHelper {
 
         if(dest == null) {
             dest = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
+//            Log.e(tag,"destRec " + dest.toString());
         }
 
         paint.reset();

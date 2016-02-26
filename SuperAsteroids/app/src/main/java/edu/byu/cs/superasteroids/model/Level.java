@@ -72,12 +72,30 @@ public class Level {
 	
 	public void update()
 	{
+	  int i;
+	  for (i = 0; i < background_objects.size(); i++)
+	  {
+	    background_objects.get(i).update();
+	  }
 
+	  for (i = 0; i < asteroids.size(); i++)
+	  {
+	    asteroids.get(i).update();
+	  }	  
 	}
 
 	public void draw()
 	{
+	  int i;
+	  for (i = 0; i < background_objects.size(); i++)
+	  {
+	    background_objects.get(i).draw();
+	  }
 
+	  for (i = 0; i < asteroids.size(); i++)
+	  {
+	    asteroids.get(i).draw();
+	  }	  
 	}
 
 	public void addAsteroids(AsteroidType type, int number)

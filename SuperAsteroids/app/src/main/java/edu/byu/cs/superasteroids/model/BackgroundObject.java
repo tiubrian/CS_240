@@ -1,4 +1,7 @@
 package edu.byu.cs.superasteroids.model;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+
+import android.util.Log;
 
 /**
  * A background object for a level.
@@ -11,6 +14,7 @@ public class BackgroundObject
 	public GameImage image_obj;
 	public Float scale;
 	public Coordinate position;
+	public static final String tag = "superasteroidsbgobject";
 	
 	public BackgroundObject(String image, Float scale, Coordinate position)
 	{
@@ -28,4 +32,19 @@ public class BackgroundObject
 		this.position = new Coordinate(position);
 	}
 
+	
+	public void draw()
+	{
+	  Coordinate viewpos = ViewPort.fromWorld(position);
+	  Log.e(tag, "Got viewpos: "+viewpos.toString() + 
+	    " scale: "+Float.toString(scale)+" imname: "+image);
+	  DrawingHelper.drawImage(image_obj.getImageId(), (float)viewpos.x, (float)viewpos.y,
+	    (float)0.0, (float)scale, (float)scale, 255);
+	}
+	
+	public void update()
+	{
+	}
+	
+	
 }

@@ -20,9 +20,10 @@ public class SpaceShip {
       MainBody body = null;
       Engine engine = null;
       ExtraPart extra_part = null;
-      PowerCore power_core = null;
-      Cannon cannon = null;
-      MovingState state = new MovingState();
+      power_core = null;
+      cannon = null;
+      state = new MovingState();
+      Log.e(tag, "Created state" + state.pos.toString());
     }
     
     public boolean isComplete()
@@ -40,6 +41,9 @@ public class SpaceShip {
 
     public void setCenter(Coordinate c)
     {
+      Log.e(tag, "setting center to "+c.toString());
+      if (state == null) Log.e(tag, "state is null");
+      else if (state.pos == null) Log.e(tag, "somehow state.pos is null");
       state.setPos(c.x, c.y);
     }
     
@@ -53,7 +57,7 @@ public class SpaceShip {
     public static float builder_rot_degs = (float)0.0;
     public static float builder_xscale = (float).5;
     public static float builder_yscale = (float).5;
-    public static int builder_alpha = 200;    
+    public static int default_alpha = 255;    
     
     public static void drawShipImage(Coordinate pos, int id)
     {
@@ -75,11 +79,14 @@ public class SpaceShip {
     public void drawShipAttachment(Coordinate O, Coordinate attach, AttachablePart part)
     {
      //do magic 
-      Coordinate offset = part.getOffset(body, attach).scale(builder_xscale, builder_yscale);
+      Coordinate offset = part.getOffset(body, attach).scale(builder_xscale, default_yscale);
 //      Log.e(tag, "Adding part "+part.toString()+ " with offset "+offset.toString());
       drawShipImage(Coordinate.add(O, offset),
         part.getImageId() );
     }
+    
+    
+    public void drawShip(Coordinate center, float rotation, float xscale, float yscale)
     
     public void draw()
     {

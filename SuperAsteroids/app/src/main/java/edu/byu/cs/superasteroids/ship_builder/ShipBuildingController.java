@@ -141,7 +141,7 @@ public class ShipBuildingController implements IShipBuildingController {
 	}
 
 	
-	public static float shipX = (float)300.;
+	public static float shipX = (float)500.;
 	public static float shipY = (float)100.;
 	
 		

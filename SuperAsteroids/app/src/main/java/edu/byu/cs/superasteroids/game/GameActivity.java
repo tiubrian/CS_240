@@ -13,6 +13,8 @@ import edu.byu.cs.superasteroids.base.GameView;
 import edu.byu.cs.superasteroids.base.IGameDelegate;
 import edu.byu.cs.superasteroids.content.AudioManagement;
 import edu.byu.cs.superasteroids.content.ContentManager;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+import android.util.Log;
 
 public class GameActivity extends ActivityView {
 
@@ -40,6 +42,7 @@ public class GameActivity extends ActivityView {
         
         //Set the view's game delegate and have it load content
         gameView.setGameDelegate(gameDelegate);
+        if (DrawingHelper.getCanvas() == null) Log.e("superasteroidsga","Drawing Helper is new");
         gameDelegate.loadContent(ContentManager.getInstance());
     }
 	

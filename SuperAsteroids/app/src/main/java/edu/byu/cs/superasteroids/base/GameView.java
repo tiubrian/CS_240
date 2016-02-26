@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
+import android.util.Log;
+
 
 public class GameView extends BaseSurfaceView {
 
@@ -16,12 +18,13 @@ public class GameView extends BaseSurfaceView {
     private boolean canDraw = false;
     private IGameDelegate gameDelegate;
     private GameLoopThread gameLoopThread;
+    private static final String tag = "superasteroidsDH";
 
 	public GameView(Context context) {
 		super(context);
         holder = getHolder();
         DrawingHelper.setCanvas(new Canvas());
-
+        if (DrawingHelper.getCanvas() == null) Log.e(tag,"Drawing Helper is new");
         gameLoopThread = new GameLoopThread(this);
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -43,8 +46,9 @@ public class GameView extends BaseSurfaceView {
 
 	public void gameDraw(Canvas canvas) {
 		//super.onDraw(canvas);
-
+//        Log.e(tag, "calling gamedraw");
         if(!done && canDraw && canvas != null) {
+  //          Log.e(tag, "drawing canvas");
             currentCanvas = canvas;
             DrawingHelper.setCanvas(canvas);
             DrawingHelper.setViewHeight(getMeasuredHeight());

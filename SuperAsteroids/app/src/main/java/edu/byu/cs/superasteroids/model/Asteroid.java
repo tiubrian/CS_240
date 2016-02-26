@@ -19,4 +19,11 @@ public class Asteroid
 	  this.type = type;
 	}
 	
+	public void update()
+	{
+	}
+	
+	public void draw()
+	{
+	}
 }

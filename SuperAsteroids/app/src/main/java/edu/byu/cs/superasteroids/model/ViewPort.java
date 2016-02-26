@@ -20,7 +20,7 @@ public class ViewPort {
  /**
  * The coordinate of the upper left corner of the viewport, in world coordinates.
  */
- public static Coordinate offset = new Coordinate(0,0);
+ public static Coordinate offset = new Coordinate(1800,800);
  
  public static boolean inViewPort(Coordinate coord)
  {
@@ -68,6 +68,7 @@ public class ViewPort {
  public static void setWorldDimensions(float newx, float newy)
  {
    worldDim = new Coordinate(newx, newy);
+   Log.e(tag, "World Dimensions: " + worldDim.toString());
  }
 
  public static float xscale = (float)1.;
@@ -84,8 +85,8 @@ public class ViewPort {
    Log.e(tag, "Got bitmap.");
    Coordinate imDim = new Coordinate(image.getWidth(), image.getHeight());
    Log.e(tag, "Got Dimensions of Background Image: "+imDim.toString());
-   xscale = imDim.x/worldDim.x;
-   yscale = imDim.y/worldDim.y;
+   xscale = (float)imDim.x/worldDim.x;
+   yscale = (float)imDim.y/worldDim.y;
  }
  
  /**
@@ -93,8 +94,10 @@ public class ViewPort {
  */
  public static void drawBackground()
  {
+  // Log.e(tag, "dim: "+dim.toString() + " , offset " + offset.toString());
    Rect src = new Rect((int)(offset.x*xscale), (int)(offset.y*yscale),
-    (int)(dim.x*xscale), (int)(dim.y*yscale));
+    (int)((offset.x+dim.x)*xscale), (int)((offset.y+dim.y)*yscale));
+//   Log.e(tag, "drawing background "+src.toString());
    DrawingHelper.drawImage(backgroundImageId, src, null);
  }
 }
