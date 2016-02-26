@@ -82,6 +82,7 @@ public class AsteroidsModel
 		Log.e(tag,"got extras");
 		levels = DAO.getLevels();
 		Log.e(tag,"got levels");
+		DAO.close();
 	}
 	
 	public ArrayList<Integer> getCannonImages()

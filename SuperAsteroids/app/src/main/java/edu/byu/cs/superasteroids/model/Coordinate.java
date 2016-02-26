@@ -49,6 +49,22 @@ public class Coordinate {
   return new Coordinate(other.x+x, other.y+y);
  }
  
+ 
+ /**
+ *Rotate the vector described by coordinate clockwise rotation degrees.
+ *@param rotation: The rotation angle, in degrees.
+ */
+ public void rotate(float rotation)
+ {
+//   Log.e(tag, "Old ": this.toString() + " rotation");
+   rotation = (float)Math.toRadians(rotation);
+   int newx = (int)( Math.cos(rotation) * x - Math.sin(rotation) * y);
+   int newy = (int)(  Math.sin(rotation) * x + Math.cos(rotation) * y);
+   x = newx;
+   y = newy;
+   
+ }
+ 
  public boolean equals(Coordinate other)
  {
 	 return (x == other.x) && (y == other.y); 

@@ -237,6 +237,11 @@ public class ModelDAO {
 		db.rawQuery("delete from cannon;",null);
 	}
 
+	public void close()
+	{
+	 if (db != null) db.close();
+	}
+	
 	public void addObjectsToLevel(int number, Level level)
 	{
   	  String[] params = new String[] {Integer.toString(number)};

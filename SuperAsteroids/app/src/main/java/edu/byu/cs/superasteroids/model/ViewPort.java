@@ -20,7 +20,8 @@ public class ViewPort {
  /**
  * The coordinate of the upper left corner of the viewport, in world coordinates.
  */
- public static Coordinate offset = new Coordinate(1800,800);
+ public static Coordinate offset = new Coordinate(0,0);
+ // public static Coordinate offset = new Coordinate(1800,800);
  
  public static boolean inViewPort(Coordinate coord)
  {

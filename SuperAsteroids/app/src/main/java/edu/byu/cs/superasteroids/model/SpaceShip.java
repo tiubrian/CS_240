@@ -47,52 +47,71 @@ public class SpaceShip {
       state.setPos(c.x, c.y);
     }
     
+    /**
+    * Get the center of the ship, in view coordinates
+    */
+    public Coordinate getViewCenter()
+    {
+      return ViewPort.fromWorld(state.pos);
+    }
     
+
+    public static float builder_rotation = (float)0.0;
+    public static float builder_xscale = (float).5;
+    public static float builder_yscale = (float).5;
+    public static int default_alpha = 255;    
+    
+    public static float default_xscale = (float).5;
+    public static float default_yscale = (float).5;
+    
+    
+    public static void drawShipImage(Coordinate pos, int id, float rotation, float xscale, float yscale)
+    {
+      DrawingHelper.drawImage(id, (float)pos.getX(), (float)pos.getY(), rotation,  xscale, 
+	yscale, default_alpha);
+    }
+    
+    public void builder_draw(float x, float y)
+    {
+      drawShip(new Coordinate(x, y), builder_rotation, builder_xscale, builder_yscale); 
+    }
+    
+    
+    public void drawShipAttachment(Coordinate O, Coordinate attach, AttachablePart part, float rotation, float xscale, float yscale)
+    {
+     //do magic 
+      Coordinate offset = part.getOffset(body, attach).scale(xscale, yscale);
+//      Log.e(tag, "Adding part "+part.toString()+ " with offset "+offset.toString());
+      offset.rotate(rotation);
+  //    Log.e(tag, "Angle "+Float.toString(rotation)+" Rotated Offset: "+offset.toString());
+      drawShipImage(Coordinate.add(O, offset),
+	part.getImageId(), rotation, xscale, yscale);
+    }
+    
+    
+    public void drawShip(Coordinate center, float rotation, float xscale, float yscale)
+    {
+      if (body != null) drawShipImage(center, body.getImageId(), rotation, xscale, yscale);
+      if (engine != null) drawShipAttachment(center, body.engineAttach, engine, rotation, xscale, yscale);
+      if (cannon != null) drawShipAttachment(center, body.cannonAttach, cannon, rotation, xscale, yscale);
+      if (extra_part != null) drawShipAttachment(center, body.extraAttach, extra_part, rotation, xscale, yscale);
+    }
+    
+    public void draw()
+    {
+//      Log.e(tag, "drawing ship");
+      drawShip(getViewCenter(), getRotation(), default_xscale, default_yscale);
+    }
+
     
     public void update()
     {
 
     }
 
-    public static float builder_rot_degs = (float)0.0;
-    public static float builder_xscale = (float).5;
-    public static float builder_yscale = (float).5;
-    public static int default_alpha = 255;    
-    
-    public static void drawShipImage(Coordinate pos, int id)
+    public float getRotation()
     {
-      DrawingHelper.drawImage(id, (float)pos.getX(), (float)pos.getY(),  builder_rot_degs,  builder_xscale, 
-	builder_yscale, builder_alpha);     
+     //TODO:: fully implement this method
+     return (float)0.0;
     }
-    
-    public void builder_draw(float x, float y)
-    {
-      //O for the relative origin
-      Coordinate O = new Coordinate(x, y);
-      if (body != null) drawShipImage(O, body.getImageId());
-      if (engine != null) drawShipAttachment(O, body.engineAttach, engine);
-      if (cannon != null) drawShipAttachment(O, body.cannonAttach, cannon);
-      if (extra_part != null) drawShipAttachment(O, body.extraAttach, extra_part);
-    }
-    
-    
-    public void drawShipAttachment(Coordinate O, Coordinate attach, AttachablePart part)
-    {
-     //do magic 
-      Coordinate offset = part.getOffset(body, attach).scale(builder_xscale, default_yscale);
-//      Log.e(tag, "Adding part "+part.toString()+ " with offset "+offset.toString());
-      drawShipImage(Coordinate.add(O, offset),
-        part.getImageId() );
-    }
-    
-    
-    public void drawShip(Coordinate center, float rotation, float xscale, float yscale)
-    
-    public void draw()
-    {
-    }
-
-    
-
-    
 }

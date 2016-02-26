@@ -36,8 +36,8 @@ public class BackgroundObject
 	public void draw()
 	{
 	  Coordinate viewpos = ViewPort.fromWorld(position);
-	  Log.e(tag, "Got viewpos: "+viewpos.toString() + 
-	    " scale: "+Float.toString(scale)+" imname: "+image);
+//	  Log.e(tag, "Got viewpos: "+viewpos.toString() + 
+//	    " scale: "+Float.toString(scale)+" imname: "+image);
 	  DrawingHelper.drawImage(image_obj.getImageId(), (float)viewpos.x, (float)viewpos.y,
 	    (float)0.0, (float)scale, (float)scale, 255);
 	}

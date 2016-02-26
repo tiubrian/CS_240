@@ -151,17 +151,21 @@ public class GameDataImporter implements IGameDataImporter {
 			}
 			catch (IOException e)
 			{
+			        DAO.close();
 				return false;
 			}
 			catch (JSONException e)
 			{
-			  Log.e(importtag,e.toString()+" jsonexception " + e.getMessage());
+			        DAO.close();
+			        Log.e(importtag,e.toString()+" jsonexception " + e.getMessage());
 			}
 			catch (Exception e)
 			{
+			  DAO.close();
 			  Log.e(importtag,e.toString()+" runtimeexception " + e.getMessage());			 
-			 throw e;
+			  throw e;
 			}
+			DAO.close();
 			return true;
 		}
     
