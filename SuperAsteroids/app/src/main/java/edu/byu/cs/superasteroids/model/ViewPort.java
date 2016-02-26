@@ -42,8 +42,10 @@ public class ViewPort {
  
  public static void setCenter(Coordinate newCenter)
  {
-   Coordinate newOffset = new Coordinate(newCenter.x -  dim.x/2, newCenter.y + dim.y/2);
-   if (validOffset(offset)) offset = newOffset;
+   Coordinate newOffset = new Coordinate(newCenter.x -  dim.x/2, newCenter.y - dim.y/2);
+//   Log.e(tag, "newOffset: "+newOffset.toString());
+   if (validOffset(newOffset)) offset = newOffset;
+//   else    Log.e(tag, "Invalid offset, World Dimensions: " + worldDim.toString());
  }
 
  
@@ -60,16 +62,16 @@ public class ViewPort {
  public static boolean boxInWorld(int x, int y, int w, int h)
  {
    if (x + w > worldDim.x) return false;
-   if (x < worldDim.x) return false;
-   if (y + h > worldDim.y) return false;
-   if (y < worldDim.y) return false;
+   if (x < 0) return false;
+   if (y + h > worldDim.y) return false;	
+   if (y < 0) return false;
    return true;
  }
  
  public static void setWorldDimensions(float newx, float newy)
  {
    worldDim = new Coordinate(newx, newy);
-   Log.e(tag, "World Dimensions: " + worldDim.toString());
+//   Log.e(tag, "World Dimensions: " + worldDim.toString());
  }
 
  public static float xscale = (float)1.;
@@ -95,10 +97,10 @@ public class ViewPort {
  */
  public static void drawBackground()
  {
-  // Log.e(tag, "dim: "+dim.toString() + " , offset " + offset.toString());
+   Log.e(tag, "dim: "+dim.toString() + " , offset " + offset.toString());
    Rect src = new Rect((int)(offset.x*xscale), (int)(offset.y*yscale),
     (int)((offset.x+dim.x)*xscale), (int)((offset.y+dim.y)*yscale));
-//   Log.e(tag, "drawing background "+src.toString());
+   Log.e(tag, "drawing background "+src.toString());
    DrawingHelper.drawImage(backgroundImageId, src, null);
  }
 }

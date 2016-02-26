@@ -44,7 +44,7 @@ public class SpaceShip {
 
     public void setCenter(Coordinate c)
     {
-      Log.e(tag, "setting center to "+c.toString());
+//      Log.e(tag, "setting center to "+c.toString());
       if (state == null) Log.e(tag, "state is null");
       else if (state.pos == null) Log.e(tag, "somehow state.pos is null");
       state.setPos(c.x, c.y);
