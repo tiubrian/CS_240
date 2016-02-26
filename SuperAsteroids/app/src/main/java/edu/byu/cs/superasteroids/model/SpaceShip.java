@@ -1,6 +1,7 @@
 package edu.byu.cs.superasteroids.model;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
-
+import edu.byu.cs.superasteroids.game.InputManager;
+import android.graphics.PointF;
 import android.util.Log;
 
 /**
@@ -14,6 +15,7 @@ public class SpaceShip {
     public Cannon cannon;
     public MovingState state;
     public final static String tag = "superasteroidsship";
+    public float theta;
 
     public SpaceShip()
     {
@@ -23,7 +25,8 @@ public class SpaceShip {
       power_core = null;
       cannon = null;
       state = new MovingState();
-      Log.e(tag, "Created state" + state.pos.toString());
+      theta = (float)0.0;
+//      Log.e(tag, "Created state" + state.pos.toString());
     }
     
     public boolean isComplete()
@@ -54,7 +57,11 @@ public class SpaceShip {
     {
       return ViewPort.fromWorld(state.pos);
     }
-    
+
+    public Coordinate getCenter()
+    {
+     return state.pos;
+    }
 
     public static float builder_rotation = (float)0.0;
     public static float builder_xscale = (float).5;
@@ -103,15 +110,38 @@ public class SpaceShip {
       drawShip(getViewCenter(), getRotation(), default_xscale, default_yscale);
     }
 
+    public static float speedScale = (float).1;
+    public static float minDirectionDist = (float)30.;
     
     public void update()
     {
-
+      if (InputManager.movePoint != null) {
+        Coordinate movePoint = ViewPort.toWorld(new Coordinate(InputManager.movePoint));
+        Log.e(tag, "center: "+ getCenter().toString() + " movePoint: "+movePoint.toString());
+        Coordinate direction = Coordinate.subtract(movePoint, getCenter());
+        this.theta = 90 + direction.getAngle(); //hack
+        float norm = direction.norm();
+        state.dx = direction.x*getSpeed()/norm;
+        state.dy = direction.y*getSpeed()/norm;
+        //avoid erratic oscillations
+        if (norm < minDirectionDist) state.stopMoving(); 
+   //     Log.e(tag, "dir "+direction.toString()+" velocity: dx "+Float.toString(state.dx)+" "+Float.toString(state.dy));
+      }
+      else {
+       state.stopMoving();
+      }
+      state.update();
+      ViewPort.setCenter(getCenter());
     }
 
+    
+    public float getSpeed()
+    {
+      return (float)(engine.baseSpeed + power_core.engineBoost)*speedScale;
+    }
+    
     public float getRotation()
     {
-     //TODO:: fully implement this method
-     return (float)0.0;
+      return this.theta;
     }
 }

@@ -29,6 +29,7 @@ public class MovingState {
     }
 
     
+    
     public MovingState(Float x_init, Float y_init, Float dx, Float dy)
     {
      this();
@@ -52,10 +53,22 @@ public class MovingState {
      this.dy = dy;
     }	
 
+    public void stopMoving()
+    {
+     dx = (float)0.0;
+     dy = (float)0.0;
+    }
+    
+    public void setPolar(float angle, float speed)
+    {
+      theta = (float)Math.toRadians(angle);
+      dx = theta*speed;
+      dy = theta*speed;
+    }
     
     public void update()
     {
-
+      pos.reset(pos.x +dx, pos.y + dy);
     }
 
     public void draw()

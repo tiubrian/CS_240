@@ -1,4 +1,6 @@
 package edu.byu.cs.superasteroids.model;
+import android.graphics.PointF;
+
 
 /**
  * This class abstracts the notion of a coordinate.
@@ -21,6 +23,10 @@ public class Coordinate {
 	 y = (int)y_coord;
  }
 
+ public Coordinate(PointF p)
+ {
+   this(p.x, p.y);
+ }
  
  public Coordinate(String s)
  {
@@ -63,6 +69,18 @@ public class Coordinate {
    x = newx;
    y = newy;
    
+ }
+ 
+ public static final float epsilon = (float)(0.000001);
+ 
+ public float norm()
+ {
+  return (float)Math.sqrt(x*x + y*y);
+ }
+ 
+ public float getAngle()
+ {
+  return (float)Math.toDegrees(Math.atan2(y, x));
  }
  
  public boolean equals(Coordinate other)

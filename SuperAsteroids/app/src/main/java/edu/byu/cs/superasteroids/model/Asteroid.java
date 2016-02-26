@@ -21,6 +21,7 @@ public class Asteroid
 	
 	public void update()
 	{
+	 state.update();
 	}
 	
 	public void draw()
