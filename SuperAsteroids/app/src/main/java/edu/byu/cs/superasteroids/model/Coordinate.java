@@ -1,6 +1,6 @@
 package edu.byu.cs.superasteroids.model;
 import android.graphics.PointF;
-
+import android.util.Log;	
 
 /**
  * This class abstracts the notion of a coordinate.
@@ -10,6 +10,7 @@ import android.graphics.PointF;
 public class Coordinate {
  public int x;
  public int y;
+ public final static String tag = "superasteroidscoord";
 
  public Coordinate(int x_coord, int y_coord)
  {
@@ -45,15 +46,34 @@ public class Coordinate {
   return new Coordinate(a.x-b.x, a.y-b.y);
  }
 
+ public void subtractFromSelf(Coordinate other)
+ {
+   this.x -= other.x;
+   this.y -= other.y;
+ }
+ 
+ public void addToSelf(Coordinate other)
+ {
+   this.x += other.x;
+   this.y += other.y;
+ }
+ 
  public Coordinate scale(float xscale, float yscale)
  {
   return new Coordinate(x*xscale, y*yscale);
+ }
+
+ public void rescale(float scale)
+ {
+   x = (int)(scale*x);
+   y = (int)(scale*y);
  }
  
  public Coordinate increment(Coordinate other)
  {
   return new Coordinate(other.x+x, other.y+y);
  }
+ 
  
  
  /**
@@ -70,9 +90,24 @@ public class Coordinate {
    y = newy;
    
  }
+
+/**
+ *Rotate the vector described by coordinate clockwise rotation degrees about anchor.
+ *@param rotation: The rotation angle, in degrees.
+ */
+
+ public void rotateAboutAnchor(float rotationDegrees, Coordinate anchor)
+ {
+   Log.e(tag, "Old: "+this.toString() +
+     " rotationDeg: " + Float.toString(rotationDegrees)
+     + " anchor "+anchor);
+   this.subtractFromSelf(anchor);
+   this.rotate(rotationDegrees);
+   this.addToSelf(anchor);
+   Log.e(tag, "New: "+this.toString());
+ }
  
- public static final float epsilon = (float)(0.000001);
- 
+
  public float norm()
  {
   return (float)Math.sqrt(x*x + y*y);

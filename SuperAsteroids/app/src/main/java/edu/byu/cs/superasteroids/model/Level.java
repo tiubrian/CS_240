@@ -70,17 +70,17 @@ public class Level {
 	}
 
 	
-	public void update()
+	public void update(double elapsedTime)
 	{
 	  int i;
 	  for (i = 0; i < background_objects.size(); i++)
 	  {
-	    background_objects.get(i).update();
+	    background_objects.get(i).update(elapsedTime);
 	  }
 
 	  for (i = 0; i < asteroids.size(); i++)
 	  {
-	    asteroids.get(i).update();
+	    asteroids.get(i).update(elapsedTime);
 	  }	  
 	}
 
@@ -98,6 +98,14 @@ public class Level {
 	  }	  
 	}
 
+	public void initAsteroidStates()
+	{
+	  for (int i = 0; i < asteroids.size(); i++)
+	  {
+	    asteroids.get(i).initRandom();
+	  }
+	}
+	
 	public void addAsteroids(AsteroidType type, int number)
 	{
 	  int i = 0;

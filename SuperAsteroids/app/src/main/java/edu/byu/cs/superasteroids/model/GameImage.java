@@ -102,4 +102,8 @@ public class GameImage
    return new Coordinate(width/2, height/2);
  }
  
+ public Coordinate getDimensions()
+ {
+   return new Coordinate(width, height);
+ }
 }

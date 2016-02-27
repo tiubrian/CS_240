@@ -89,7 +89,13 @@ public class Cannon  extends AttachablePart {
 		return res.toString();
 	}*/
 	
- public void update()
+ public void setAttach(MainBody body)
+ {
+  this.bodyAttach = body.cannonAttach;
+ }
+
+	
+public void update()
  {
 
  }

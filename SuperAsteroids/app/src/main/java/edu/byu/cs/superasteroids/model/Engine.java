@@ -40,6 +40,10 @@ public class Engine extends AttachablePart {
 	return res.toString();
 }
 
+ public void setAttach(MainBody body)
+ {
+  this.bodyAttach = body.engineAttach;
+ }
  
  public void update()
  {

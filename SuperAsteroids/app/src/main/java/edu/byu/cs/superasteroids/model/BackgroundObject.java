@@ -42,7 +42,7 @@ public class BackgroundObject
 	    (float)0.0, (float)scale, (float)scale, 255);
 	}
 	
-	public void update()
+	public void update(double elapsedTime)
 	{
 	}
 	

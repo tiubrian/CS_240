@@ -4,10 +4,11 @@ import android.util.Log;
  * Represents the state of a moving object.
  */
 public class MovingState {
-    public Coordinate pos;
     public static final String tag = "superasteroidsstate";
     public Float dx;
     public Float dy;
+    private float x;
+    private float y;
     /**
      * The direction of the moving object.
      * This probably can be determined from the x and y velocities, but is included for convenience.
@@ -19,21 +20,22 @@ public class MovingState {
      theta = (float)0.0;
      dx = (float)0.0;
      dy = (float)0.0;
-     pos = new Coordinate(0,0);
+     x = (float)0.;
+     y = (float)0.;
     }
     
     public MovingState(Float x_init, Float y_init)
     {
      this();
-     pos.reset(x_init, y_init);
+     x = x_init;
+     y = y_init;
     }
 
     
     
     public MovingState(Float x_init, Float y_init, Float dx, Float dy)
     {
-     this();
-     pos.reset(x_init, y_init);
+     this(x_init, y_init);
      this.dx = dx;
      this.dy = dy;
     }	
@@ -41,18 +43,26 @@ public class MovingState {
     public MovingState(int x_init, int y_init)
     {
      this();
-     pos.reset(x_init, y_init);
+     x = (float)x_init;
+     y = (float)y_init;
     }
 
     
     public MovingState(int x_init, int y_init, Float dx, Float dy)
     {
-     this();
-     pos.reset(x_init, y_init);
+     this(x_init, y_init);
      this.dx = dx;
      this.dy = dy;
     }	
 
+    
+    public void randomDirection(float newSpeed)
+    {
+      theta = (float)(2*Math.PI*Math.random());
+      dx = (float)Math.sin(theta)*newSpeed;
+      dy = (float)Math.cos(theta)*newSpeed;      
+    }
+    
     public void stopMoving()
     {
      dx = (float)0.0;
@@ -62,13 +72,14 @@ public class MovingState {
     public void setPolar(float angle, float speed)
     {
       theta = (float)Math.toRadians(angle);
-      dx = theta*speed;
-      dy = theta*speed;
+      dx = (float)Math.sin(theta)*speed;
+      dy = (float)Math.cos(theta)*speed;
     }
     
-    public void update()
+    public void update(double elapsedTime)
     {
-      pos.reset(pos.x +dx, pos.y + dy);
+      x += dx;
+      y += dy;
     }
 
     public void draw()
@@ -78,18 +89,22 @@ public class MovingState {
     
     public float getX()
     {
-      return (float)pos.getX();
+      return x;
     }
     
     public float getY() {
-      return (float)pos.getY();
+      return y;
     }
     
     public void setPos(int x, int y)
     {
      Log.e(tag, "setting pos to "+Integer.toString(x)+" "+Integer.toString(y));
-     pos.setX(x);
-     pos.setY(y);
+     this.x = x;
+     this.y = y;
     }
 
+    public Coordinate getPos()
+    {
+     return new Coordinate(x, y);
+    }
 }

@@ -264,7 +264,7 @@ public class ModelDAO {
 	
 	public void addTypesToLevel(int number, Level level)
 	{
-	  String sql = "select name, image, imageWidth, imageHeight, type "
+	  String sql = "select id, name, image, imageWidth, imageHeight, type "
 	    + ", number_of_asteroids from level_asteroid, asteroid_type where "
 	    + " level_asteroid.asteroidId = asteroid_type.id and "
 	    + " level_asteroid.level_number = ?";

@@ -24,10 +24,10 @@ public class MainMenuController implements IMainMenuController {
 Log.e(tag,"created asteroids model.");
      model.populate(activity.getApplicationContext());
     Log.e(tag,"populated model.");
-     model.ship.cannon = model.cannons.get(0);
-     model.ship.body = model.main_bodies.get(0);
-     model.ship.extra_part = model.extra_parts.get(0);
-     model.ship.engine = model.engines.get(0);
+     model.ship.setCannon(model.cannons.get(0));
+     model.ship.setBody(model.main_bodies.get(0));
+     model.ship.setExtraPart(model.extra_parts.get(0));
+     model.ship.setEngine(model.engines.get(0));
      model.ship.power_core = model.power_cores.get(0);
      activity.startGame();
     }

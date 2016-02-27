@@ -22,6 +22,35 @@ public class ViewPort {
  */
  public static Coordinate offset = new Coordinate(0,0);
  // public static Coordinate offset = new Coordinate(1800,800);
+ public enum Wall {LEFT, RIGHT, TOP, BOTTOM, NONE};
+ 
+ public static String wallToString(Wall wall)
+ {
+   switch(wall)
+   {
+     case LEFT:
+       return "LEFT";
+     case RIGHT:
+       return "RIGHT";
+     case TOP:
+       return "TOP";
+     case BOTTOM:
+       return "BOTTOM";
+     case NONE:
+       return "NONE";
+     default:
+       return "Some other undefined wall type.";
+   }
+ }
+ 
+ public static Wall wallViolated(Coordinate coord)
+ {
+  if (coord.x <= 0) return Wall.LEFT;
+  if (coord.x >= worldDim.x) return Wall.RIGHT;
+  if (coord.y <= 0) return Wall.TOP;
+  if (coord.y >= worldDim.y) return Wall.BOTTOM;
+  return Wall.NONE;
+ }
  
  public static boolean inViewPort(Coordinate coord)
  {
@@ -70,7 +99,10 @@ public class ViewPort {
  
  public static void setWorldDimensions(float newx, float newy)
  {
+   dim = new Coordinate(DrawingHelper.getGameViewWidth(),
+    DrawingHelper.getGameViewHeight());
    worldDim = new Coordinate(newx, newy);
+   setCenter(worldDim.scale((float).5, (float).5)); //start at center of world
 //   Log.e(tag, "World Dimensions: " + worldDim.toString());
  }
 
@@ -80,8 +112,6 @@ public class ViewPort {
  public static void setBackground(int imageId)
  {
    Log.e(tag, "Calling setBackground");
-   dim = new Coordinate(DrawingHelper.getGameViewWidth(),
-    DrawingHelper.getGameViewHeight());
    Log.e(tag," computed dimensions: "+dim.toString());
    backgroundImageId = imageId;
    Bitmap image = ContentManager.getInstance().getImage(imageId);

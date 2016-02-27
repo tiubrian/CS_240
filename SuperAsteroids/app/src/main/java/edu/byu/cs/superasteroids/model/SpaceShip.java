@@ -1,32 +1,67 @@
 package edu.byu.cs.superasteroids.model;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import edu.byu.cs.superasteroids.game.InputManager;
+import edu.byu.cs.superasteroids.model.ViewPort.Wall;
 import android.graphics.PointF;
 import android.util.Log;
 
 /**
  * The spaceship that meshes all of the parts.
  */
-public class SpaceShip {
+public class SpaceShip extends BoundedObject {
     public MainBody body;
     public Engine engine;
     public ExtraPart extra_part;
     public PowerCore power_core;
     public Cannon cannon;
-    public MovingState state;
     public final static String tag = "superasteroidsship";
-    public float theta;
+    public static float builder_rotation = (float)0.0;
+    public static float builder_xscale = (float).5;
+    public static float builder_yscale = (float).5;
+    public static int default_alpha = 255;    
+    
+    public static float default_xscale = (float).5;
+    public static float default_yscale = (float).5;
+    
 
+    
     public SpaceShip()
     {
+      super();
       MainBody body = null;
       Engine engine = null;
       ExtraPart extra_part = null;
       power_core = null;
       cannon = null;
       state = new MovingState();
-      theta = (float)0.0;
-//      Log.e(tag, "Created state" + state.pos.toString());
+//      Log.e(tag, "Created state" + state.getPos().toString());
+    }
+    
+    
+    public void setBody(MainBody body)
+    {
+      this.body = body;
+      if (cannon != null) cannon.setBody(body);
+      if (engine != null) engine.setBody(body);
+      if (exta_part != null) extra_part.setBody(body);
+    }
+    
+    public void setEngine(Engine engine)
+    {
+      this.engine = engine;
+      engine.setBody(this.body);
+    }
+    
+    public void setCannon(Cannon cannon)
+    {
+      this.cannon = cannon;
+      cannon.setBody(this.body);
+    }
+    
+    public void setExtraPart(ExtraPart extra_part)
+    {
+      this.extra_part = extra_part;
+      extra_part.setBody(this.body);
     }
     
     public boolean isComplete()
@@ -46,7 +81,7 @@ public class SpaceShip {
     {
 //      Log.e(tag, "setting center to "+c.toString());
       if (state == null) Log.e(tag, "state is null");
-      else if (state.pos == null) Log.e(tag, "somehow state.pos is null");
+      else if (state.getPos() == null) Log.e(tag, "somehow state.getPos() is null");
       state.setPos(c.x, c.y);
     }
     
@@ -55,22 +90,47 @@ public class SpaceShip {
     */
     public Coordinate getViewCenter()
     {
-      return ViewPort.fromWorld(state.pos);
+      return ViewPort.fromWorld(state.getPos());
     }
 
     public Coordinate getCenter()
     {
-     return state.pos;
+     return state.getPos();
     }
 
-    public static float builder_rotation = (float)0.0;
-    public static float builder_xscale = (float).5;
-    public static float builder_yscale = (float).5;
-    public static int default_alpha = 255;    
+    public ArrayList<AttachablePart> getAttachableParts()
+    {
+      ArrayList<AttachablePart> parts = new ArrayList<AttachablePart>();
+      parts.add(engine);
+      parts.add(cannon);
+      parts.add(extra_part);
+      return parts;
+    }
     
-    public static float default_xscale = (float).5;
-    public static float default_yscale = (float).5;
-    
+    public void initDimension()
+    {
+      int max_x = body.maxX();
+      int max_y = body.maxY();
+      int min_y = body.minY();
+      int min_x = body.minX();
+      ArrayList<AttachablePart> parts = getAttachableParts();
+      
+      for (int i = 0; i < AttachableParts.size(); i++)
+      {
+        AttachablePart p = parts.get(i);
+        int tx = p.maxX();
+        int ty = p.maxY();
+        if (tx > max_x) max_x = tx;
+        if (ty > max_y) max_y = ty;
+        
+        tx = p.minY();
+        ty = p.minX();
+        if (tx < min_x) min_x = tx;
+        if (ty < min_y) min_y = ty;
+      }
+      
+      this.dim = new Coordinate(max_x - min_x,max_y - min_y);
+    }
     
     public static void drawShipImage(Coordinate pos, int id, float rotation, float xscale, float yscale)
     {
@@ -84,10 +144,10 @@ public class SpaceShip {
     }
     
     
-    public void drawShipAttachment(Coordinate O, Coordinate attach, AttachablePart part, float rotation, float xscale, float yscale)
+    public void drawShipAttachment(Coordinate O, AttachablePart part, float rotation, float xscale, float yscale)
     {
      //do magic 
-      Coordinate offset = part.getOffset(body, attach).scale(xscale, yscale);
+      Coordinate offset = part.getOffset().scale(xscale, yscale);
 //      Log.e(tag, "Adding part "+part.toString()+ " with offset "+offset.toString());
       offset.rotate(rotation);
   //    Log.e(tag, "Angle "+Float.toString(rotation)+" Rotated Offset: "+offset.toString());
@@ -99,9 +159,9 @@ public class SpaceShip {
     public void drawShip(Coordinate center, float rotation, float xscale, float yscale)
     {
       if (body != null) drawShipImage(center, body.getImageId(), rotation, xscale, yscale);
-      if (engine != null) drawShipAttachment(center, body.engineAttach, engine, rotation, xscale, yscale);
-      if (cannon != null) drawShipAttachment(center, body.cannonAttach, cannon, rotation, xscale, yscale);
-      if (extra_part != null) drawShipAttachment(center, body.extraAttach, extra_part, rotation, xscale, yscale);
+      if (engine != null) drawShipAttachment(center, engine, rotation, xscale, yscale);
+      if (cannon != null) drawShipAttachment(center, cannon, rotation, xscale, yscale);
+      if (extra_part != null) drawShipAttachment(center, extra_part, rotation, xscale, yscale);
     }
     
     public void draw()
@@ -113,8 +173,10 @@ public class SpaceShip {
     public static float speedScale = (float).1;
     public static float minDirectionDist = (float)30.;
     
-    public void update()
+    @Override
+    public void update(double elapsedTime)
     {
+      super.update(elapsedTime);
       if (InputManager.movePoint != null) {
         Coordinate movePoint = ViewPort.toWorld(new Coordinate(InputManager.movePoint));
         Log.e(tag, "center: "+ getCenter().toString() + " movePoint: "+movePoint.toString());
@@ -130,18 +192,19 @@ public class SpaceShip {
       else {
        state.stopMoving();
       }
-      state.update();
+      state.update(elapsedTime);
       ViewPort.setCenter(getCenter());
     }
 
+    public void onWallCollision(Wall wall)
+    {
+      Log.e(tag, " collided with wall "+ViewPort.wallToString(wall));
+      //TODO: figure out something more intelligent to do here
+      state.stopMoving();
+    }
     
     public float getSpeed()
     {
       return (float)(engine.baseSpeed + power_core.engineBoost)*speedScale;
-    }
-    
-    public float getRotation()
-    {
-      return this.theta;
     }
 }

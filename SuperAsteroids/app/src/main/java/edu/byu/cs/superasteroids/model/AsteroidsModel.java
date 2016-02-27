@@ -49,6 +49,8 @@ public class AsteroidsModel
 	  Log.e(tag, "Set background");
 	  ship.setCenter(ViewPort.getCenter());
 	  Log.e(tag, "Set Center");
+	  // create asteroids with random velocities and positions
+	  level.initAsteroidStates();
 	}
 	
 	public void draw()
@@ -60,8 +62,8 @@ public class AsteroidsModel
 	
 	public void update(double elapsedTime)
 	{
-	  level.update();
-	  ship.update();
+	  level.update(elapsedTime);
+	  ship.update(elapsedTime);
 	}
 	
 	public void populate(Context context)
@@ -145,20 +147,20 @@ public class AsteroidsModel
 	}
 
     public void setShipMainBody(int index){
-      ship.body = main_bodies.get(index);
+      ship.setBody(main_bodies.get(index));
     }
     
     public void setShipExtraPart(int index){
-      ship.extra_part = extra_parts.get(index);
+      ship.setExtraPart(extra_parts.get(index));
     }
     
     public void setShipCannon(int index){
-      ship.cannon = cannons.get(index);
+      ship.setCannon(cannons.get(index));
 
     }
     
     public void setShipEngine(int index){
-      ship.engine = engines.get(index);
+      ship.setEngine(engines.get(index));
       Log.e(tag, "Set Ship Engine");
 
     }

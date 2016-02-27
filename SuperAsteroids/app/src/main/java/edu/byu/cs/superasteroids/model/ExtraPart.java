@@ -32,6 +32,12 @@ public class ExtraPart extends AttachablePart
 
   }
 
+ public void setAttach(MainBody body)
+ {
+  this.bodyAttach = body.extraAttach;
+ }
+
+  
   public String toString() {
 		StringBuilder res = new StringBuilder();
 		res.append(" attachPoint: ");

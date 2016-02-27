@@ -36,9 +36,9 @@ public class AsteroidType {
 	}
 
 	
- public void update()
+ public void update(double elapsedTime, Asteroid ast)
  {
-
+  //do stuff here
  }
 
  public void draw()
@@ -64,5 +64,11 @@ public class AsteroidType {
   return image.getWidth();
  }
 
-
+ public int getImageId()
+ {
+   return image.getImageId();
+ }
+ 
+ 
+ 
 }
