@@ -1,12 +1,14 @@
 package edu.byu.cs.superasteroids.model;
 import java.util.ArrayList;
 import org.json.*;
+import android.util.Log;
 
 /**
  * This is the model class for a level in SuperAsteroids.
  * A level has a set of moving asteroids, a background, a hint (which never really helps), and spatial dimensions.
  */
 public class Level {
+        public final static String tag = "superasteroidslevel";
 	/**
 	 * The level number, or order of the level in the sequence of levels. Supposedly correlated with level difficulty.
 	 */
@@ -86,6 +88,7 @@ public class Level {
 
 	public void draw()
 	{
+	  Log.e(tag, "drawing level with "+asteroids.size()+" asteroids");
 	  int i;
 	  for (i = 0; i < background_objects.size(); i++)
 	  {
@@ -108,6 +111,7 @@ public class Level {
 	
 	public void addAsteroids(AsteroidType type, int number)
 	{
+	  Log.e(tag, "adding "+ number + " asteroids.");
 	  int i = 0;
 	  for (i=0; i<number; i++)
 	  {

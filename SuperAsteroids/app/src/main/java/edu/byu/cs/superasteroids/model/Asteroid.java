@@ -11,20 +11,23 @@ public class Asteroid extends BoundedObject
 {
         public static float speed;
 	public AsteroidType type;
+	public final static String tag = "superasteroidsasteroid";
 	public Asteroid()
 	{
+	  super();
 	  this.state = new MovingState();
 	}
 
 	public Asteroid(AsteroidType type)
 	{
-  	  this.state = new MovingState();
+  	  this();
 	  this.type = type;
 	}
 	
 	public void initRandom()
 	{
 	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
+	  Log.e(tag, "supposedly Random initial position "+ state.getPos().toString());
 	  state.randomDirection(speed);
 	}
 	
@@ -63,12 +66,13 @@ public class Asteroid extends BoundedObject
 	
 	public void initDimension()
 	{
-	 this.dim = type.image.getDimension();
+	 this.dim = type.image.getDimensions();
 	}
 	
 	public void draw()
 	{
 	  super.draw();
+	  Log.e(tag, "drawing Asteroid ");
 	}
 	
 	@Override

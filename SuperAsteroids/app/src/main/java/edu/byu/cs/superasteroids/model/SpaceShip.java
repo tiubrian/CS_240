@@ -4,6 +4,7 @@ import edu.byu.cs.superasteroids.game.InputManager;
 import edu.byu.cs.superasteroids.model.ViewPort.Wall;
 import android.graphics.PointF;
 import android.util.Log;
+import java.util.ArrayList;
 
 /**
  * The spaceship that meshes all of the parts.
@@ -43,7 +44,7 @@ public class SpaceShip extends BoundedObject {
       this.body = body;
       if (cannon != null) cannon.setBody(body);
       if (engine != null) engine.setBody(body);
-      if (exta_part != null) extra_part.setBody(body);
+      if (extra_part != null) extra_part.setBody(body);
     }
     
     public void setEngine(Engine engine)
@@ -115,7 +116,7 @@ public class SpaceShip extends BoundedObject {
       int min_x = body.minX();
       ArrayList<AttachablePart> parts = getAttachableParts();
       
-      for (int i = 0; i < AttachableParts.size(); i++)
+      for (int i = 0; i < parts.size(); i++)
       {
         AttachablePart p = parts.get(i);
         int tx = p.maxX();

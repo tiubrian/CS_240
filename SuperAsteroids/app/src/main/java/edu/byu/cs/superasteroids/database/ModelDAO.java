@@ -274,7 +274,7 @@ public class ModelDAO {
 	    cur.moveToFirst();
 	    while (!cur.isAfterLast())
 	    {
-	      int num = cur.getInt(5);
+	      int num = cur.getInt(6);
 	      AsteroidType type = getAsteroidTypeFromCursor(cur);
 	      level.addAsteroids(type, num);		    
 	      cur.moveToNext();
