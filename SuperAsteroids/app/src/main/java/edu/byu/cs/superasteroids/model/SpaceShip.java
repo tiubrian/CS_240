@@ -86,18 +86,6 @@ public class SpaceShip extends BoundedObject {
       state.setPos(c.x, c.y);
     }
     
-    /**
-    * Get the center of the ship, in view coordinates
-    */
-    public Coordinate getViewCenter()
-    {
-      return ViewPort.fromWorld(state.getPos());
-    }
-
-    public Coordinate getCenter()
-    {
-     return state.getPos();
-    }
 
     public ArrayList<AttachablePart> getAttachableParts()
     {
@@ -165,9 +153,10 @@ public class SpaceShip extends BoundedObject {
       if (extra_part != null) drawShipAttachment(center, extra_part, rotation, xscale, yscale);
     }
     
+    @Override
     public void draw()
     {
-//      Log.e(tag, "drawing ship");
+      Log.e(tag, "drawing ship world center "+getCenter().toString()+" view center "+getViewCenter().toString());
       drawShip(getViewCenter(), getRotation(), default_xscale, default_yscale);
     }
 

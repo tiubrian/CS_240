@@ -103,6 +103,12 @@ public class MovingState {
      this.y = y;
     }
 
+    public void setPos(Coordinate coord)
+    {
+     this.x = coord.x;
+     this.y = coord.y;
+    }
+    
     public Coordinate getPos()
     {
      return new Coordinate(x, y);

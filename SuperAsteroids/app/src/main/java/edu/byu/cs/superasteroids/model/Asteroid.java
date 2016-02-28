@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class Asteroid extends BoundedObject
 {
-        public static float speed;
+        public static float initSpeed = (float)10.0;
 	public AsteroidType type;
 	public final static String tag = "superasteroidsasteroid";
 	public Asteroid()
@@ -26,13 +26,17 @@ public class Asteroid extends BoundedObject
 	
 	public void initRandom()
 	{
-	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
+//	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
+          state.setPos(new Coordinate(1750,1500));
 	  Log.e(tag, "supposedly Random initial position "+ state.getPos().toString());
-	  state.randomDirection(speed);
+	  state.randomDirection(initSpeed);
+	  Log.e(tag, "Asteroid is Moving with dx = "+Float.toString(state.dx)+" dy="+Float.toString(state.dy));
 	}
 	
+	@Override
 	public void update(double elapsedTime)
 	{
+	 Log.e(tag, " updating asteroid");
 	 super.update(elapsedTime);
 	 //Move
 	 state.update(elapsedTime);
@@ -48,10 +52,10 @@ public class Asteroid extends BoundedObject
 	   case RIGHT:
 	    //make sure we only flip once
 	    //If I just naively toggled the sign, it could get 'stuck' to the wall
-	    if (state.dx <0) state.dx = -state.dx;
+	    if (state.dx > 0) state.dx = -state.dx;
 	    break;
 	   case LEFT:
-	    if (state.dx > 0) state.dx = -state.dx;
+	    if (state.dx < 0) state.dx = -state.dx;
  	   break;
  	   case TOP:
 	    if (state.dy < 0) state.dy = -state.dy;
@@ -69,10 +73,11 @@ public class Asteroid extends BoundedObject
 	 this.dim = type.image.getDimensions();
 	}
 	
+	@Override
 	public void draw()
 	{
 	  super.draw();
-	  Log.e(tag, "drawing Asteroid ");
+	  Log.e(tag, "drawing Asteroid at location "+getCenter().toString() + " view"+getViewCenter().toString());
 	}
 	
 	@Override
