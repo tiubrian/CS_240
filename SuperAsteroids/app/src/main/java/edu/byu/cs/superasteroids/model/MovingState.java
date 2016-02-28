@@ -72,8 +72,8 @@ public class MovingState {
     public void setPolar(float angle, float speed)
     {
       theta = (float)Math.toRadians(angle);
-      dx = (float)Math.sin(theta)*speed;
-      dy = (float)Math.cos(theta)*speed;
+      dx = (float)Math.cos(theta)*speed;
+      dy = (float)Math.sin(theta)*speed;
     }
     
     public void update(double elapsedTime)

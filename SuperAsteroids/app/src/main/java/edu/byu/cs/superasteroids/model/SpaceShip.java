@@ -35,6 +35,7 @@ public class SpaceShip extends BoundedObject {
       power_core = null;
       cannon = null;
       state = new MovingState();
+      scale = (float)0.5;
 //      Log.e(tag, "Created state" + state.getPos().toString());
     }
     
@@ -157,7 +158,10 @@ public class SpaceShip extends BoundedObject {
     public void draw()
     {
       Log.e(tag, "drawing ship world center "+getCenter().toString()+" view center "+getViewCenter().toString());
-      drawShip(getViewCenter(), getRotation(), default_xscale, default_yscale);
+      drawShip(getViewCenter(), getRotation(), scale, scale);
+//      drawShip(getViewCenter(), (float)45., default_xscale, default_yscale);
+      //so we can draw the projectiles
+      cannon.draw();
     }
 
     public static float speedScale = (float).1;
@@ -167,6 +171,7 @@ public class SpaceShip extends BoundedObject {
     public void update(double elapsedTime)
     {
       super.update(elapsedTime);
+      
       if (InputManager.movePoint != null) {
         Coordinate movePoint = ViewPort.toWorld(new Coordinate(InputManager.movePoint));
         Log.e(tag, "center: "+ getCenter().toString() + " movePoint: "+movePoint.toString());
@@ -182,6 +187,7 @@ public class SpaceShip extends BoundedObject {
       else {
        state.stopMoving();
       }
+      cannon.update(elapsedTime);
       state.update(elapsedTime);
       ViewPort.setCenter(getCenter());
     }

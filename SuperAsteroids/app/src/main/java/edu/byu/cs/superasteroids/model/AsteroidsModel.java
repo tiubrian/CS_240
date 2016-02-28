@@ -19,7 +19,7 @@ public class AsteroidsModel
 	public ArrayList<Level> levels;
 	public Level level;
 	public SpaceShip ship;
-	public int currentLevelNum = -1;
+	public int currentLevelNum;
 
 	
 	public static ContentManager manager = ContentManager.getInstance();
@@ -35,6 +35,7 @@ public class AsteroidsModel
 	public AsteroidsModel()
 	{
 	  ship = new SpaceShip();
+	  currentLevelNum = -1;
 	}
 	
 	
@@ -51,7 +52,15 @@ public class AsteroidsModel
 	  Log.e(tag, "Set Center");
 	  // create asteroids with random velocities and positions
 	  level.initAsteroidStates();
+	  currentLevelNum = levelInd;
 	}
+	
+	public Level getCurrentLevel()
+	{
+	  return levels.get(currentLevelNum);
+	}
+
+	
 	
 	public void draw()
 	{
@@ -64,6 +73,11 @@ public class AsteroidsModel
 	{
 	  level.update(elapsedTime);
 	  ship.update(elapsedTime);
+	}
+	
+	public static SpaceShip getShip()
+	{
+	 return getInstance().ship;
 	}
 	
 	public void populate(Context context)

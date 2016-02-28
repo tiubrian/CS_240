@@ -73,7 +73,8 @@ public class ViewPort {
  {
    Coordinate newOffset = new Coordinate(newCenter.x -  dim.x/2, newCenter.y - dim.y/2);
 //   Log.e(tag, "newOffset: "+newOffset.toString());
-   if (validOffset(newOffset)) offset = newOffset;
+   if (validOffsetX(newOffset.getX())) offset.setX(newOffset.getX());
+   if (validOffsetY(newOffset.getY())) offset.setY(newOffset.getY());
 //   else    Log.e(tag, "Invalid offset, World Dimensions: " + worldDim.toString());
  }
 
@@ -81,6 +82,26 @@ public class ViewPort {
  public static Coordinate getCenter()
  {
    return new Coordinate(offset.x+dim.x/2, offset.y + dim.y/2);
+ }
+ 
+ public static boolean validOffsetX(int x)
+ {
+   return validWorldX(x) && validWorldX(x + dim.getX());
+ }
+ 
+ public static boolean validOffsetY(int y)
+ {
+   return validWorldY(y) && validWorldY(y + dim.getY());   
+ }
+ 
+ public static boolean validWorldX(int x)
+ {
+   return (x > 0) && (x < worldDim.getX());
+ }
+ 
+ public static boolean validWorldY(int y)
+ {
+   return (y > 0) && (y < worldDim.getY());
  }
  
  public static boolean validOffset(Coordinate c)
