@@ -68,6 +68,20 @@ public class Asteroid extends GameObject
 	  }
 	}
 	
+	@Override
+	public void touch(Projectile p)
+	{
+	 Log.e(tag, "HIT BY LASER");
+	 removeFromGame();
+	}
+	
+	@Override 
+	public void touch(SpaceShip s)
+	{
+	 Log.e(tag, "HIT SPACESHIP");
+	 removeFromGame();
+	}
+	
 	public void initDimension()
 	{
 	 this.dim = type.image.getDimensions();

@@ -1,5 +1,5 @@
 package edu.byu.cs.superasteroids.model;
-import java.util.ArrayList;
+import java.util.*;
 import org.json.*;
 import edu.byu.cs.superasteroids.game.InputManager;
 import android.util.Log;
@@ -131,7 +131,7 @@ public void update(double elapsedTime)
    if (InputManager.firePressed) 
    {
      if (lastFired > coolDown) {
-       playFireSound();
+//       playFireSound();
        fireProjectile();
        lastFired = 0.0;
        Log.e(tag, "Firing ");
@@ -150,7 +150,7 @@ public void update(double elapsedTime)
 
  public void purge()
  {
-   for (Iterator<Projectile> it = projectiles.iterator(); it.hasNext())
+   for (Iterator<Projectile> it = projectiles.iterator(); it.hasNext();)
    {
      Projectile p = it.next();
      if (p.deleted)

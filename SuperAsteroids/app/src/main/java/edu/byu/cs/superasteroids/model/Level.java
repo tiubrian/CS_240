@@ -1,5 +1,5 @@
 package edu.byu.cs.superasteroids.model;
-import java.util.ArrayList;
+import java.util.*;
 import org.json.*;
 import android.util.Log;
 
@@ -105,7 +105,7 @@ public class Level {
 
 	public void purge()
 	{
-	  for (Iterator<Asteroid> it = asteroids.iterator(); it.hasNext())
+	  for (Iterator<Asteroid> it = asteroids.iterator(); it.hasNext();)
 	  {
 	    Asteroid a = it.next();
 	    if (a.deleted)
@@ -123,6 +123,11 @@ public class Level {
 	  {
 	    asteroids.get(i).initRandom();
 	  }
+	}
+	
+	public ArrayList<Asteroid> getAsteroids()
+	{
+	  return this.asteroids;
 	}
 	
 	public void addAsteroids(AsteroidType type, int number)

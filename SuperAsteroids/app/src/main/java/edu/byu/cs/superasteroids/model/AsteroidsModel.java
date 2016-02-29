@@ -60,7 +60,10 @@ public class AsteroidsModel
 	  return levels.get(currentLevelNum);
 	}
 
-	
+	public ArrayList<Asteroid> getAsteroids()
+	{
+	  return getCurrentLevel().getAsteroids();
+        }
 	
 	public void draw()
 	{

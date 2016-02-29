@@ -1,7 +1,7 @@
 package edu.byu.cs.superasteroids.model;
 import edu.byu.cs.superasteroids.model.ViewPort.Wall;
 import android.util.Log;
-
+import java.util.*;
 
 /**
  * The laser thing that blows up asteroids.
@@ -45,8 +45,33 @@ public class Projectile extends GameObject {
     {
       super.update(elapsedTime);
       state.update(elapsedTime);
+      
+      checkAsteroidCollision();
     }
 
+  public void checkAsteroidCollision()
+  {
+    Iterator<Asteroid> it = AsteroidsModel.getInstance().getAsteroids().iterator();
+    
+    while (it.hasNext())
+    {
+      Asteroid a = it.next();
+      if (collidesWith(a)) {
+	a.touch(this);
+	this.touch(a);
+	Log.e(tag, "Collided with Asteroid!");
+      }
+    }
+  }
+
+  @Override
+  public void touch(Asteroid a)
+  {
+    Log.e(tag,"I GOT ONE!!!!");
+    removeFromGame();
+  }
+
+  
     @Override
     public int getImageId()
     {

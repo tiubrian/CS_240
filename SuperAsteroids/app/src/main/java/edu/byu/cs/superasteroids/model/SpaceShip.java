@@ -4,7 +4,7 @@ import edu.byu.cs.superasteroids.game.InputManager;
 import edu.byu.cs.superasteroids.model.ViewPort.Wall;
 import android.graphics.PointF;
 import android.util.Log;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * The spaceship that meshes all of the parts.
@@ -190,8 +190,25 @@ public class SpaceShip extends GameObject {
       cannon.update(elapsedTime);
       state.update(elapsedTime);
       ViewPort.setCenter(getCenter());
+      checkAsteroidCollision();
     }
 
+    public void checkAsteroidCollision()
+    {
+      Iterator<Asteroid> it = AsteroidsModel.getInstance().getAsteroids().iterator();
+      
+      while (it.hasNext())
+      {
+	Asteroid a = it.next();
+	if (collidesWith(a)) {
+	  a.touch(this);
+	  this.touch(a);
+	  Log.e(tag, "Collided with Asteroid!");
+	}
+      }
+    }
+    
+    
     public void onWallCollision(Wall wall)
     {
       Log.e(tag, " collided with wall "+ViewPort.wallToString(wall));

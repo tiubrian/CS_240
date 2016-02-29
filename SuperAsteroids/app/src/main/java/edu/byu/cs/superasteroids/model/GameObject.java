@@ -43,7 +43,27 @@ abstract class GameObject {
    deleted = true;
   }
   
+  /**
+  * Functions to simluate collision behavior. By default they do nothing.
+  * The touch function should only modify the object, not the argument.
+  */
+  
+  public void touch(Projectile p)
+  {
+   
+  }
 
+  public void touch(SpaceShip s)
+  {
+   
+  }
+ 
+  public void touch(Asteroid a)
+  {
+   
+  }
+
+  
   /**
   * Get the corners of the object, in world coordinates.
   */
@@ -114,7 +134,7 @@ abstract class GameObject {
     checkWallCollision();
   }
   
-  public boolean collidesWith(BoundedObject other)
+  public boolean collidesWith(GameObject other)
   {
     int i;
     ArrayList<Coordinate> other_corners = other.getCorners();
@@ -137,8 +157,8 @@ abstract class GameObject {
     Coordinate off = Coordinate.subtract(point, getCenter());
     // The idea is that the unrotated corners live in 
     off.rotate(-this.theta);
-    if ((off.x > dim.x/2) || (off.x < - dim.x / 2)) return false;
-    if ((off.y > dim.y/2) || (off.y < - dim.y / 2)) return false;
+    if ((off.x > scale*dim.x/2) || (off.x < - scale*dim.x / 2)) return false;
+    if ((off.y > scale*dim.y/2) || (off.y < - scale*dim.y / 2)) return false;
     return true;
   }
   
