@@ -17,6 +17,8 @@ public class ViewPort {
  public static Coordinate dim;
  public static Coordinate worldDim;
  public static int backgroundImageId;
+ //make the starfield bigger
+ public static float viewscale = (float)2.;
  /**
  * The coordinate of the upper left corner of the viewport, in world coordinates.
  */
@@ -139,8 +141,8 @@ public class ViewPort {
    Log.e(tag, "Got bitmap.");
    Coordinate imDim = new Coordinate(image.getWidth(), image.getHeight());
    Log.e(tag, "Got Dimensions of Background Image: "+imDim.toString());
-   xscale = (float)imDim.x/worldDim.x;
-   yscale = (float)imDim.y/worldDim.y;
+   xscale = viewscale*(float)imDim.x/worldDim.x;
+   yscale = viewscale*(float)imDim.y/worldDim.y;
  }
  
  /**

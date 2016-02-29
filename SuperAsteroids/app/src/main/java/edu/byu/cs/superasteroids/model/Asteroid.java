@@ -26,8 +26,8 @@ public class Asteroid extends GameObject
 	
 	public void initRandom()
 	{
-//	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
-          state.setPos(new Coordinate(1750,1500));
+	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
+//          state.setPos(new Coordinate(1750,1500));
 	  Log.e(tag, "supposedly Random initial position "+ state.getPos().toString());
 	  state.randomDirection(initSpeed);
 	  Log.e(tag, "Asteroid is Moving with dx = "+Float.toString(state.dx)+" dy="+Float.toString(state.dy));
@@ -79,7 +79,7 @@ public class Asteroid extends GameObject
 	public void touch(SpaceShip s)
 	{
 	 Log.e(tag, "HIT SPACESHIP");
-	 removeFromGame();
+//	 removeFromGame();
 	}
 	
 	public void initDimension()

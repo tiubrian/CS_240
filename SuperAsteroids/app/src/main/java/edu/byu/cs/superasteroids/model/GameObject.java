@@ -92,7 +92,9 @@ abstract class GameObject {
     
     for (int i = 0; i < corners.size(); i++)
     {
+      corners.get(i).subtractFromSelf(center);
       corners.get(i).rescale(scale);
+      corners.get(i).addToSelf(center);
     }
     return corners;
   }

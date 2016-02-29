@@ -13,7 +13,7 @@ public class Projectile extends GameObject {
     int index;
     Cannon cannon;
     public final static String tag = "superasteroidsprojectile";
-    public static float initSpeed = (float)10.0;
+    public static float initSpeed = (float)30.0;
     public static float initScale = (float).2;
     
     public Projectile(Cannon cannon)
@@ -32,6 +32,18 @@ public class Projectile extends GameObject {
 
     public void onWallCollision(Wall w)
     {
+      Log.e(tag, "Hit wall "+ViewPort.wallToString(w));
+      ArrayList<Coordinate> corners = getUnrotatedCorners();
+      for (int i = 0; i < corners.size(); i++)
+      {
+        Log.e(tag, "Corner: "+corners.get(i).toString());
+      }
+      ArrayList<Coordinate> rcorners = getCorners();
+      for (int i = 0; i < rcorners.size(); i++)
+      {
+        Log.e(tag, "rCorner: "+rcorners.get(i).toString());
+      }
+
       this.removeFromGame();
     }
     
