@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * The spaceship that meshes all of the parts.
  */
-public class SpaceShip extends BoundedObject {
+public class SpaceShip extends GameObject {
     public MainBody body;
     public Engine engine;
     public ExtraPart extra_part;

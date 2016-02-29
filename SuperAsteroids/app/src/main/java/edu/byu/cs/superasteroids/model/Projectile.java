@@ -7,13 +7,14 @@ import android.util.Log;
  * The laser thing that blows up asteroids.
  * This class is responisble for much of the fun in the project.
  */
-public class Projectile extends BoundedObject {
+public class Projectile extends GameObject {
 
     GameImage image;
     int index;
     Cannon cannon;
     public final static String tag = "superasteroidsprojectile";
-    public static float initSpeed = (float)10.0; 
+    public static float initSpeed = (float)10.0;
+    public static float initScale = (float).2;
     
     public Projectile(Cannon cannon)
     {
@@ -21,7 +22,7 @@ public class Projectile extends BoundedObject {
       this.state = new MovingState();
       this.image = cannon.attackImage;
       this.index = cannon.projectiles.size();
-      this.scale = (float).2;
+      this.scale = initScale;
       SpaceShip ship = AsteroidsModel.getInstance().ship;
       state.setPos(cannon.getWorldEmitPoint());
       Log.e(tag, "cannon Emit Point: "+ cannon.getWorldEmitPoint().toString());
@@ -29,11 +30,6 @@ public class Projectile extends BoundedObject {
       this.theta = ship.theta;
     }
 
-    public void removeFromGame()
-    {
-      cannon.projectiles.remove(this.index);
-    }
-    
     public void onWallCollision(Wall w)
     {
       this.removeFromGame();

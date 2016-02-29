@@ -128,23 +128,39 @@ public class Cannon  extends AttachablePart {
 public void update(double elapsedTime)
  {
    lastFired += elapsedTime;
-   Log.e(tag, "Updating cannon with "+Double.toString(elapsedTime));
    if (InputManager.firePressed) 
    {
      if (lastFired > coolDown) {
        playFireSound();
        fireProjectile();
        lastFired = 0.0;
+       Log.e(tag, "Firing ");
      }
      
      Log.e(tag, " Fire Pressed");
    }
+   
    for (int i = 0; i < projectiles.size(); i++)
    {
      projectiles.get(i).update(elapsedTime);
    }
+   
+   purge();
  }
 
+ public void purge()
+ {
+   for (Iterator<Projectile> it = projectiles.iterator(); it.hasNext())
+   {
+     Projectile p = it.next();
+     if (p.deleted)
+     {
+       Log.e(tag, "deleting projectile ");
+       it.remove();
+     }
+   }
+ }
+ 
  public void draw()
  {
    for (int i = 0; i < projectiles.size(); i++)

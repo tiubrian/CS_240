@@ -7,7 +7,7 @@ import android.util.Log;
  * An Asteroid -- the mortal enemy of our spaceship
  * Has an AsteroidType with info , and probably will have other information in the future.
  */
-public class Asteroid extends BoundedObject
+public class Asteroid extends GameObject
 {
         public static float initSpeed = (float)10.0;
 	public AsteroidType type;

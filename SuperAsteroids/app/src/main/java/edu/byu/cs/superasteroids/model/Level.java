@@ -98,9 +98,25 @@ public class Level {
 	  for (i = 0; i < asteroids.size(); i++)
 	  {
 	    asteroids.get(i).draw();
-	  }	  
+	  }
+	  
+	  purge();
 	}
 
+	public void purge()
+	{
+	  for (Iterator<Asteroid> it = asteroids.iterator(); it.hasNext())
+	  {
+	    Asteroid a = it.next();
+	    if (a.deleted)
+	    {
+	      Log.e(tag, "deleting asteroid ");
+	      it.remove();
+	    }
+	  }
+	}
+
+	
 	public void initAsteroidStates()
 	{
 	  for (int i = 0; i < asteroids.size(); i++)
