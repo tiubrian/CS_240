@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import edu.byu.cs.superasteroids.drawing.DrawingHelper;
@@ -28,6 +29,7 @@ public class AsteroidsModel
 	public int currentLevelNum;
         public GameActivity activity;
         public boolean level_init;
+        public static int safeZoneDim = 200;
 
 	
 	public static ContentManager manager = ContentManager.getInstance();
@@ -150,7 +152,9 @@ public class AsteroidsModel
 	
 	public void draw_status()
 	{
-//	  DrawingHelper.drawText("Level "+Integer.toString(currentLevelNum));
+	  Log.e(tag, "drawing status");
+	  DrawingHelper.drawText(new Point(30,30), "Level "+Integer.toString(currentLevelNum+1)
+	   + " Lives " + Integer.toString(ship.getLives()), Color.GREEN, (float)30.);
 	}
 	
 	public void update(double elapsedTime)

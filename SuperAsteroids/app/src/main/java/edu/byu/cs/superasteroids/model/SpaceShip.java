@@ -15,6 +15,10 @@ public class SpaceShip extends GameObject {
     public ExtraPart extra_part;
     public PowerCore power_core;
     public Cannon cannon;
+    public static int defaultLives = 100;
+    public int lives;
+    public double lastCollision;
+    public static double safeTime = 5.;
     public final static String tag = "superasteroidsship";
     public static float builder_rotation = (float)0.0;
     public static float builder_xscale = (float).5;
@@ -36,9 +40,15 @@ public class SpaceShip extends GameObject {
       cannon = null;
       state = new MovingState();
       scale = (float)0.5/ViewPort.viewscale;
+      lives = defaultLives;
+      lastCollision = safeTime + 1.;
 //      Log.e(tag, "Created state" + state.getPos().toString());
     }
     
+    public int getLives()
+    {
+      return lives;
+    }
     
     public void setBody(MainBody body)
     {
@@ -162,6 +172,7 @@ public class SpaceShip extends GameObject {
 //      drawShip(getViewCenter(), (float)45., default_xscale, default_yscale);
       //so we can draw the projectiles
       cannon.draw();
+      draw_corners();
     }
 
     public static float speedScale = (float).1;
@@ -176,7 +187,7 @@ public class SpaceShip extends GameObject {
         Coordinate movePoint = ViewPort.toWorld(new Coordinate(InputManager.movePoint));
         Log.e(tag, "center: "+ getCenter().toString() + " movePoint: "+movePoint.toString());
         Coordinate direction = Coordinate.subtract(movePoint, getCenter());
-        this.theta = 90 + direction.getAngle(); //hack
+        this.setTheta(90 + direction.getAngle()); //hack
         float norm = direction.norm();
         state.dx = direction.x*getSpeed()/norm;
         state.dy = direction.y*getSpeed()/norm;
@@ -190,7 +201,9 @@ public class SpaceShip extends GameObject {
       cannon.update(elapsedTime);
       state.update(elapsedTime);
       ViewPort.setCenter(getCenter());
-      checkAsteroidCollision();
+      
+      lastCollision += elapsedTime;
+      if (lastCollision > safeTime) checkAsteroidCollision();
     }
 
     public void checkAsteroidCollision()
@@ -204,10 +217,17 @@ public class SpaceShip extends GameObject {
 	  a.touch(this);
 	  this.touch(a);
 	  Log.e(tag, "Collided with Asteroid!");
+	  lastCollision = 0.;
 	}
       }
     }
     
+    @Override
+    public void touch (Asteroid a)
+    {
+      lives--;
+      Log.e(tag, "Collided with asteroid, lives = "+Integer.toString(lives));
+    }
     
     public void onWallCollision(Wall wall)
     {

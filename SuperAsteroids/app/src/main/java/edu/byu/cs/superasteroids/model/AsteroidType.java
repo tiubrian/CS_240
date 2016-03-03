@@ -41,12 +41,12 @@ public class AsteroidType {
  public void update(double elapsedTime, Asteroid ast)
  {
   //do stuff here
-  if (type.equals("growing")) {ast.scale = grow(ast.scale); Log.e(tag, "growing the asteroid");}
+  if (type.equals("growing")) {ast.setScale(grow(ast.scale)); Log.e(tag, "growing the asteroid");}
  }
 
  public float grow(float scale)
  {
-  if (scale < (float)2.) scale += (float).005;
+  if (scale < (float)2.) scale += (float).001;
   return scale;
  }
  

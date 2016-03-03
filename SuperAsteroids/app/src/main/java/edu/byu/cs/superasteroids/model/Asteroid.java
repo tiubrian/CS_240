@@ -29,9 +29,18 @@ public class Asteroid extends GameObject
 	  this.splits = 1;
 	}
 	
-	public void initRandom()
+	public void randomPos()
 	{
 	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
+	}
+	
+	public void initRandom()
+	{
+	  Coordinate shipCenter = AsteroidsModel.getShip().getCenter();
+	  randomPos();
+	  while (Coordinate.sup_dist(shipCenter, getCenter()) < AsteroidsModel.safeZoneDim) {
+	    randomPos();
+	  }
 //          state.setPos(new Coordinate(1750,1500));
 	  Log.e(tag, "supposedly Random initial position "+ state.getPos().toString());
 	  setRandomDirection();
@@ -130,6 +139,20 @@ public class Asteroid extends GameObject
 	  super.draw();
 	  Log.e(tag, "drawing Asteroid at location "+getCenter().toString() + " view"+getViewCenter().toString());
 	}
+	
+	  @Override
+	  public float getXImageScale()
+	  {
+	    return type.image.getXScale();
+	  }
+	  
+	  @Override
+	  public float getYImageScale()
+	  {
+	    return type.image.getYScale();
+	  }
+
+	
 	
 	@Override
 	public int getImageId()

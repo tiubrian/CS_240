@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.Color;
 import android.util.Log;
 import java.util.ArrayList;
 
@@ -65,6 +66,11 @@ abstract class GameObject {
    
   }
 
+  public void setScale(float nscale)
+  {
+    scale = nscale;
+    computeCornerOffsets();
+  }
   
   public void setTheta(float theta)
   {
@@ -76,6 +82,7 @@ abstract class GameObject {
   {
     corner_offsets = new ArrayList<Coordinate>();
     initDimension();
+    dim.rescale(ViewPort.viewscale);
     corner_offsets.add(new Coordinate(- dim.x/2, - dim.y/2));
     corner_offsets.add(new Coordinate(dim.x/2, - dim.y/2));
     corner_offsets.add(new Coordinate(dim.x/2, dim.y/2));
@@ -206,6 +213,16 @@ abstract class GameObject {
     return -1;
   }
   
+  public float getXImageScale()
+  {
+    return (float)1.;
+  }
+  
+  public float getYImageScale()
+  {
+    return (float)1.;
+  }
+  
   public static final int alpha = 255;
   
   public void draw()
@@ -214,7 +231,21 @@ abstract class GameObject {
     Log.e(tag, "Drawing Asteroid with Center "+view_center.toString() +
     " id "+Integer.toString(getImageId()));
     DrawingHelper.drawImage(getImageId(), (float)view_center.x, (float)view_center.y,
-      theta, scale, scale, alpha);
+      theta, scale*getXImageScale(), scale*getYImageScale() , alpha);
+//    draw_corners();
+  }
+  
+  public void draw_corners()
+  {
+    ArrayList<Coordinate> corners = getCorners();
+    for (int i = 0; i < corners.size(); i++)
+    {
+      DrawingHelper.drawPoint(ViewPort.fromWorld(corners.get(i)).toPointF(), (float)10.,
+      Color.RED, 255);
+    }
+    DrawingHelper.drawPoint(ViewPort.fromWorld(getCenter()).toPointF(), (float)5.,
+    Color.GREEN, 255);
+
   }
   
 }

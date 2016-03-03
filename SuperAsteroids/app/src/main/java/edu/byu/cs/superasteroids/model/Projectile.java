@@ -83,6 +83,19 @@ public class Projectile extends GameObject {
     {
       return image.getImageId();
     }
+
+  @Override
+  public float getXImageScale()
+  {
+    return image.getXScale();
+  }
+  
+  @Override
+  public float getYImageScale()
+  {
+    return image.getYScale();
+  }
+   
     
     @Override
     public void draw()

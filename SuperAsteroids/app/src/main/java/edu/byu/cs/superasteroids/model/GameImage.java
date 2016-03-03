@@ -1,6 +1,7 @@
 package edu.byu.cs.superasteroids.model;
 import edu.byu.cs.superasteroids.content.ContentManager;
 import android.util.Log;
+import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ public class GameImage
  private int height;
  private int width;
  private int id;
+ private float xscale;
+ private float yscale;
  public static final String tag = "superasteroidsGameImage";
 
  public String toString()
@@ -67,6 +70,8 @@ public class GameImage
  public GameImage()
  {
   id = -2;
+  xscale = (float)1.;
+  yscale = (float)1.;
  }
 
  public GameImage(String imagefile)
@@ -77,6 +82,18 @@ public class GameImage
   height = 0;
  }
 
+ 
+ public float getXScale()
+ {
+   if (id <0) getImageId();
+   return xscale;
+ }
+ 
+ public float getYScale()
+ {
+   if (id <0) getImageId();
+   return yscale;
+ }
  
  public GameImage(String imagefile, int imageWidth, int imageHeight)
  {
@@ -92,6 +109,9 @@ public class GameImage
   {
     id = ContentManager.getInstance().loadImage(name);
     Log.e(tag, "Gave ContentManager "+name+" got "+Integer.toString(id));
+    Bitmap b = ContentManager.getInstance().getImage(getImageId());
+    xscale = width / (float)b.getWidth();
+    yscale = height / (float)b.getHeight();    
     return id;
   }
   else return id;

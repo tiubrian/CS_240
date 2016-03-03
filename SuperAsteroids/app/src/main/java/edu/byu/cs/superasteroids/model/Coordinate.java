@@ -29,6 +29,12 @@ public class Coordinate {
    this(p.x, p.y);
  }
  
+ //distance under the L-infinity norm
+ public static int sup_dist(Coordinate a, Coordinate b)
+ {
+  return Math.max(Math.abs(a.x-b.x), Math.abs(a.y-b.y));
+ }
+ 
  public Coordinate(String s)
  {
    String[] res = s.split(",");

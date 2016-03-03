@@ -23,5 +23,35 @@ public abstract class AttachablePart extends SpaceshipPart
    if (body != null) this.setAttach(body);
  }
  
+ @Override
+ public int maxX()
+ {
+  Coordinate offset = getOffset();
+  return offset.getX() + image.getWidth() / 2;
+ }
+
+ @Override 
+ public int maxY()
+ {
+  Coordinate offset = getOffset();
+  return offset.getY() + image.getHeight() / 2;
+ }
+ 
+ @Override
+ public int minX()
+ {
+  Coordinate offset = getOffset();
+  return offset.getX() - image.getWidth() / 2;
+ }
+ 
+ @Override
+ public int minY()
+ {
+  Coordinate offset = getOffset();
+  return offset.getY() - image.getHeight() / 2;
+ }
+ 
+
+ 
  public abstract void setAttach(MainBody body);
 }
