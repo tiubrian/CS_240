@@ -172,7 +172,7 @@ public class SpaceShip extends GameObject {
 //      drawShip(getViewCenter(), (float)45., default_xscale, default_yscale);
       //so we can draw the projectiles
       cannon.draw();
-      draw_corners();
+//      draw_corners();
     }
 
     public static float speedScale = (float).1;
