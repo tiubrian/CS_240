@@ -1136,25 +1136,25 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_background edu.byu.cs.superasteroids:background}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundSplit edu.byu.cs.superasteroids:backgroundSplit}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundStacked edu.byu.cs.superasteroids:backgroundStacked}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_customNavigationLayout edu.byu.cs.superasteroids:customNavigationLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_displayOptions edu.byu.cs.superasteroids:displayOptions}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_divider edu.byu.cs.superasteroids:divider}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_height edu.byu.cs.superasteroids:height}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_homeLayout edu.byu.cs.superasteroids:homeLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_icon edu.byu.cs.superasteroids:icon}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle edu.byu.cs.superasteroids:indeterminateProgressStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_itemPadding edu.byu.cs.superasteroids:itemPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_logo edu.byu.cs.superasteroids:logo}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_navigationMode edu.byu.cs.superasteroids:navigationMode}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarPadding edu.byu.cs.superasteroids:progressBarPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarStyle edu.byu.cs.superasteroids:progressBarStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_subtitle edu.byu.cs.superasteroids:subtitle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_subtitleTextStyle edu.byu.cs.superasteroids:subtitleTextStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_title edu.byu.cs.superasteroids:title}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_titleTextStyle edu.byu.cs.superasteroids:titleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_background edu.byu.cs.superasteroidsn:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundSplit edu.byu.cs.superasteroidsn:backgroundSplit}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundStacked edu.byu.cs.superasteroidsn:backgroundStacked}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_customNavigationLayout edu.byu.cs.superasteroidsn:customNavigationLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_displayOptions edu.byu.cs.superasteroidsn:displayOptions}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_divider edu.byu.cs.superasteroidsn:divider}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_height edu.byu.cs.superasteroidsn:height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_homeLayout edu.byu.cs.superasteroidsn:homeLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_icon edu.byu.cs.superasteroidsn:icon}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle edu.byu.cs.superasteroidsn:indeterminateProgressStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_itemPadding edu.byu.cs.superasteroidsn:itemPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_logo edu.byu.cs.superasteroidsn:logo}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_navigationMode edu.byu.cs.superasteroidsn:navigationMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarPadding edu.byu.cs.superasteroidsn:progressBarPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarStyle edu.byu.cs.superasteroidsn:progressBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_subtitle edu.byu.cs.superasteroidsn:subtitle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_subtitleTextStyle edu.byu.cs.superasteroidsn:subtitleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_title edu.byu.cs.superasteroidsn:title}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_titleTextStyle edu.byu.cs.superasteroidsn:titleTextStyle}</code></td><td></td></tr>
            </table>
            @see #ActionBar_background
            @see #ActionBar_backgroundSplit
@@ -1184,17 +1184,17 @@ containing a value of this type.
             0x7f01004d, 0x7f01004e, 0x7f01004f
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#background}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#background}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:background
+          @attr name edu.byu.cs.superasteroidsn:background
         */
         public static final int ActionBar_background = 10;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#backgroundSplit}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1202,11 +1202,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name edu.byu.cs.superasteroids:backgroundSplit
+          @attr name edu.byu.cs.superasteroidsn:backgroundSplit
         */
         public static final int ActionBar_backgroundSplit = 12;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#backgroundStacked}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#backgroundStacked}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1214,21 +1214,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name edu.byu.cs.superasteroids:backgroundStacked
+          @attr name edu.byu.cs.superasteroidsn:backgroundStacked
         */
         public static final int ActionBar_backgroundStacked = 11;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#customNavigationLayout}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#customNavigationLayout}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:customNavigationLayout
+          @attr name edu.byu.cs.superasteroidsn:customNavigationLayout
         */
         public static final int ActionBar_customNavigationLayout = 13;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#displayOptions}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#displayOptions}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1245,21 +1245,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>showCustom</code></td><td>0x10</td><td></td></tr>
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
-          @attr name edu.byu.cs.superasteroids:displayOptions
+          @attr name edu.byu.cs.superasteroidsn:displayOptions
         */
         public static final int ActionBar_displayOptions = 3;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#divider}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#divider}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:divider
+          @attr name edu.byu.cs.superasteroidsn:divider
         */
         public static final int ActionBar_divider = 9;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#height}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#height}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1271,41 +1271,41 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:height
+          @attr name edu.byu.cs.superasteroidsn:height
         */
         public static final int ActionBar_height = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#homeLayout}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#homeLayout}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:homeLayout
+          @attr name edu.byu.cs.superasteroidsn:homeLayout
         */
         public static final int ActionBar_homeLayout = 14;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#icon}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#icon}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:icon
+          @attr name edu.byu.cs.superasteroidsn:icon
         */
         public static final int ActionBar_icon = 7;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#indeterminateProgressStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#indeterminateProgressStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:indeterminateProgressStyle
+          @attr name edu.byu.cs.superasteroidsn:indeterminateProgressStyle
         */
         public static final int ActionBar_indeterminateProgressStyle = 16;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#itemPadding}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#itemPadding}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1317,21 +1317,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:itemPadding
+          @attr name edu.byu.cs.superasteroidsn:itemPadding
         */
         public static final int ActionBar_itemPadding = 18;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#logo}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#logo}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:logo
+          @attr name edu.byu.cs.superasteroidsn:logo
         */
         public static final int ActionBar_logo = 8;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#navigationMode}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#navigationMode}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1345,11 +1345,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>listMode</code></td><td>1</td><td></td></tr>
 <tr><td><code>tabMode</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name edu.byu.cs.superasteroids:navigationMode
+          @attr name edu.byu.cs.superasteroidsn:navigationMode
         */
         public static final int ActionBar_navigationMode = 2;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#progressBarPadding}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#progressBarPadding}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1361,21 +1361,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:progressBarPadding
+          @attr name edu.byu.cs.superasteroidsn:progressBarPadding
         */
         public static final int ActionBar_progressBarPadding = 17;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#progressBarStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#progressBarStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:progressBarStyle
+          @attr name edu.byu.cs.superasteroidsn:progressBarStyle
         */
         public static final int ActionBar_progressBarStyle = 15;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#subtitle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#subtitle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1385,21 +1385,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:subtitle
+          @attr name edu.byu.cs.superasteroidsn:subtitle
         */
         public static final int ActionBar_subtitle = 4;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#subtitleTextStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:subtitleTextStyle
+          @attr name edu.byu.cs.superasteroidsn:subtitleTextStyle
         */
         public static final int ActionBar_subtitleTextStyle = 6;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#title}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#title}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -1409,17 +1409,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:title
+          @attr name edu.byu.cs.superasteroidsn:title
         */
         public static final int ActionBar_title = 1;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#titleTextStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:titleTextStyle
+          @attr name edu.byu.cs.superasteroidsn:titleTextStyle
         */
         public static final int ActionBar_titleTextStyle = 5;
         /** Attributes that can be used with a ActionBarLayout.
@@ -1447,13 +1447,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowActionBar edu.byu.cs.superasteroids:windowActionBar}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowActionBarOverlay edu.byu.cs.superasteroids:windowActionBarOverlay}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMajor edu.byu.cs.superasteroids:windowFixedHeightMajor}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMinor edu.byu.cs.superasteroids:windowFixedHeightMinor}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMajor edu.byu.cs.superasteroids:windowFixedWidthMajor}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMinor edu.byu.cs.superasteroids:windowFixedWidthMinor}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBarWindow_windowSplitActionBar edu.byu.cs.superasteroids:windowSplitActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowActionBar edu.byu.cs.superasteroidsn:windowActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowActionBarOverlay edu.byu.cs.superasteroidsn:windowActionBarOverlay}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMajor edu.byu.cs.superasteroidsn:windowFixedHeightMajor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowFixedHeightMinor edu.byu.cs.superasteroidsn:windowFixedHeightMinor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMajor edu.byu.cs.superasteroidsn:windowFixedWidthMajor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowFixedWidthMinor edu.byu.cs.superasteroidsn:windowFixedWidthMinor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBarWindow_windowSplitActionBar edu.byu.cs.superasteroidsn:windowSplitActionBar}</code></td><td></td></tr>
            </table>
            @see #ActionBarWindow_windowActionBar
            @see #ActionBarWindow_windowActionBarOverlay
@@ -1468,7 +1468,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f010054, 0x7f010055, 0x7f010056
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowActionBar}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1478,11 +1478,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowActionBar
+          @attr name edu.byu.cs.superasteroidsn:windowActionBar
         */
         public static final int ActionBarWindow_windowActionBar = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowActionBarOverlay}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowActionBarOverlay}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1492,11 +1492,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowActionBarOverlay
+          @attr name edu.byu.cs.superasteroidsn:windowActionBarOverlay
         */
         public static final int ActionBarWindow_windowActionBarOverlay = 1;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowFixedHeightMajor}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowFixedHeightMajor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1511,11 +1511,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowFixedHeightMajor
+          @attr name edu.byu.cs.superasteroidsn:windowFixedHeightMajor
         */
         public static final int ActionBarWindow_windowFixedHeightMajor = 6;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowFixedHeightMinor}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowFixedHeightMinor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1530,11 +1530,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowFixedHeightMinor
+          @attr name edu.byu.cs.superasteroidsn:windowFixedHeightMinor
         */
         public static final int ActionBarWindow_windowFixedHeightMinor = 4;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowFixedWidthMajor}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowFixedWidthMajor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1549,11 +1549,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowFixedWidthMajor
+          @attr name edu.byu.cs.superasteroidsn:windowFixedWidthMajor
         */
         public static final int ActionBarWindow_windowFixedWidthMajor = 3;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowFixedWidthMinor}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowFixedWidthMinor}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1568,11 +1568,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowFixedWidthMinor
+          @attr name edu.byu.cs.superasteroidsn:windowFixedWidthMinor
         */
         public static final int ActionBarWindow_windowFixedWidthMinor = 5;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#windowSplitActionBar}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#windowSplitActionBar}
           attribute's value can be found in the {@link #ActionBarWindow} array.
 
 
@@ -1582,7 +1582,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:windowSplitActionBar
+          @attr name edu.byu.cs.superasteroidsn:windowSplitActionBar
         */
         public static final int ActionBarWindow_windowSplitActionBar = 2;
         /** Attributes that can be used with a ActionMenuItemView.
@@ -1615,11 +1615,11 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionMode_background edu.byu.cs.superasteroids:background}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_backgroundSplit edu.byu.cs.superasteroids:backgroundSplit}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_height edu.byu.cs.superasteroids:height}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_subtitleTextStyle edu.byu.cs.superasteroids:subtitleTextStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_titleTextStyle edu.byu.cs.superasteroids:titleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_background edu.byu.cs.superasteroidsn:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_backgroundSplit edu.byu.cs.superasteroidsn:backgroundSplit}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_height edu.byu.cs.superasteroidsn:height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_subtitleTextStyle edu.byu.cs.superasteroidsn:subtitleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_titleTextStyle edu.byu.cs.superasteroidsn:titleTextStyle}</code></td><td></td></tr>
            </table>
            @see #ActionMode_background
            @see #ActionMode_backgroundSplit
@@ -1632,17 +1632,17 @@ containing a value of this type.
             0x7f010049
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#background}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#background}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:background
+          @attr name edu.byu.cs.superasteroidsn:background
         */
         public static final int ActionMode_background = 3;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#backgroundSplit}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
@@ -1650,11 +1650,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name edu.byu.cs.superasteroids:backgroundSplit
+          @attr name edu.byu.cs.superasteroidsn:backgroundSplit
         */
         public static final int ActionMode_backgroundSplit = 4;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#height}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#height}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
@@ -1666,27 +1666,27 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:height
+          @attr name edu.byu.cs.superasteroidsn:height
         */
         public static final int ActionMode_height = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#subtitleTextStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:subtitleTextStyle
+          @attr name edu.byu.cs.superasteroidsn:subtitleTextStyle
         */
         public static final int ActionMode_subtitleTextStyle = 2;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#titleTextStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:titleTextStyle
+          @attr name edu.byu.cs.superasteroidsn:titleTextStyle
         */
         public static final int ActionMode_titleTextStyle = 1;
         /** Attributes that can be used with a ActivityChooserView.
@@ -1695,8 +1695,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable edu.byu.cs.superasteroids:expandActivityOverflowButtonDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActivityChooserView_initialActivityCount edu.byu.cs.superasteroids:initialActivityCount}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable edu.byu.cs.superasteroidsn:expandActivityOverflowButtonDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActivityChooserView_initialActivityCount edu.byu.cs.superasteroidsn:initialActivityCount}</code></td><td></td></tr>
            </table>
            @see #ActivityChooserView_expandActivityOverflowButtonDrawable
            @see #ActivityChooserView_initialActivityCount
@@ -1705,17 +1705,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f010057, 0x7f010058
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#expandActivityOverflowButtonDrawable}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#expandActivityOverflowButtonDrawable}
           attribute's value can be found in the {@link #ActivityChooserView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:expandActivityOverflowButtonDrawable
+          @attr name edu.byu.cs.superasteroidsn:expandActivityOverflowButtonDrawable
         */
         public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#initialActivityCount}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#initialActivityCount}
           attribute's value can be found in the {@link #ActivityChooserView} array.
 
 
@@ -1725,7 +1725,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:initialActivityCount
+          @attr name edu.byu.cs.superasteroidsn:initialActivityCount
         */
         public static final int ActivityChooserView_initialActivityCount = 0;
         /** Attributes that can be used with a CompatTextView.
@@ -1734,7 +1734,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CompatTextView_textAllCaps edu.byu.cs.superasteroids:textAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #CompatTextView_textAllCaps edu.byu.cs.superasteroidsn:textAllCaps}</code></td><td></td></tr>
            </table>
            @see #CompatTextView_textAllCaps
          */
@@ -1742,14 +1742,14 @@ containing a value of this type.
             0x7f010059
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#textAllCaps}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#textAllCaps}
           attribute's value can be found in the {@link #CompatTextView} array.
 
 
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
-          @attr name edu.byu.cs.superasteroids:textAllCaps
+          @attr name edu.byu.cs.superasteroidsn:textAllCaps
         */
         public static final int CompatTextView_textAllCaps = 0;
         /** Attributes that can be used with a LinearLayoutICS.
@@ -1758,9 +1758,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LinearLayoutICS_divider edu.byu.cs.superasteroids:divider}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayoutICS_dividerPadding edu.byu.cs.superasteroids:dividerPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayoutICS_showDividers edu.byu.cs.superasteroids:showDividers}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_divider edu.byu.cs.superasteroidsn:divider}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_dividerPadding edu.byu.cs.superasteroidsn:dividerPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutICS_showDividers edu.byu.cs.superasteroidsn:showDividers}</code></td><td></td></tr>
            </table>
            @see #LinearLayoutICS_divider
            @see #LinearLayoutICS_dividerPadding
@@ -1770,17 +1770,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f010046, 0x7f01005a, 0x7f01005b
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#divider}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#divider}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:divider
+          @attr name edu.byu.cs.superasteroidsn:divider
         */
         public static final int LinearLayoutICS_divider = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#dividerPadding}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#dividerPadding}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
 
 
@@ -1792,11 +1792,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:dividerPadding
+          @attr name edu.byu.cs.superasteroidsn:dividerPadding
         */
         public static final int LinearLayoutICS_dividerPadding = 2;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#showDividers}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#showDividers}
           attribute's value can be found in the {@link #LinearLayoutICS} array.
 
 
@@ -1811,7 +1811,7 @@ containing a value of this type.
 <tr><td><code>middle</code></td><td>2</td><td></td></tr>
 <tr><td><code>end</code></td><td>4</td><td></td></tr>
 </table>
-          @attr name edu.byu.cs.superasteroids:showDividers
+          @attr name edu.byu.cs.superasteroidsn:showDividers
         */
         public static final int LinearLayoutICS_showDividers = 1;
         /** Attributes that can be used with a MenuGroup.
@@ -1880,9 +1880,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #MenuItem_actionLayout edu.byu.cs.superasteroids:actionLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuItem_actionProviderClass edu.byu.cs.superasteroids:actionProviderClass}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuItem_actionViewClass edu.byu.cs.superasteroids:actionViewClass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_actionLayout edu.byu.cs.superasteroidsn:actionLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_actionProviderClass edu.byu.cs.superasteroidsn:actionProviderClass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_actionViewClass edu.byu.cs.superasteroidsn:actionViewClass}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_checkable android:checkable}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_checked android:checked}</code></td><td></td></tr>
@@ -1896,7 +1896,7 @@ containing a value of this type.
            <tr><td><code>{@link #MenuItem_android_title android:title}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_titleCondensed android:titleCondensed}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_visible android:visible}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuItem_showAsAction edu.byu.cs.superasteroids:showAsAction}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_showAsAction edu.byu.cs.superasteroidsn:showAsAction}</code></td><td></td></tr>
            </table>
            @see #MenuItem_actionLayout
            @see #MenuItem_actionProviderClass
@@ -1924,17 +1924,17 @@ containing a value of this type.
             0x7f01005f
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#actionLayout}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#actionLayout}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:actionLayout
+          @attr name edu.byu.cs.superasteroidsn:actionLayout
         */
         public static final int MenuItem_actionLayout = 14;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#actionProviderClass}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#actionProviderClass}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
@@ -1944,11 +1944,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:actionProviderClass
+          @attr name edu.byu.cs.superasteroidsn:actionProviderClass
         */
         public static final int MenuItem_actionProviderClass = 16;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#actionViewClass}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#actionViewClass}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
@@ -1958,7 +1958,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:actionViewClass
+          @attr name edu.byu.cs.superasteroidsn:actionViewClass
         */
         public static final int MenuItem_actionViewClass = 15;
         /**
@@ -2040,7 +2040,7 @@ containing a value of this type.
         */
         public static final int MenuItem_android_visible = 4;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#showAsAction}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#showAsAction}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
@@ -2056,7 +2056,7 @@ containing a value of this type.
 <tr><td><code>withText</code></td><td>4</td><td></td></tr>
 <tr><td><code>collapseActionView</code></td><td>8</td><td></td></tr>
 </table>
-          @attr name edu.byu.cs.superasteroids:showAsAction
+          @attr name edu.byu.cs.superasteroidsn:showAsAction
         */
         public static final int MenuItem_showAsAction = 13;
         /** Attributes that can be used with a MenuView.
@@ -2144,8 +2144,8 @@ containing a value of this type.
            <tr><td><code>{@link #SearchView_android_imeOptions android:imeOptions}</code></td><td></td></tr>
            <tr><td><code>{@link #SearchView_android_inputType android:inputType}</code></td><td></td></tr>
            <tr><td><code>{@link #SearchView_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_iconifiedByDefault edu.byu.cs.superasteroids:iconifiedByDefault}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_queryHint edu.byu.cs.superasteroids:queryHint}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_iconifiedByDefault edu.byu.cs.superasteroidsn:iconifiedByDefault}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_queryHint edu.byu.cs.superasteroidsn:queryHint}</code></td><td></td></tr>
            </table>
            @see #SearchView_android_imeOptions
            @see #SearchView_android_inputType
@@ -2176,7 +2176,7 @@ containing a value of this type.
         */
         public static final int SearchView_android_maxWidth = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#iconifiedByDefault}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#iconifiedByDefault}
           attribute's value can be found in the {@link #SearchView} array.
 
 
@@ -2186,11 +2186,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:iconifiedByDefault
+          @attr name edu.byu.cs.superasteroidsn:iconifiedByDefault
         */
         public static final int SearchView_iconifiedByDefault = 3;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#queryHint}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#queryHint}
           attribute's value can be found in the {@link #SearchView} array.
 
 
@@ -2200,7 +2200,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:queryHint
+          @attr name edu.byu.cs.superasteroidsn:queryHint
         */
         public static final int SearchView_queryHint = 4;
         /** Attributes that can be used with a Spinner.
@@ -2215,10 +2215,10 @@ containing a value of this type.
            <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_android_gravity android:gravity}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled edu.byu.cs.superasteroids:disableChildrenWhenDisabled}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_popupPromptView edu.byu.cs.superasteroids:popupPromptView}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_prompt edu.byu.cs.superasteroids:prompt}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_spinnerMode edu.byu.cs.superasteroids:spinnerMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled edu.byu.cs.superasteroidsn:disableChildrenWhenDisabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_popupPromptView edu.byu.cs.superasteroidsn:popupPromptView}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_prompt edu.byu.cs.superasteroidsn:prompt}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_spinnerMode edu.byu.cs.superasteroidsn:spinnerMode}</code></td><td></td></tr>
            </table>
            @see #Spinner_android_dropDownHorizontalOffset
            @see #Spinner_android_dropDownSelector
@@ -2273,7 +2273,7 @@ containing a value of this type.
         */
         public static final int Spinner_android_popupBackground = 2;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#disableChildrenWhenDisabled}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#disableChildrenWhenDisabled}
           attribute's value can be found in the {@link #Spinner} array.
 
 
@@ -2283,31 +2283,31 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:disableChildrenWhenDisabled
+          @attr name edu.byu.cs.superasteroidsn:disableChildrenWhenDisabled
         */
         public static final int Spinner_disableChildrenWhenDisabled = 9;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#popupPromptView}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#popupPromptView}
           attribute's value can be found in the {@link #Spinner} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:popupPromptView
+          @attr name edu.byu.cs.superasteroidsn:popupPromptView
         */
         public static final int Spinner_popupPromptView = 8;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#prompt}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#prompt}
           attribute's value can be found in the {@link #Spinner} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:prompt
+          @attr name edu.byu.cs.superasteroidsn:prompt
         */
         public static final int Spinner_prompt = 6;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#spinnerMode}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#spinnerMode}
           attribute's value can be found in the {@link #Spinner} array.
 
 
@@ -2320,7 +2320,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>dialog</code></td><td>0</td><td></td></tr>
 <tr><td><code>dropdown</code></td><td>1</td><td></td></tr>
 </table>
-          @attr name edu.byu.cs.superasteroids:spinnerMode
+          @attr name edu.byu.cs.superasteroidsn:spinnerMode
         */
         public static final int Spinner_spinnerMode = 7;
         /** Attributes that can be used with a Theme.
@@ -2329,12 +2329,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Theme_actionDropDownStyle edu.byu.cs.superasteroids:actionDropDownStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight edu.byu.cs.superasteroids:dropdownListPreferredItemHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator edu.byu.cs.superasteroids:listChoiceBackgroundIndicator}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListTheme edu.byu.cs.superasteroids:panelMenuListTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListWidth edu.byu.cs.superasteroids:panelMenuListWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_popupMenuStyle edu.byu.cs.superasteroids:popupMenuStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionDropDownStyle edu.byu.cs.superasteroidsn:actionDropDownStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight edu.byu.cs.superasteroidsn:dropdownListPreferredItemHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator edu.byu.cs.superasteroidsn:listChoiceBackgroundIndicator}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListTheme edu.byu.cs.superasteroidsn:panelMenuListTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListWidth edu.byu.cs.superasteroidsn:panelMenuListWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_popupMenuStyle edu.byu.cs.superasteroidsn:popupMenuStyle}</code></td><td></td></tr>
            </table>
            @see #Theme_actionDropDownStyle
            @see #Theme_dropdownListPreferredItemHeight
@@ -2348,17 +2348,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f01006a, 0x7f01006b
         };
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#actionDropDownStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#actionDropDownStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:actionDropDownStyle
+          @attr name edu.byu.cs.superasteroidsn:actionDropDownStyle
         */
         public static final int Theme_actionDropDownStyle = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#dropdownListPreferredItemHeight}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#dropdownListPreferredItemHeight}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -2370,31 +2370,31 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:dropdownListPreferredItemHeight
+          @attr name edu.byu.cs.superasteroidsn:dropdownListPreferredItemHeight
         */
         public static final int Theme_dropdownListPreferredItemHeight = 1;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#listChoiceBackgroundIndicator}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#listChoiceBackgroundIndicator}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:listChoiceBackgroundIndicator
+          @attr name edu.byu.cs.superasteroidsn:listChoiceBackgroundIndicator
         */
         public static final int Theme_listChoiceBackgroundIndicator = 5;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#panelMenuListTheme}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#panelMenuListTheme}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:panelMenuListTheme
+          @attr name edu.byu.cs.superasteroidsn:panelMenuListTheme
         */
         public static final int Theme_panelMenuListTheme = 4;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#panelMenuListWidth}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#panelMenuListWidth}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -2406,17 +2406,17 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:panelMenuListWidth
+          @attr name edu.byu.cs.superasteroidsn:panelMenuListWidth
         */
         public static final int Theme_panelMenuListWidth = 3;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#popupMenuStyle}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#popupMenuStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.byu.cs.superasteroids:popupMenuStyle
+          @attr name edu.byu.cs.superasteroidsn:popupMenuStyle
         */
         public static final int Theme_popupMenuStyle = 2;
         /** Attributes that can be used with a View.
@@ -2426,8 +2426,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #View_android_focusable android:focusable}</code></td><td></td></tr>
-           <tr><td><code>{@link #View_paddingEnd edu.byu.cs.superasteroids:paddingEnd}</code></td><td></td></tr>
-           <tr><td><code>{@link #View_paddingStart edu.byu.cs.superasteroids:paddingStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #View_paddingEnd edu.byu.cs.superasteroidsn:paddingEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #View_paddingStart edu.byu.cs.superasteroidsn:paddingStart}</code></td><td></td></tr>
            </table>
            @see #View_android_focusable
            @see #View_paddingEnd
@@ -2443,7 +2443,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         */
         public static final int View_android_focusable = 0;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#paddingEnd}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#paddingEnd}
           attribute's value can be found in the {@link #View} array.
 
 
@@ -2455,11 +2455,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:paddingEnd
+          @attr name edu.byu.cs.superasteroidsn:paddingEnd
         */
         public static final int View_paddingEnd = 2;
         /**
-          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroids.R.attr#paddingStart}
+          <p>This symbol is the offset where the {@link edu.byu.cs.superasteroidsn.R.attr#paddingStart}
           attribute's value can be found in the {@link #View} array.
 
 
@@ -2471,7 +2471,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.byu.cs.superasteroids:paddingStart
+          @attr name edu.byu.cs.superasteroidsn:paddingStart
         */
         public static final int View_paddingStart = 1;
     };

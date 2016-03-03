@@ -1,5 +1,6 @@
 package edu.byu.cs.superasteroids.model;
 import org.json.*;
+import android.util.Log;
 
 /**
  * An asteroidType. Used to model different types of asteroids, without resorting to inheritance.
@@ -9,6 +10,7 @@ public class AsteroidType {
  public String type;
  public GameImage image;
  public int id;
+ public static final String tag = "superasteroidsasttype";
 
   public AsteroidType()
   {
@@ -39,13 +41,29 @@ public class AsteroidType {
  public void update(double elapsedTime, Asteroid ast)
  {
   //do stuff here
+  if (type.equals("growing")) {ast.scale = grow(ast.scale); Log.e(tag, "growing the asteroid");}
  }
 
+ public float grow(float scale)
+ {
+  if (scale < (float)2.) scale += (float).005;
+  return scale;
+ }
+ 
  public void draw()
  {
 
  }
 
+ public int getSplits()
+ {
+   Log.e(tag, "Asteroid Type "+type);
+   if (type.equals("octeroid")) Log.e(tag, "type octeroid");
+   else Log.e(tag, "Type is not octeroid. Type is "+type);
+   if (type.equals("octeroid")) return 8;
+   else return 2;
+ }
+ 
  public String getImageName() {
   return image.getName();
  }

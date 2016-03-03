@@ -63,23 +63,33 @@ public class ViewPort {
  
  public static Coordinate fromWorld(Coordinate coord)
  {
-   return Coordinate.subtract(coord, offset); 
+   Coordinate res = Coordinate.subtract(coord, offset);
+   res.rescale((float)1./viewscale); 
+   return res;
  }
  
  public static Coordinate toWorld(Coordinate coord)
  {
-   return Coordinate.add(offset, coord);
+   Log.e(tag, "view to world input "+coord.toString()+"offset "+offset.toString());
+   Coordinate res = coord.scale(viewscale, viewscale);
+   Log.e(tag, "scaled vtw input "+res.toString());
+   res = Coordinate.add(offset, res);
+   Log.e(tag, "result "+res.toString());
+   return res;
  }
  
  public static void setCenter(Coordinate newCenter)
  {
+   Log.e(tag, "Center "+newCenter.toString());
    Coordinate newOffset = new Coordinate(newCenter.x -  dim.x/2, newCenter.y - dim.y/2);
-//   Log.e(tag, "newOffset: "+newOffset.toString());
+   Log.e(tag, "newOffset: "+newOffset.toString());
+   Log.e(tag, "Current offset: "+offset.toString());
    if (validOffsetX(newOffset.getX())) offset.setX(newOffset.getX());
    if (validOffsetY(newOffset.getY())) offset.setY(newOffset.getY());
 //   else    Log.e(tag, "Invalid offset, World Dimensions: " + worldDim.toString());
  }
 
+ 
  
  public static Coordinate getCenter()
  {
@@ -124,7 +134,10 @@ public class ViewPort {
  {
    dim = new Coordinate(DrawingHelper.getGameViewWidth(),
     DrawingHelper.getGameViewHeight());
+   dim.rescale(viewscale); 
+    
    worldDim = new Coordinate(newx, newy);
+   
    setCenter(worldDim.scale((float).5, (float).5)); //start at center of world
 //   Log.e(tag, "World Dimensions: " + worldDim.toString());
  }
@@ -141,8 +154,8 @@ public class ViewPort {
    Log.e(tag, "Got bitmap.");
    Coordinate imDim = new Coordinate(image.getWidth(), image.getHeight());
    Log.e(tag, "Got Dimensions of Background Image: "+imDim.toString());
-   xscale = viewscale*(float)imDim.x/worldDim.x;
-   yscale = viewscale*(float)imDim.y/worldDim.y;
+   xscale = (float)imDim.x/worldDim.x;
+   yscale = (float)imDim.y/worldDim.y;
  }
  
  /**

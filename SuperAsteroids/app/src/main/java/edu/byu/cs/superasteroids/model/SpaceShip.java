@@ -35,7 +35,7 @@ public class SpaceShip extends GameObject {
       power_core = null;
       cannon = null;
       state = new MovingState();
-      scale = (float)0.5*ViewPort.viewscale;
+      scale = (float)0.5/ViewPort.viewscale;
 //      Log.e(tag, "Created state" + state.getPos().toString());
     }
     

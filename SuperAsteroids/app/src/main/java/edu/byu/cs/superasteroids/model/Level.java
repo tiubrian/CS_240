@@ -36,11 +36,13 @@ public class Level {
 
 	public ArrayList<Asteroid> asteroids;
 	public ArrayList<BackgroundObject> background_objects;
+	public ArrayList<Asteroid> queue;
 
 	public Level()
 	{
 		asteroids = new ArrayList<Asteroid>();
 		background_objects = new ArrayList<BackgroundObject>();
+		queue = new ArrayList<Asteroid>();
 	}
 
 	public Level(JSONObject obj) throws JSONException {
@@ -83,7 +85,13 @@ public class Level {
 	  for (i = 0; i < asteroids.size(); i++)
 	  {
 	    asteroids.get(i).update(elapsedTime);
-	  }	  
+	  }
+	  
+	  for (i=0; i < queue.size(); i++)
+	  {
+	    asteroids.add(queue.get(i));
+	  }
+	  queue.clear();
 	}
 
 	public void draw()
@@ -139,6 +147,16 @@ public class Level {
 	    Asteroid a = new Asteroid(type);
 	    asteroids.add(a);
 	  }
+	}
+
+	public void addAsteroid(Asteroid a)
+	{
+	  asteroids.add(a);
+	}
+	
+	public void scheduleAsteroid(Asteroid a)
+	{
+	  queue.add(a);
 	}
 
 	public void addBackgroundObject(BackgroundObject obj)

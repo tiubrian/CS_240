@@ -24,6 +24,7 @@ abstract class GameObject {
   Coordinate dim;
   boolean deleted;
   public final static String tag = "superasteroidsbounded";
+  private ArrayList<Coordinate> corner_offsets;
   
   
   public GameObject()
@@ -32,6 +33,7 @@ abstract class GameObject {
    dim = null;
    scale = (float)1.;
    deleted = false;
+   corner_offsets = null;
   }
   
   public abstract void onWallCollision(Wall w);
@@ -64,22 +66,52 @@ abstract class GameObject {
   }
 
   
+  public void setTheta(float theta)
+  {
+    this.theta = theta;
+    computeCornerOffsets();
+  }
+  
+  public void computeCornerOffsets()
+  {
+    corner_offsets = new ArrayList<Coordinate>();
+    initDimension();
+    corner_offsets.add(new Coordinate(- dim.x/2, - dim.y/2));
+    corner_offsets.add(new Coordinate(dim.x/2, - dim.y/2));
+    corner_offsets.add(new Coordinate(dim.x/2, dim.y/2));
+    corner_offsets.add(new Coordinate( - dim.x/2, dim.y/2));
+    
+    for (int i = 0; i < corner_offsets.size(); i++)
+    {
+      corner_offsets.get(i).rescale(scale);
+      corner_offsets.get(i).rotate(theta - 90);
+    }
+
+  }
+  
+  public void getCornerOffsets()
+  {
+    if (corner_offsets == null) computeCornerOffsets();
+  }
+  
   /**
   * Get the corners of the object, in world coordinates.
   */
   public ArrayList<Coordinate> getCorners()
   {
-    ArrayList<Coordinate> corners = getUnrotatedCorners();
+    ArrayList<Coordinate> corners = new ArrayList<Coordinate>();
+    getCornerOffsets();
     Coordinate center = getCenter();
 
-    for (int i = 0; i < corners.size(); i++)
+    for (int i = 0; i < corner_offsets.size(); i++)
     {
-      //Becuase of android's insistence on clockwise rotation
-      corners.get(i).rotateAboutAnchor(theta, center);
+      corners.add(Coordinate.add(center, corner_offsets.get(i)));
     }
     
     return corners;
   }
+  
+  
   
   public ArrayList<Coordinate> getUnrotatedCorners()
   {
@@ -97,6 +129,11 @@ abstract class GameObject {
       corners.get(i).addToSelf(center);
     }
     return corners;
+  }
+  
+  public void setCenter(Coordinate pos)
+  {
+    state.setPos(pos);
   }
   
   public void checkWallCollision()
@@ -158,7 +195,7 @@ abstract class GameObject {
     if (dim == null) initDimension();
     Coordinate off = Coordinate.subtract(point, getCenter());
     // The idea is that the unrotated corners live in 
-    off.rotate(-this.theta);
+    off.rotate(-(this.theta-90));
     if ((off.x > scale*dim.x/2) || (off.x < - scale*dim.x / 2)) return false;
     if ((off.y > scale*dim.y/2) || (off.y < - scale*dim.y / 2)) return false;
     return true;

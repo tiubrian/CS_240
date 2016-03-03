@@ -10,8 +10,11 @@ import android.util.Log;
 public class Asteroid extends GameObject
 {
         public static float initSpeed = (float)10.0;
+        public static int defaultHealth = 4;
 	public AsteroidType type;
 	public final static String tag = "superasteroidsasteroid";
+	public int splits;
+	public int health;
 	public Asteroid()
 	{
 	  super();
@@ -22,6 +25,8 @@ public class Asteroid extends GameObject
 	{
   	  this();
 	  this.type = type;
+	  this.health = defaultHealth;
+	  this.splits = 1;
 	}
 	
 	public void initRandom()
@@ -29,8 +34,13 @@ public class Asteroid extends GameObject
 	  state.setPos((int)(Math.random()*ViewPort.worldDim.x), (int)(Math.random()*ViewPort.worldDim.y));
 //          state.setPos(new Coordinate(1750,1500));
 	  Log.e(tag, "supposedly Random initial position "+ state.getPos().toString());
-	  state.randomDirection(initSpeed);
+	  setRandomDirection();
 	  Log.e(tag, "Asteroid is Moving with dx = "+Float.toString(state.dx)+" dy="+Float.toString(state.dy));
+	}
+	
+	public void setRandomDirection()
+	{
+	  state.randomDirection(initSpeed);	 
 	}
 	
 	@Override
@@ -68,18 +78,45 @@ public class Asteroid extends GameObject
 	  }
 	}
 	
+	
+	public void decrementHealth(int damage)
+	{
+	  this.health -= damage;
+	  if (this.health <= 0) {
+	   if (this.splits <= 0) removeFromGame();
+	   else {
+	     this.splits--;
+	     int pieces = type.getSplits();
+	     Log.e(tag, "pieces "+Integer.toString(pieces));
+	     for (int i = 0; i < pieces; i++)
+	     {
+	       Asteroid a = new Asteroid(this.type);
+	       a.setCenter(this.getCenter());
+	       a.splits = this.splits;
+	       a.health = defaultHealth/2;
+	       a.setRandomDirection();
+	       a.scale = this.scale/pieces;
+	       Log.e(tag, "On pieces "+Integer.toString(i));
+	       AsteroidsModel.getInstance().getCurrentLevel().scheduleAsteroid(a);
+	     }
+	     removeFromGame();
+	   }
+	 }	
+	}
+
+	
 	@Override
 	public void touch(Projectile p)
 	{
 	 Log.e(tag, "HIT BY LASER");
-	 removeFromGame();
+	 decrementHealth(p.getDamage());
 	}
 	
 	@Override 
 	public void touch(SpaceShip s)
 	{
 	 Log.e(tag, "HIT SPACESHIP");
-//	 removeFromGame();
+	 decrementHealth(1);
 	}
 	
 	public void initDimension()

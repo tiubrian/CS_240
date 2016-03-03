@@ -4,13 +4,19 @@ import edu.byu.cs.superasteroids.content.ContentManager;
 import android.database.sqlite.*;
 import android.content.Context;
 import android.util.Log;
-
+import android.widget.Toast;
+import android.graphics.Color;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import edu.byu.cs.superasteroids.drawing.DrawingHelper;
 import java.util.ArrayList;
-
+import edu.byu.cs.superasteroids.game.GameActivity;
 
 public class AsteroidsModel
 {
 	private static AsteroidsModel singleton = null;
+	public static Coordinate minimapDim = new Coordinate(150, 150);
+	public static Coordinate minimapOff = new Coordinate(650, 10);
 	public ArrayList<Cannon>  cannons;
 	public ArrayList<ExtraPart> extra_parts;
 	public ArrayList<MainBody> main_bodies;
@@ -20,6 +26,8 @@ public class AsteroidsModel
 	public Level level;
 	public SpaceShip ship;
 	public int currentLevelNum;
+        public GameActivity activity;
+        public boolean level_init;
 
 	
 	public static ContentManager manager = ContentManager.getInstance();
@@ -36,13 +44,21 @@ public class AsteroidsModel
 	{
 	  ship = new SpaceShip();
 	  currentLevelNum = -1;
+	  activity = null;
+	  level_init = false;
 	}
 	
+	
+	public void setActivity(GameActivity activity)
+	{
+	  Log.e(tag, "setting activity");
+	  this.activity = activity;
+	}
 	
 	public void initLevel(int levelInd)
 	{
 	  Log.e(tag, "Initiliazing level");
-	  if (levelInd >= levels.size()) return; //TODO: game over now
+	  if (levelInd >= levels.size()) {endGame(); return;} //TODO: game over now
 	  level = levels.get(levelInd);
 	  ViewPort.setWorldDimensions((float)level.width, (float)level.height);
 	  Log.e(tag, "Set World Dimensions");
@@ -53,6 +69,25 @@ public class AsteroidsModel
 	  // create asteroids with random velocities and positions
 	  level.initAsteroidStates();
 	  currentLevelNum = levelInd;
+	  Log.e(tag,"New level num "+currentLevelNum);
+	  level_init = true;
+	  try {
+	   activity.runOnUiThread(new Runnable() {
+	     public void run()
+	     {
+	       Toast.makeText(activity.getApplicationContext(), level.hint, Toast.LENGTH_LONG).show();
+	     }
+	    });
+	  }
+	  catch (Exception e)
+	  {
+	    Log.e(tag, e.toString() + " ex");
+	  }
+	}
+	
+	public void endGame()
+	{
+	  Log.e(tag, "game over");
 	}
 	
 	public Level getCurrentLevel()
@@ -65,17 +100,70 @@ public class AsteroidsModel
 	  return getCurrentLevel().getAsteroids();
         }
 	
+	public Coordinate getMinimapDimension()
+	{
+	  return minimapDim;
+	}
+	
+	public Coordinate getMinimapOffset()
+	{
+	  return minimapOff;
+	}
+	
+	public PointF worldToMiniMap(Coordinate center)
+	{
+	  Coordinate offset = getMinimapOffset();
+	  Coordinate dim = getMinimapDimension();
+	  Coordinate wdim = ViewPort.worldDim;
+	  Coordinate res = Coordinate.add(offset, center.scale(dim.x * ((float)1./wdim.x), dim.y*((float)1./wdim.y)));
+	  return res.toPointF();
+	}
+	
+	public static float minimapPSize = (float)4.;
+	
+	public void draw_minimap()
+	{
+	  ArrayList<Asteroid> asts = getAsteroids();
+	  Coordinate offset = getMinimapOffset();
+	  Coordinate dim = getMinimapDimension();
+	  Rect r = new Rect(offset.x, offset.y, offset.x+dim.x, offset.y+dim.y);
+	  DrawingHelper.drawRectangle(r, Color.RED, 255);
+	  
+	  for (int i = 0; i < asts.size(); i++)
+	  {
+	    DrawingHelper.drawPoint(worldToMiniMap(asts.get(i).getCenter()), 
+	      minimapPSize, Color.GREEN, 255);
+	  }
+	  
+	  DrawingHelper.drawPoint(worldToMiniMap(ship.getCenter()),
+	  minimapPSize, Color.BLUE, 255);
+	}
+	
 	public void draw()
 	{
 	  ViewPort.drawBackground();
 	  level.draw();
 	  ship.draw();
+	  draw_status();
+	  draw_minimap();
+	}
+	
+	public void draw_status()
+	{
+//	  DrawingHelper.drawText("Level "+Integer.toString(currentLevelNum));
 	}
 	
 	public void update(double elapsedTime)
 	{
 	  level.update(elapsedTime);
 	  ship.update(elapsedTime);
+	  Log.e(tag, "level " +Integer.toString(currentLevelNum) +
+	    " number of asteroids "+Integer.toString(level.asteroids.size()));
+	  if (level.asteroids.size() == 0)
+	  {
+	    Log.e(tag, "Moving from level "+Integer.toString(currentLevelNum));
+	    initLevel(currentLevelNum+1);
+	  }
 	}
 	
 	public static SpaceShip getShip()

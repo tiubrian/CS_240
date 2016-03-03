@@ -10,7 +10,7 @@ import java.util.*;
 public class Projectile extends GameObject {
 
     GameImage image;
-    int index;
+    public int damage;
     Cannon cannon;
     public final static String tag = "superasteroidsprojectile";
     public static float initSpeed = (float)30.0;
@@ -21,29 +21,23 @@ public class Projectile extends GameObject {
       this.cannon = cannon;
       this.state = new MovingState();
       this.image = cannon.attackImage;
-      this.index = cannon.projectiles.size();
       this.scale = initScale;
+      this.damage = cannon.damage;
       SpaceShip ship = AsteroidsModel.getInstance().ship;
       state.setPos(cannon.getWorldEmitPoint());
       Log.e(tag, "cannon Emit Point: "+ cannon.getWorldEmitPoint().toString());
       state.setPolar(ship.theta-90, initSpeed);
-      this.theta = ship.theta;
+      this.setTheta(ship.theta);
     }
 
+    public int getDamage()
+    {
+      return damage;
+    }
+    
     public void onWallCollision(Wall w)
     {
       Log.e(tag, "Hit wall "+ViewPort.wallToString(w));
-      ArrayList<Coordinate> corners = getUnrotatedCorners();
-      for (int i = 0; i < corners.size(); i++)
-      {
-        Log.e(tag, "Corner: "+corners.get(i).toString());
-      }
-      ArrayList<Coordinate> rcorners = getCorners();
-      for (int i = 0; i < rcorners.size(); i++)
-      {
-        Log.e(tag, "rCorner: "+rcorners.get(i).toString());
-      }
-
       this.removeFromGame();
     }
     

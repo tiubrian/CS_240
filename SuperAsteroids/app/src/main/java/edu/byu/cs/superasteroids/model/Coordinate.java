@@ -58,6 +58,12 @@ public class Coordinate {
    this.y += other.y;
  }
  
+ public PointF toPointF()
+ {
+   return new PointF((float)x, (float)y);
+ }
+ 
+ 
  public Coordinate scale(float xscale, float yscale)
  {
   return new Coordinate(x*xscale, y*yscale);
@@ -68,6 +74,7 @@ public class Coordinate {
    x = (int)(scale*x);
    y = (int)(scale*y);
  }
+ 
  
  public Coordinate increment(Coordinate other)
  {

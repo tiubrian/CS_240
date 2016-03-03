@@ -30,6 +30,7 @@ public class GameController implements IController, IGameDelegate {
     {
 	    Log.e(tag,"Called loadcontent");
 	    model = AsteroidsModel.getInstance();
+	    model.setActivity(activity);
 	    Log.e(tag,"created asteroids model.");
     }
 
