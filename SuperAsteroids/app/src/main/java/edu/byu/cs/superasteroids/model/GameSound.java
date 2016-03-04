@@ -36,9 +36,27 @@ public class GameSound {
     }
   }
   
+  public void load()
+  {
+    getId();
+  }
+  
   public void play()
   {
+    Log.e(tag, "Playing sound "+name);
     ContentManager.getInstance().playSound(getId(), volume, speed);
   }
   
+  public void playLoop()
+  {
+    Log.e(tag, "Playing Loop");
+    play();
+    play();
+    //ContentManager.getInstance().playLoop(getId());
+  }
+  
+  public void pause()
+  {
+    ContentManager.getInstance().pauseLoop(getId());
+  }
 }

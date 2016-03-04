@@ -33,6 +33,8 @@ public class Level {
 	 * A list of asteroids.
 	 */
 	public String title;
+	
+	public GameSound music;
 
 	public ArrayList<Asteroid> asteroids;
 	public ArrayList<BackgroundObject> background_objects;
@@ -43,6 +45,7 @@ public class Level {
 		asteroids = new ArrayList<Asteroid>();
 		background_objects = new ArrayList<BackgroundObject>();
 		queue = new ArrayList<Asteroid>();
+		music = null;
 	}
 
 	public Level(JSONObject obj) throws JSONException {
@@ -73,6 +76,22 @@ public class Level {
 		return res.toString();
 	}
 
+	public void initMusic()
+	{
+ 	  if (music == null) music = new GameSound(musicFile);	
+	}
+	
+	public void load()
+	{
+	  initMusic();
+       	  music.load();
+	}
+	
+	public void pauseMusic()
+	{
+	  initMusic();
+	  music.pause();
+	}
 	
 	public void update(double elapsedTime)
 	{
@@ -149,6 +168,12 @@ public class Level {
 	  }
 	}
 
+	public void playMusic()
+	{
+	  if (music == null) music = new GameSound(musicFile);
+	  music.playLoop();
+	}
+	
 	public void addAsteroid(Asteroid a)
 	{
 	  asteroids.add(a);

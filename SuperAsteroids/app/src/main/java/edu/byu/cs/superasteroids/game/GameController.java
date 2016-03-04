@@ -47,6 +47,8 @@ public class GameController implements IController, IGameDelegate {
     public void init()
     {
       model.initLevel(0);
+      model.ship.cannon.load();
+      model.level.load();
       is_init = true;
     }
     

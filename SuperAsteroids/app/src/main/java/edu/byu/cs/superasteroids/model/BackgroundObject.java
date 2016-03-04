@@ -20,7 +20,7 @@ public class BackgroundObject
 	{
 		this.image = image;
 		image_obj = new GameImage(image,0,0);
-		this.scale = scale;
+		this.scale = scale/ViewPort.viewscale;
 		this.position = position;
 	}
 	
@@ -28,7 +28,7 @@ public class BackgroundObject
 	{
 		this.image = image;
 		image_obj = new GameImage(image,0,0);
-		this.scale = scale;
+		this.scale = scale/ViewPort.viewscale;
 		this.position = new Coordinate(position);
 	}
 

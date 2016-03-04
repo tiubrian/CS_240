@@ -218,6 +218,7 @@ public class SpaceShip extends GameObject {
 	  this.touch(a);
 	  Log.e(tag, "Collided with Asteroid!");
 	  lastCollision = 0.;
+	  break;
 	}
       }
     }

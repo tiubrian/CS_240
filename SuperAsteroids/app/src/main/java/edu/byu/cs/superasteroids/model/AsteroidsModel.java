@@ -62,6 +62,7 @@ public class AsteroidsModel
 	  Log.e(tag, "Initiliazing level");
 	  if (levelInd >= levels.size()) {endGame(); return;} //TODO: game over now
 	  level = levels.get(levelInd);
+	  level.load();
 	  ViewPort.setWorldDimensions((float)level.width, (float)level.height);
 	  Log.e(tag, "Set World Dimensions");
 	  ViewPort.setBackground(backgroundImage.getImageId());
@@ -72,6 +73,7 @@ public class AsteroidsModel
 	  level.initAsteroidStates();
 	  currentLevelNum = levelInd;
 	  Log.e(tag,"New level num "+currentLevelNum);
+	  level.playMusic();
 	  level_init = true;
 	  try {
 	   activity.runOnUiThread(new Runnable() {
@@ -165,6 +167,7 @@ public class AsteroidsModel
 	    " number of asteroids "+Integer.toString(level.asteroids.size()));
 	  if (level.asteroids.size() == 0)
 	  {
+	    level.pauseMusic();
 	    Log.e(tag, "Moving from level "+Integer.toString(currentLevelNum));
 	    initLevel(currentLevelNum+1);
 	  }

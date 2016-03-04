@@ -108,6 +108,17 @@ public class Cannon  extends AttachablePart {
   this.bodyAttach = body.cannonAttach;
  }
 
+ public void initSound()
+ {
+   if (fireSound == null) fireSound = new GameSound(attackSound);
+ }
+ 
+ public void load()
+ {
+   initSound();
+   fireSound.load();
+ }
+ 
  public Coordinate getWorldEmitPoint()
  {
    SpaceShip ship = AsteroidsModel.getShip();
@@ -121,7 +132,7 @@ public class Cannon  extends AttachablePart {
  
  public void playFireSound()
  {
-   if (fireSound == null) fireSound = new GameSound(attackSound);
+   initSound();
    fireSound.play();
  }
 	
@@ -131,7 +142,7 @@ public void update(double elapsedTime)
    if (InputManager.firePressed) 
    {
      if (lastFired > coolDown) {
-//       playFireSound();
+       playFireSound();
        fireProjectile();
        lastFired = 0.0;
        Log.e(tag, "Firing ");
