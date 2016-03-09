@@ -19,7 +19,28 @@ public class PowerCore  extends SpaceshipPart {
 		image = new GameImage(obj.getString("image"), 0, 0);
 
 	}
- 
+
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+  if (!super.equals(o)) return false;
+
+  PowerCore powerCore = (PowerCore) o;
+
+  if (cannonBoost != powerCore.cannonBoost) return false;
+  return engineBoost == powerCore.engineBoost;
+
+ }
+
+ @Override
+ public int hashCode() {
+  int result = super.hashCode();
+  result = 31 * result + cannonBoost;
+  result = 31 * result + engineBoost;
+  return result;
+ }
+
  public String toString() {
 	StringBuilder res = new StringBuilder();
 	res.append(" cannonBoost: ");

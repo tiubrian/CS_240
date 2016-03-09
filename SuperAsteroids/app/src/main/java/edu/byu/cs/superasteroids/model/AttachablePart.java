@@ -7,6 +7,25 @@ public abstract class AttachablePart extends SpaceshipPart
  public MainBody body;
  public Coordinate bodyAttach;
 
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+  if (!super.equals(o)) return false;
+
+  AttachablePart that = (AttachablePart) o;
+
+  return attachPoint.equals(that.attachPoint);
+
+ }
+
+ @Override
+ public int hashCode() {
+  int result = super.hashCode();
+  result = 31 * result + attachPoint.hashCode();
+  return result;
+ }
+
  /**
  *Compute the offset from the center of the main body to the center of the part.
  */

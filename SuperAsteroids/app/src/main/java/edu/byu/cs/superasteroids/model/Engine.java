@@ -1,11 +1,13 @@
 package edu.byu.cs.superasteroids.model;
 import org.json.*;
+import android.util.Log;
 /**
  * The engine of the space ship. Has a lateral speed, turnrate, and image.
  */
 public class Engine extends AttachablePart {
  public int baseSpeed;
  public int baseTurnRate;
+ public static final String tag = "superasteroidsengine";
  /**
   * Describes where to attach the engine image to the main body of the ship.
   */
@@ -15,15 +17,36 @@ public class Engine extends AttachablePart {
  public Engine()
  {
  }
- 
+
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+  if (!super.equals(o)) {Log.e(tag, "super eq failed in engine"); return false;}
+
+  Engine engine = (Engine) o;
+
+  if (baseSpeed != engine.baseSpeed) return false;
+  return baseTurnRate == engine.baseTurnRate;
+
+ }
+
+ @Override
+ public int hashCode() {
+  int result = super.hashCode();
+  result = 31 * result + baseSpeed;
+  result = 31 * result + baseTurnRate;
+  return result;
+ }
+
  public Engine(JSONObject obj) throws JSONException
  {
 	 baseSpeed = Integer.parseInt(obj.getString("baseSpeed"));
 	 baseTurnRate = Integer.parseInt(obj.getString("baseTurnRate"));
 	 attachPoint = new Coordinate(obj.getString("attachPoint"));
 	 image = new GameImage(obj.getString("image"), 
-								Integer.parseInt(obj.getString("imageHeight")),
-								Integer.parseInt(obj.getString("imageWidth")) );
+								Integer.parseInt(obj.getString("imageWidth")),
+								Integer.parseInt(obj.getString("imageHeight")) );
 	 
  }
  

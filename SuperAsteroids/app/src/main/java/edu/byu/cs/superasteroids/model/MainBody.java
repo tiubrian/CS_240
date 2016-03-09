@@ -13,9 +13,33 @@ public class MainBody  extends SpaceshipPart {
   * Where to attach the engine.
   */
  public Coordinate engineAttach;
+
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+
+  MainBody mainBody = (MainBody) o;
+
+  if (!super.equals( (SpaceshipPart)o)) return false;
+  if (!cannonAttach.equals(mainBody.cannonAttach)) return false;
+  if (!engineAttach.equals(mainBody.engineAttach)) return false;
+  return extraAttach.equals(mainBody.extraAttach);
+
+ }
+
+ @Override
+ public int hashCode() {
+  int result = cannonAttach.hashCode();
+  result = 31 * result + engineAttach.hashCode();
+  result = 31 * result + extraAttach.hashCode();
+  return result;
+ }
+
  /**
   * Where to attach the extra part (AKA left wing).
   */
+
  public Coordinate extraAttach;
 //  public GameImage image;
 

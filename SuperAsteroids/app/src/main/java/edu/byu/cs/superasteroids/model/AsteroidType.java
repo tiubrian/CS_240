@@ -22,9 +22,31 @@ public class AsteroidType {
 					Integer.parseInt(obj.getString("imageWidth")),
 					Integer.parseInt(obj.getString("imageHeight")));
 		type = obj.getString("type");
-	} 
+	}
 
-	public String toString() {
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+
+  AsteroidType that = (AsteroidType) o;
+
+  if (!name.equals(that.name)) {Log.e(tag, " name eq failed"); return false;}
+  if (!type.equals(that.type)) {Log.e(tag, " type eq failed"); return false;}
+  Log.e(tag, "images "+image.equals(that.image));
+  return image.equals(that.image);
+
+ }
+
+ @Override
+ public int hashCode() {
+  int result = name != null ? name.hashCode() : 0;
+  result = 31 * result + (type != null ? type.hashCode() : 0);
+  result = 31 * result + (image != null ? image.hashCode() : 0);
+  return result;
+ }
+
+ public String toString() {
 		StringBuilder res = new StringBuilder();
 		res.append(" id: ");
 		res.append(id);

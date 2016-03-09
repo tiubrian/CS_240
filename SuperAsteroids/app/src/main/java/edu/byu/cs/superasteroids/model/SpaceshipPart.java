@@ -14,7 +14,8 @@ public abstract class SpaceshipPart
  {
    return image.getImageId();
  }
- 
+
+ public static final String tag = "superasteroidspart";
  
  /**
  * Return the minimum and maximum x and y values, relative to the center of the image.
@@ -39,5 +40,22 @@ public abstract class SpaceshipPart
  {
   return -image.getHeight() / 2;
  }
- 
+
+ @Override
+ public boolean equals(Object o) {
+  if (this == o) return true;
+  if (o == null || getClass() != o.getClass()) return false;
+
+  SpaceshipPart that = (SpaceshipPart) o;
+
+  Log.e(tag, " this image " +image.toString()+" other image "+that.image.toString());
+  if (!image.equals(that.image)) Log.e(tag, "images don't match");
+  return image.equals(that.image);
+
+ }
+
+ @Override
+ public int hashCode() {
+  return image.hashCode();
+ }
 }
