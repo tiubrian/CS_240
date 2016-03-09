@@ -35,7 +35,7 @@ public class GameImage
  
  public boolean equals(GameImage other)
  {
-	 return (name==other.getName()) && (height==other.getHeight()) && (width==other.getWidth());
+	 return (name.equals(other.getName())) && (height == other.getHeight()) && (width == other.getWidth());
  }
 
  

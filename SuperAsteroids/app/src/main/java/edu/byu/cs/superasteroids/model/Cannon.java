@@ -70,7 +70,7 @@ public class Cannon  extends AttachablePart {
 	public boolean equals(Cannon other)
 	{
 		return (damage==other.damage)
-			&& (attackSound==other.attackSound)
+			&& (attackSound.equals(other.attackSound))
 			&& (attackImage.equals(other.attackImage))
 			&& (image.equals(other.image))
 			&& (attachPoint.equals(other.attachPoint))

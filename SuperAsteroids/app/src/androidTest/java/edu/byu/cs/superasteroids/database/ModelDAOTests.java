@@ -9,6 +9,9 @@ import org.junit.*;
 import java.util.ArrayList;
 import android.util.Log;
 
+/**
+ * This class was written so I could learn how to write a Junit test case, and debug some of the equals methods of my model classes.
+ */
 public class ModelDAOTests extends AndroidTestCase {
 
 	public void testCannonInsert()
@@ -26,10 +29,19 @@ public class ModelDAOTests extends AndroidTestCase {
 		DAO.clearCannons();
 		DAO.addCannon(c);
 		ArrayList<Cannon> result = DAO.getCannons();
-		Log.e("superasteroidsfoo",c.toString());
-		Log.e("superasteroidsfoo",result.get(0).toString());
+		Log.e("superasteroidsfoo", c.toString());
+		Log.e("superasteroidsfoo", result.get(0).toString());
 		DAO.addCannon(result.get(0));
-		assertTrue(c.equals(result.get(0)));
+		Cannon o = result.get(0);
+		assertTrue(1 == 1);
+		assertTrue(c.toString()+"damage", c.damage == o.damage);
+		assertTrue(c.toString()+"aimage", c.attackImage.equals(o.attackImage));
+		assertTrue(c.toString()+"sound", c.attackSound.equals(o.attackSound));
+		assertTrue(c.toString()+"image", c.image.equals(o.image));
+		assertTrue(c.toString()+"emitpoint", c.emitPoint.equals(o.emitPoint));
+		assertTrue(c.toString()+"attach", c.attachPoint.equals(o.attachPoint));
+		assertTrue(result.get(0).toString(),c.equals(result.get(0)));
 		DAO.clearCannons();
 	}
+
 }
