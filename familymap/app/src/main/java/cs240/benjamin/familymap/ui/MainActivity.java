@@ -1,10 +1,12 @@
 package cs240.benjamin.familymap;
 
+import cs240.benjamin.familymap.ui.*;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
+import cs240.benjamin.familymap.R;
 
 public class MainActivity extends ActionBarActivity {
 
