@@ -102,15 +102,15 @@ public class LoginFragment extends Fragment {
     public void onLoginSucceded()
     {
         Log.e(tag, "successful login");
-        UserDataTask udataTask = new UserDataTask(getActivity().getApplicationContext());
+        UserDataTask udataTask = new UserDataTask();
         udataTask.execute();
-        Toast toast= Toast.makeText(, "Login Succeeded", Toast.LENGTH_LONG);
-        toast.show();
     }
 
     public void showUserData(String fname, String lname)
     {
-        Log.e(tag, "calling show user data with fname: "+fname+" lname "+lname)
+        Log.e(tag, "calling show user data with fname: "+fname+" lname "+lname);
+        Toast toast = Toast.makeText(getActivity().getApplicationContext(), "First Name "+fname+ " Last Name "+lname, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     public class UserDataTask extends AsyncTask<URL, Integer, JSONObject>
@@ -137,14 +137,17 @@ public class LoginFragment extends Fragment {
                 failLogin();
             }
             else {
-/*                try { MainModel.authToken = result.getString("Authorization");}
-                catch (JSONException e) {
-                    Log.e(tag, e.getMessage()+" str "+e.toString());
-                    failLogin();
-                    return;
-                }*/
                 String fname = "";
                 String lname = "";
+                try {
+                    fname = result.getString("firstName");
+                    lname = result.getString("lastName");
+                }
+                catch (JSONException e) {
+                    Log.e(tag, e.getMessage() + " str " + e.toString());
+//                    failLogin();
+                    return;
+                }
                 showUserData(fname, lname);
             }
         }
@@ -187,7 +190,9 @@ public class LoginFragment extends Fragment {
                 failLogin();
             }
             else {
-                try { MainModel.authToken = result.getString("Authorization");}
+                try {
+                    MainModel.userID = result.getString("personId");
+                    MainModel.authToken = result.getString("Authorization");}
                 catch (JSONException e) {
                     Log.e(tag, e.getMessage()+" str "+e.toString());
                     failLogin();

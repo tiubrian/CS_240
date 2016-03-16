@@ -5,4 +5,5 @@ package cs240.benjamin.familymap.model;
  */
 public class MainModel {
     public static String authToken;
+    public static String userID;
 }
