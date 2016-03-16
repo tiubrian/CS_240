@@ -29,7 +29,7 @@ public class HTTPClient {
             url = new URL("http://" + serverIP + ":" + serverPort + "/" + action);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("authorization_token", auth_token);
+            connection.setRequestProperty("Authorization", auth_token);
             connection.connect();
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -61,7 +61,7 @@ public class HTTPClient {
         try {
             url = new URL("http://" + serverIP + ":" + serverPort + "/" + action);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
             OutputStream reqBody = connection.getOutputStream();
             reqBody.write(payload.toString().getBytes());
             connection.connect();

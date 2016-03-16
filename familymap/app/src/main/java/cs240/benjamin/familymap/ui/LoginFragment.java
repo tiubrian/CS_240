@@ -20,6 +20,9 @@ import org.json.JSONObject;
 
 import cs240.benjamin.familymap.client.HTTPClient;
 import cs240.benjamin.familymap.R;
+import cs240.benjamin.familymap.model.MainModel;
+
+import android.widget.Toast;
 
 /**
  * Created by benjamin on 3/7/16.
@@ -89,6 +92,64 @@ public class LoginFragment extends Fragment {
         authTask.execute();
     }
 
+    public void failLogin()
+    {
+        Log.e(tag, "failing login");
+        Toast toast= Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    public void onLoginSucceded()
+    {
+        Log.e(tag, "successful login");
+        UserDataTask udataTask = new UserDataTask(getActivity().getApplicationContext());
+        udataTask.execute();
+        Toast toast= Toast.makeText(, "Login Succeeded", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    public void showUserData(String fname, String lname)
+    {
+        Log.e(tag, "calling show user data with fname: "+fname+" lname "+lname)
+    }
+
+    public class UserDataTask extends AsyncTask<URL, Integer, JSONObject>
+    {
+        public static final String tag = "familyudatatask";
+
+        @Override
+        public JSONObject doInBackground(URL... urls)
+        {
+            Log.e(tag, "called doinbackground");
+            JSONObject res = HTTPClient.doAuthAction("person/"+MainModel.userID, MainModel.authToken);
+            Log.e(tag, "did get action, res: "+res.toString());
+            return res;
+        }
+
+        public void onProgressUpdate(Integer... progress)
+        {
+
+        }
+
+        public void onPostExecute(JSONObject result)
+        {
+            if (result.has("message")) {
+                failLogin();
+            }
+            else {
+/*                try { MainModel.authToken = result.getString("Authorization");}
+                catch (JSONException e) {
+                    Log.e(tag, e.getMessage()+" str "+e.toString());
+                    failLogin();
+                    return;
+                }*/
+                String fname = "";
+                String lname = "";
+                showUserData(fname, lname);
+            }
+        }
+    }
+
 
     public class Authenticate extends AsyncTask<URL, Integer, JSONObject>
     {
@@ -112,14 +173,6 @@ public class LoginFragment extends Fragment {
             Log.e(tag, "made request body "+body.toString());
             JSONObject res = HTTPClient.doPostAction("user/login", body);
             Log.e(tag, "did post action, res: "+res.toString());
-            for (int i = 0; i < urls.length; i++)
-            {
-                //do request
-                //urls[i];
-                //connection.setRequestProperty authorization_token
-                //OutputStream requestBody = get. getBytes, close
-
-            }
             return res;
         }
 
@@ -130,7 +183,18 @@ public class LoginFragment extends Fragment {
 
         public void onPostExecute(JSONObject result)
         {
-
+            if (result.has("message")) {
+                failLogin();
+            }
+            else {
+                try { MainModel.authToken = result.getString("Authorization");}
+                catch (JSONException e) {
+                    Log.e(tag, e.getMessage()+" str "+e.toString());
+                    failLogin();
+                    return;
+                }
+                onLoginSucceded();
+            }
         }
     }
 
