@@ -1,26 +1,38 @@
 package cs240.benjamin.familymap;
-
-import cs240.benjamin.familymap.ui.*;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
 import cs240.benjamin.familymap.R;
+import cs240.benjamin.familymap.ui.*;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity{
 
     public final static String tag = "familyMainActivity";
+    public static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e(tag, "creating main activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fragmentManager = getSupportFragmentManager();
+        Log.e(tag, "creating main activity");
         if (savedInstanceState == null)
         {
+            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment , new LoginFragment(this)).commit();
             Log.e(tag, "added loginfragment");
-            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment , new LoginFragment()).commit();
         }
+        Log.e(tag, "adding map fragment");
+        showMap();
+        Log.e(tag,"showed map");
+    }
+
+    public void showMap()
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment(this)).commit();
     }
 
     @Override

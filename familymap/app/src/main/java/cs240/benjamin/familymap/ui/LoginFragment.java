@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.util.Log;
 import android.os.AsyncTask;
 import java.net.URL;
+import cs240.benjamin.familymap.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,10 +41,12 @@ public class LoginFragment extends Fragment {
     private String portText;
 
     public static final String tag = "familyLoginFragment";
+//    public MainActivity parent;
 
-    public LoginFragment()
+    public LoginFragment(MainActivity a)
     {
-
+        //parent = a;
+        Log.e(tag, "creating login fragment");
     }
 
     public String toString()
@@ -111,6 +114,7 @@ public class LoginFragment extends Fragment {
         Log.e(tag, "calling show user data with fname: "+fname+" lname "+lname);
         Toast toast = Toast.makeText(getActivity().getApplicationContext(), "First Name "+fname+ " Last Name "+lname, Toast.LENGTH_LONG);
         toast.show();
+        //parent.showMap();
     }
 
     public class UserDataTask extends AsyncTask<URL, Integer, JSONObject>
@@ -191,7 +195,7 @@ public class LoginFragment extends Fragment {
             }
             else {
                 try {
-                    MainModel.userID = result.getString("personId");
+                    MainModel.userID = result.getString("personId   ");
                     MainModel.authToken = result.getString("Authorization");}
                 catch (JSONException e) {
                     Log.e(tag, e.getMessage()+" str "+e.toString());
