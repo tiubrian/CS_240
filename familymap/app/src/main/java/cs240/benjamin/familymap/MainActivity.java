@@ -26,13 +26,13 @@ public class MainActivity extends ActionBarActivity{
             Log.e(tag, "added loginfragment");
         }
         Log.e(tag, "adding map fragment");
-        showMap();
-        Log.e(tag,"showed map");
     }
 
     public void showMap()
     {
+        Log.e(tag,"called show map");
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment(this)).commit();
+        Log.e(tag, "showed map");
     }
 
     @Override

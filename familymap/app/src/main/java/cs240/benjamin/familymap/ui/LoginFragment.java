@@ -114,20 +114,23 @@ public class LoginFragment extends Fragment {
         Log.e(tag, "calling show user data with fname: "+fname+" lname "+lname);
         Toast toast = Toast.makeText(getActivity().getApplicationContext(), "First Name "+fname+ " Last Name "+lname, Toast.LENGTH_LONG);
         toast.show();
-        //parent.showMap();
+        ((MainActivity)getActivity()).showMap();
     }
 
-    public class UserDataTask extends AsyncTask<URL, Integer, JSONObject>
+    public void showMap()
+    {
+        ((MainActivity)getActivity()).showMap();
+    }
+
+    public class UserDataTask extends AsyncTask<URL, Integer, Boolean>
     {
         public static final String tag = "familyudatatask";
 
         @Override
-        public JSONObject doInBackground(URL... urls)
+        public Boolean doInBackground(URL... urls)
         {
             Log.e(tag, "called doinbackground");
-            JSONObject res = HTTPClient.doAuthAction("person/"+MainModel.userID, MainModel.authToken);
-            Log.e(tag, "did get action, res: "+res.toString());
-            return res;
+            return MainModel.sync();
         }
 
         public void onProgressUpdate(Integer... progress)
@@ -135,24 +138,13 @@ public class LoginFragment extends Fragment {
 
         }
 
-        public void onPostExecute(JSONObject result)
+        public void onPostExecute(Boolean success)
         {
-            if (result.has("message")) {
+            if (!success) {
                 failLogin();
             }
             else {
-                String fname = "";
-                String lname = "";
-                try {
-                    fname = result.getString("firstName");
-                    lname = result.getString("lastName");
-                }
-                catch (JSONException e) {
-                    Log.e(tag, e.getMessage() + " str " + e.toString());
-//                    failLogin();
-                    return;
-                }
-                showUserData(fname, lname);
+                showMap();
             }
         }
     }
@@ -195,7 +187,7 @@ public class LoginFragment extends Fragment {
             }
             else {
                 try {
-                    MainModel.userID = result.getString("personId   ");
+                    MainModel.userID = result.getString("personId");
                     MainModel.authToken = result.getString("Authorization");}
                 catch (JSONException e) {
                     Log.e(tag, e.getMessage()+" str "+e.toString());
