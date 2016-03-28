@@ -72,16 +72,16 @@ public class MainModel {
            dump("on person "+Integer.toString(i));
            JSONObject person_obj =  data.getJSONObject(i);
            String id = person_obj.getString("personID");
-           String motherId = safeJSONGet(person_obj, "motherID");
-           String fatherId = safeJSONGet(person_obj, "fatherID");
+           String motherId = safeJSONGet(person_obj, "mother");
+           String fatherId = safeJSONGet(person_obj, "father");
 
-           //because I hate remebering the order of arguments to a constructor
+           //because I hate remembering the order of arguments to a constructor
            //also because the Person class should not know about how the server formats person JSON objects
            //what if I need to support multiple formats?
            Person person = new Person();
            person.setFirstName(person_obj.getString("firstName"));
            person.setLastName(person_obj.getString("lastName"));
-           person.setSpouseId(person_obj.getString("spouseID"));
+           person.setSpouseId(safeJSONGet(person_obj, "spouse"));
            person.setGender(person_obj.getString("gender"));
            person.setFatherId(fatherId);
            person.setMotherId(motherId);
@@ -93,7 +93,7 @@ public class MainModel {
     {
         dump("called load events");
         JSONObject res = HTTPClient.doAuthAction("event", authToken);
-        dump("did events action");
+        dump("did events action with res "+res.toString());
         JSONArray data = res.getJSONArray("data");
         dump("loading events, got data");
 
@@ -101,6 +101,7 @@ public class MainModel {
         {
             dump("on event "+Integer.toString(i));
             JSONObject event_obj = data.getJSONObject(i);
+            dump("got event obj "+event_obj.toString());
             Event event = new Event();
             event.setCity(event_obj.getString("city"));
             event.setCountry(event_obj.getString("country"));
@@ -109,6 +110,7 @@ public class MainModel {
             event.setLng(event_obj.getDouble("longitude"));
             String eventId = event_obj.getString("eventID");
             String personId = event_obj.getString("personID");
+            dump("filled event obj");
             addEvent(personId, eventId, event);
         }
     }

@@ -22,11 +22,12 @@ public class Person {
 
     Person()
     {
-
+        events = new HashMap<String, Event>();
     }
 
     Person(String firstName, String lastName, String spouseId, String gender, String fatherId, String motherId)
     {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.spouseId = spouseId;
