@@ -1,6 +1,8 @@
 package cs240.benjamin.familymap.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -17,12 +19,12 @@ public class Person {
      * It's not good if this gets changed by anyone to whatever they want. :)
      * */
     private String gender;
-    private HashMap<String, Event> events;
+    private HashSet<String> events;
     public static final String tag = "familyperson";
 
     Person()
     {
-        events = new HashMap<String, Event>();
+        events = new HashSet<String>();
     }
 
     Person(String firstName, String lastName, String spouseId, String gender, String fatherId, String motherId)
@@ -36,9 +38,15 @@ public class Person {
         this.gender = gender;
     }
 
-    public void addEvent(String id, Event event)
+
+    public void addEvent(String id)
     {
-        events.put(id, event);
+        events.add(id);
+    }
+
+    public HashSet<String> getEvents()
+    {
+        return events;
     }
 
     @Override
@@ -51,12 +59,6 @@ public class Person {
                 ", fatherId='" + fatherId + '\'' +
                 ", gender='" + gender + '\'' +
                 '}');
-
-        for (Event e: events.values())
-        {
-            //portability
-            res.append(e.toString() + System.getProperty("line.separator"));
-        }
 
         return res.toString();
     }

@@ -1,6 +1,8 @@
 package cs240.benjamin.familymap.model;
 
 import java.util.HashMap;
+import java.util.TreeSet;
+
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -18,6 +20,8 @@ public class MainModel {
     public static String authToken = "";
     public static String userID = "";
     public static HashMap<String, Person> people = new HashMap<String, Person>();
+    public static HashMap<String, Event> events = new HashMap<String, Event>();
+    public static TreeSet<String> descriptions = new TreeSet<String>();
 
     public static Person getPerson(String id)
     {
@@ -36,15 +40,23 @@ public class MainModel {
     {
         try {
             people.clear();
+            events.clear();
             loadPeople();
             loadEvents();
-            dumpAllToLog();
+            computeDescriptionSet();
+//            dumpAllToLog();
             return true;
         }
         catch (Exception e)
         {
             error("exception in sync "+ e.toString());
             return false;
+        }
+    }
+
+    private static void computeDescriptionSet() {
+        for (Event e: events.values()) {
+            descriptions.add(e.getDescription());
         }
     }
 
@@ -99,9 +111,9 @@ public class MainModel {
 
         for (int i = 0; i < data.length(); i++)
         {
-            dump("on event "+Integer.toString(i));
+            dump("on event " + Integer.toString(i));
             JSONObject event_obj = data.getJSONObject(i);
-            dump("got event obj "+event_obj.toString());
+            dump("got event obj " + event_obj.toString());
             Event event = new Event();
             event.setCity(event_obj.getString("city"));
             event.setCountry(event_obj.getString("country"));
@@ -110,6 +122,7 @@ public class MainModel {
             event.setLng(event_obj.getDouble("longitude"));
             String eventId = event_obj.getString("eventID");
             String personId = event_obj.getString("personID");
+            event.setPersonId(personId);
             dump("filled event obj");
             addEvent(personId, eventId, event);
         }
@@ -123,8 +136,19 @@ public class MainModel {
     public static void addEvent(String personId, String eventId, Event event)
     {
         if (people.containsKey(personId)) {
-            people.get(personId).addEvent(eventId, event);
+            people.get(personId).addEvent(eventId);
+            events.put(eventId, event);
         }
+    }
+
+    public static Event getEvent(String eventId)
+    {
+        return events.get(eventId);
+    }
+
+    public static boolean isEventVisible(String eventId)
+    {
+        return true;
     }
 
     public static void dump(String msg)

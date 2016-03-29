@@ -41,11 +41,9 @@ public class LoginFragment extends Fragment {
     private String portText;
 
     public static final String tag = "familyLoginFragment";
-//    public MainActivity parent;
 
-    public LoginFragment(MainActivity a)
+    public LoginFragment()
     {
-        //parent = a;
         Log.e(tag, "creating login fragment");
     }
 

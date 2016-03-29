@@ -10,13 +10,14 @@ public class Event {
     private String country;
     private String city;
     private String year;
+    private String personId;
 
     public Event()
     {
 
     }
 
-    public Event(String description, double lat, double lng, String country, String city, String year) {
+    public Event(String description, double lat, double lng, String country, String city, String year, String personId) {
         //using the setter because the description must always be lower case
         this.setDescription(description);
         this.lat = lat;
@@ -24,6 +25,7 @@ public class Event {
         this.country = country;
         this.city = city;
         this.year = year;
+        this.personId = personId;
     }
 
     public int compareTo(Event other)
@@ -37,6 +39,11 @@ public class Event {
         if (year_cmp !=0 ) return year_cmp;
 
         return description.compareTo(other.getDescription());
+    }
+
+    public String fullDescription()
+    {
+        return description + ": " + city + "," + country + ", ("+year+")";
     }
 
     @Override
@@ -101,6 +108,14 @@ public class Event {
 
     public double getLng() {
         return lng;
+    }
+
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
     public void setLng(double lng) {

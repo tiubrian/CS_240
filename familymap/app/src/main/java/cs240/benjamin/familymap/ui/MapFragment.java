@@ -19,13 +19,23 @@ import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.client.*;
 import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.vision.face.Landmark;
+
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 
 /**
@@ -42,17 +52,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Double latitude, longitude;
-    private MainActivity parent;
+    private HashMap<String, Float> description_hues;
+    private TextView event_text;
+
+    public static final float DEFAULT_MARKER_COLOR = BitmapDescriptorFactory.HUE_AZURE;
 
     public MapFragment()
     {
         Log.e(tag, "initializing the mapfragment without an activity");
-    }
-
-    public MapFragment(MainActivity act)
-    {
-        parent = act;
-        if (parent == null) Log.e(tag, "map's parent is null");
     }
 
     @Override
@@ -65,6 +72,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
         latitude = 26.78;
         longitude = 72.56;
+        event_text = (TextView)view.findViewById(R.id.map_event_text);
 
         setUpMapIfNeeded(); // For setting up the MapFragment
 
@@ -76,7 +84,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            if (parent == null) Log.e(tag, "map's parent is null in setup map");
             Log.e(tag, "on view created");
 
            FragmentManager manager = getChildFragmentManager();
@@ -90,6 +97,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+
+    private void computeMarkerColors()
+    {
+        description_hues = new HashMap<String, Float>();
+        int num_colors = MainModel.descriptions.size();
+        Iterator<String> it = MainModel.descriptions.iterator();
+        int i = 0;
+        float color_increment = ((float)360) / (num_colors+1);
+        while (it.hasNext()) {
+            i++;
+            description_hues.put(it.next(), i * color_increment);
+        }
+    }
+
     /**
      * This is where we can add markers or lines, add listeners or move the
      * camera.
@@ -99,12 +120,47 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
      */
     private void setUpMap() {
         // For showing a move to my loction button
-        mMap.setMyLocationEnabled(true);
+//        mMap.setMyLocationEnabled(true);
         // For dropping a marker at a point on the Map
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Log.e(tag, "clicked on ");
+                String eventId = marker.getSnippet();
+                Event e = MainModel.getEvent(eventId);
+                Person p = MainModel.getPerson(e.getPersonId());
+                String eventText = p.getFirstName() + " " + p.getLastName() + System.getProperty("line.separator")
+                        + e.fullDescription();
+                event_text.setText(eventText);
+                return false;
+            }
+        });
+
+        computeMarkerColors();
+
+        for (String eventId: MainModel.events.keySet()) {
+            if (MainModel.isEventVisible(eventId)) {
+                showEvent(eventId);
+            }
+        }
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
         // For zooming automatically to the Dropped PIN Location
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
-                longitude), 12.0f));
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
+  //              longitude), 12.0f));
+    }
+
+    private void showEvent(String eventId)
+    {
+        Event e = MainModel.getEvent(eventId);
+        LatLng pos = new LatLng(e.getLat(), e.getLng());
+        String description = e.getDescription();
+        float event_color = (description_hues.containsKey(description)) ? description_hues.get(description) : DEFAULT_MARKER_COLOR;
+        mMap.addMarker(new MarkerOptions()
+                .position(pos)
+                .snippet(eventId)
+                .icon(BitmapDescriptorFactory.defaultMarker(event_color)));
+        //TODO: determine color here
     }
 
     @Override

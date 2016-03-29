@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity{
         Log.e(tag, "creating main activity");
         if (savedInstanceState == null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment , new LoginFragment(this)).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment , new LoginFragment()).commit();
             Log.e(tag, "added loginfragment");
         }
         Log.e(tag, "adding map fragment");
@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity{
     public void showMap()
     {
         Log.e(tag,"called show map");
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment(this)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment()).commit();
         Log.e(tag, "showed map");
     }
 
