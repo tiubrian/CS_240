@@ -120,6 +120,7 @@ public class MainModel {
             event.setDescription(event_obj.getString("description"));
             event.setLat(event_obj.getDouble("latitude"));
             event.setLng(event_obj.getDouble("longitude"));
+            event.setYear(event_obj.getString("year"));
             String eventId = event_obj.getString("eventID");
             String personId = event_obj.getString("personID");
             event.setPersonId(personId);

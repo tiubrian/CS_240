@@ -1,6 +1,7 @@
 package cs240.benjamin.familymap.ui;
 import cs240.benjamin.familymap.MainActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,7 @@ import cs240.benjamin.familymap.model.*;
 import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.client.*;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -38,7 +40,7 @@ import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Iterator;
-
+import com.joanzapata.android.iconify.*;
 
 /**
  * Created by benjamin on 3/23/16.
@@ -53,9 +55,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
      */
 
     private GoogleMap mMap;
-    private Double latitude, longitude;
     private HashMap<String, Float> description_hues;
     private TextView event_text;
+    private ImageView gender_image_view;
 
     public static final float DEFAULT_MARKER_COLOR = BitmapDescriptorFactory.HUE_AZURE;
 
@@ -71,11 +73,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return null;
         }
 //        view = (ScrollView) inflater.inflate(R.layout.map_layout, container, false);
-        view = (LinearLayout) inflater.inflate(R.layout.map_layout, container, false);
-        // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
-        latitude = 26.78;
-        longitude = 72.56;
+        view = (RelativeLayout) inflater.inflate(R.layout.map_layout, container, false);
         event_text = (TextView)view.findViewById(R.id.map_event_text);
+        Drawable andIcon = new IconDrawable(getActivity(), Iconify.IconValue.fa_android);
+        gender_image_view = (ImageView)view.findViewById(R.id.map_gender_image);
+        gender_image_view.setImageDrawable(andIcon);
 
         setUpMapIfNeeded(); // For setting up the MapFragment
 

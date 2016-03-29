@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <fragment
-android:id="@+id/map_fragment"
-android:layout_width="wrap_content"
-android:layout_height="200dp"
-class="com.google.android.gms.maps.SupportMapFragment" />
+    android:id="@+id/map_fragment"
+    android:layout_width="wrap_content"
+    android:layout_height="400dp"
+    android:layout_above="@+id/map_event_text"
+    android:name="com.google.android.gms.maps.SupportMapFragment" />
+<ImageView
+    android:id="@+id/map_gender_image"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:contentDescription="Gender Image"
+    android:layout_toLeftOf="@+id/map_event_text"
+    />
 <TextView
     android:id="@+id/map_event_text"
     android:layout_width="wrap_content"
     android:layout_height="100dp"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
     android:text="Click on an event marker."/>
-</LinearLayout>
+</RelativeLayout>
 
 <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--android:layout_height="wrap_content"-->
