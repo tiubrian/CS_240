@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-    <fragment
-        android:id="@+id/map_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="com.google.android.gms.maps.SupportMapFragment" />
-    <TextView
-        android:id="@+id/map_event_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click on an event marker."/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<fragment
+android:id="@+id/map_fragment"
+android:layout_width="wrap_content"
+android:layout_height="200dp"
+class="com.google.android.gms.maps.SupportMapFragment" />
+<TextView
+    android:id="@+id/map_event_text"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:text="Click on an event marker."/>
 </LinearLayout>
-</ScrollView>
+
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="wrap_content">-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--xmlns:tools="http://schemas.android.com/tools">-->
+    <!--<fragment-->
+        <!--android:id="@+id/map_fragment"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--class="com.google.android.gms.maps.SupportMapFragment" />-->
+<!--</LinearLayout>-->
+<!--</ScrollView>-->

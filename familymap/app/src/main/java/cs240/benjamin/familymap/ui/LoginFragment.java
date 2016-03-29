@@ -39,12 +39,14 @@ public class LoginFragment extends Fragment {
     private String userText;
     private String hostText;
     private String portText;
+    private boolean doingAsyncTask;
 
     public static final String tag = "familyLoginFragment";
 
     public LoginFragment()
     {
         Log.e(tag, "creating login fragment");
+        doingAsyncTask = false;
     }
 
     public String toString()
@@ -84,11 +86,13 @@ public class LoginFragment extends Fragment {
 
     public void doLogin()
     {
+        if (doingAsyncTask) return;
         Log.e(tag, "doing login");
         userText = username.getText().toString();
         passText = password.getText().toString();
         portText = port.getText().toString();
         hostText = host.getText().toString();
+        doingAsyncTask = true;
         Authenticate authTask = new Authenticate();
         authTask.execute();
     }
@@ -138,6 +142,7 @@ public class LoginFragment extends Fragment {
 
         public void onPostExecute(Boolean success)
         {
+            doingAsyncTask = false;
             if (!success) {
                 failLogin();
             }

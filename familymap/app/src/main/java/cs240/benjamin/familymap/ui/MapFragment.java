@@ -18,7 +18,9 @@ import cs240.benjamin.familymap.model.*;
 import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.client.*;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -68,7 +70,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (container == null) {
             return null;
         }
-        view = (RelativeLayout) inflater.inflate(R.layout.map_layout, container, false);
+//        view = (ScrollView) inflater.inflate(R.layout.map_layout, container, false);
+        view = (LinearLayout) inflater.inflate(R.layout.map_layout, container, false);
         // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
         latitude = 26.78;
         longitude = 72.56;
@@ -126,12 +129,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.e(tag, "clicked on ");
+                Log.e(tag, "clicked on marker");
                 String eventId = marker.getSnippet();
                 Event e = MainModel.getEvent(eventId);
                 Person p = MainModel.getPerson(e.getPersonId());
                 String eventText = p.getFirstName() + " " + p.getLastName() + System.getProperty("line.separator")
                         + e.fullDescription();
+                Log.e(tag, "setting event text to "+eventText);
                 event_text.setText(eventText);
                 return false;
             }
