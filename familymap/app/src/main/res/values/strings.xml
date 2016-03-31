@@ -19,4 +19,5 @@
     <string name="fname">First Name</string>
     <string name="lname">Last Name</string>
     <string name="gender">Gender</string>
+    <string name="life_events">LIFE EVENTS</string>
 </resources>

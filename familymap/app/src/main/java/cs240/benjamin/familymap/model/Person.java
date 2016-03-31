@@ -1,5 +1,6 @@
 package cs240.benjamin.familymap.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,6 +48,16 @@ public class Person {
     public HashSet<String> getEvents()
     {
         return events;
+    }
+
+    public ArrayList<String> getEventIds()
+    {
+        ArrayList<String> ids = new ArrayList<String>();
+        for (String id : events)
+        {
+            ids.add(id);
+        }
+        return ids;
     }
 
     @Override
@@ -107,6 +118,11 @@ public class Person {
             default:
                 return "Unknown";
         }
+    }
+
+    public String getFullName()
+    {
+        return firstName + " " + lastName;
     }
 
     public String getFirstName() {
