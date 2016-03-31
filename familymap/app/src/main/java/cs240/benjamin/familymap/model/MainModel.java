@@ -81,7 +81,7 @@ public class MainModel {
 
        for (int i=0; i < data.length(); i++)
        {
-           dump("on person "+Integer.toString(i));
+      //     dump("on person "+Integer.toString(i));
            JSONObject person_obj =  data.getJSONObject(i);
            String id = person_obj.getString("personID");
            String motherId = safeJSONGet(person_obj, "mother");
@@ -111,9 +111,9 @@ public class MainModel {
 
         for (int i = 0; i < data.length(); i++)
         {
-            dump("on event " + Integer.toString(i));
+  //          dump("on event " + Integer.toString(i));
             JSONObject event_obj = data.getJSONObject(i);
-            dump("got event obj " + event_obj.toString());
+//            dump("got event obj " + event_obj.toString());
             Event event = new Event();
             event.setCity(event_obj.getString("city"));
             event.setCountry(event_obj.getString("country"));
@@ -124,7 +124,7 @@ public class MainModel {
             String eventId = event_obj.getString("eventID");
             String personId = event_obj.getString("personID");
             event.setPersonId(personId);
-            dump("filled event obj");
+    //        dump("filled event obj");
             addEvent(personId, eventId, event);
         }
     }

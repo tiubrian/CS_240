@@ -1,6 +1,8 @@
 package cs240.benjamin.familymap.ui;
 import cs240.benjamin.familymap.MainActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -58,12 +60,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private HashMap<String, Float> description_hues;
     private TextView event_text;
     private ImageView gender_image_view;
+    private String selPersonId;
+    private String selEventId;
 
     public static final float DEFAULT_MARKER_COLOR = BitmapDescriptorFactory.HUE_AZURE;
 
     public MapFragment()
     {
         Log.e(tag, "initializing the mapfragment without an activity");
+        this.selPersonId = null;
+        this.selEventId = null;
     }
 
     @Override
@@ -78,10 +84,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Drawable andIcon = new IconDrawable(getActivity(), Iconify.IconValue.fa_android);
         gender_image_view = (ImageView)view.findViewById(R.id.map_gender_image);
         gender_image_view.setImageDrawable(andIcon);
+        setWidgetClickListeners();
 
         setUpMapIfNeeded(); // For setting up the MapFragment
 
         return view;
+    }
+
+    private void setWidgetClickListeners()
+    {
+        gender_image_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(tag, "clicked on gender image");
+                //TODO: transition to person activity
+                startPersonActivity();
+            }
+        });
+
+        event_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(tag, "clicked on event description");
+                //TODO: transition to person activity
+                startPersonActivity();
+            }
+        });
+
     }
 
     /***** Sets up the map if it is possible to do so *****/
@@ -116,13 +145,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the
-     * camera.
-     * <p>
-     * This should only be called once and when we are sure that {@link #mMap}
-     * is not null.
-     */
+    private void showGenderImage(String gender)
+    {
+        gender = gender.toUpperCase();
+        switch (gender) {
+            case "M":
+                Drawable maleIcon = new IconDrawable(getActivity(), Iconify.IconValue.fa_male).colorRes(R.color.wallet_holo_blue_light).sizeDp(40);
+                gender_image_view.setImageDrawable(maleIcon);
+                break;
+            case "F":
+                Drawable femaleIcon = new IconDrawable(getActivity(), Iconify.IconValue.fa_female).color(Color.RED).sizeDp(40);
+                gender_image_view.setImageDrawable(femaleIcon);
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    private void startPersonActivity()
+    {
+        Log.e(tag, "trying to start person activity with id "+selPersonId);
+        if (selPersonId == null) return;
+        Intent intent = new Intent(getActivity(), PersonActivity.class);
+        intent.putExtra("personId",selPersonId);
+        startActivity(intent);
+    }
+
     private void setUpMap() {
         // For showing a move to my loction button
 //        mMap.setMyLocationEnabled(true);
@@ -137,8 +186,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 Person p = MainModel.getPerson(e.getPersonId());
                 String eventText = p.getFirstName() + " " + p.getLastName() + System.getProperty("line.separator")
                         + e.fullDescription();
-                Log.e(tag, "setting event text to "+eventText);
+                Log.e(tag, "setting event text to " + eventText);
                 event_text.setText(eventText);
+                selPersonId = e.getPersonId();
+                selEventId = eventId;
+
+                showGenderImage(p.getGender());
                 return false;
             }
         });

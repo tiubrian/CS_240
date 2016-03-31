@@ -95,6 +95,20 @@ public class Person {
         return result;
     }
 
+
+    public String getFullGenderName()
+    {
+        switch (gender.toUpperCase())
+        {
+            case "M":
+                return "Male";
+            case "F":
+                return "Female";
+            default:
+                return "Unknown";
+        }
+    }
+
     public String getFirstName() {
         return firstName;
     }

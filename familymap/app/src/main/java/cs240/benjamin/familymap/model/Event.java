@@ -43,7 +43,7 @@ public class Event {
 
     public String fullDescription()
     {
-        return description + ": " + city + "," + country + ", ("+year+")";
+        return description + ": " + city + ", " + country + ", ("+year+")";
     }
 
     @Override
