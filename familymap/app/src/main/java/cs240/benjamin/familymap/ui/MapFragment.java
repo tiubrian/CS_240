@@ -66,7 +66,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private String selPersonId;
     private String selEventId;
     private ArrayList<Polygon> lifeStory;
+    private Polygon spouseLine;
+    private ArrayList<Polygon> familyLines;
+
     public static final int LIFE_STORY_WIDTH = 10;
+    public static final int SPOUSE_LINE_WIDTH = 10;
 
     public static final float DEFAULT_MARKER_COLOR = BitmapDescriptorFactory.HUE_AZURE;
 
@@ -76,6 +80,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         this.selPersonId = null;
         this.selEventId = null;
         lifeStory = new ArrayList<Polygon>();
+        spouseLine = null;
+        familyLines = new ArrayList<Polygon>();
     }
 
     @Override
@@ -172,7 +178,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Log.e(tag, "trying to start person activity with id " + selPersonId);
         if (selPersonId == null) return;
         Intent intent = new Intent(getActivity(), PersonActivity.class);
-        intent.putExtra("personId",selPersonId);
+        intent.putExtra("personId", selPersonId);
         startActivity(intent);
     }
 
@@ -190,7 +196,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 event_text.setText(eventText);
                 selPersonId = e.getPersonId();
                 selEventId = eventId;
-                updateLifeStory();
+                updateLines();
 
                 showGenderImage(p.getGender());
                 return false;
@@ -199,13 +205,90 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         computeMarkerColors();
 
+        showEvents();
+
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
+  //              longitude), 12.0f));
+    }
+
+    private void showEvents()
+    {
         for (String eventId: MainModel.events.keySet()) {
             if (MainModel.isEventVisible(eventId)) {
                 showEvent(eventId);
             }
         }
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
-  //              longitude), 12.0f));
+    }
+
+    private void updateLines()
+    {
+        updateLifeStory();
+        updateSpouseLines();
+        updateFamilyStoryLines();
+    }
+
+    private void updateSpouseLines()
+    {
+        clearSpouseLine();
+        Event selEvent = MainModel.getEvent(selEventId);
+        Person p = selEvent.getPerson();
+        Person spouse = MainModel.getPerson(p.getSpouseId());
+
+        if (spouse == null || selEvent == null) return;
+
+        Event firstSpouseEvent = spouse.getEarliestEvent();
+
+        if (firstSpouseEvent == null) return;
+
+        if (!MainModel.isEventVisible(selEvent.getId()) || !MainModel.isEventVisible(firstSpouseEvent.getId())) return;
+        spouseLine = drawLine(selEvent, firstSpouseEvent, SPOUSE_LINE_WIDTH, Settings.getSpouseLineColor());
+    }
+
+    private void clearSpouseLine()
+    {
+        if (spouseLine != null) spouseLine.remove();
+    }
+
+    private void recDrawFamilyStoryLines(Person p, int width)
+    {
+        Person mother = MainModel.getPerson(p.getMotherId());
+        Person father = MainModel.getPerson(p.getFatherId());
+        if (mother != null)
+        {
+
+        }
+
+        if (father != null)
+        {
+
+        }
+    }
+
+    private void updateFamilyStoryLines()
+    {
+        clearFamilyStoryLines();
+        recDrawFamilyStoryLines(MainModel.getPerson(selPersonId), Settings.START_FAMILY_LINE_WIDTH);
+    }
+
+    /**
+     * If the source and target events are visible, draw a line between the source and target, and save it in the map of lines.
+     * This is so that the lines can be removed when changing the selected event.
+     * */
+    private void drawFamilyStoryLine(Event source, Event target, int width)
+    {
+        if (MainModel.isEventVisible(source.getId()) && MainModel.isEventVisible(target.getId()))
+        {
+            familyLines.add(drawLine(source, target, width, Settings.getFamilyStoryColor()));
+        }
+    }
+
+    private void clearFamilyStoryLines()
+    {
+        for (int i = 0; i < familyLines.size(); i++)
+        {
+            familyLines.get(i).remove();
+        }
+        familyLines.clear();
     }
 
     private void updateLifeStory()
@@ -228,7 +311,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         {
             Event event1 = visibleEvents.get(j-1);
             Event event2 = visibleEvents.get(j);
-            lifeStory.add(drawLine(event1, event2, LIFE_STORY_WIDTH, MainModel.getLifeStoryColor()));
+            lifeStory.add(drawLine(event1, event2, LIFE_STORY_WIDTH, Settings.getLifeStoryColor()));
         }
 
     }

@@ -28,6 +28,7 @@ public class MainModel {
 
     public static Person getPerson(String id)
     {
+        if (!people.containsKey(id)) return null;
         return people.get(id);
     }
 
@@ -180,6 +181,7 @@ public class MainModel {
 
     public static Event getEvent(String eventId)
     {
+        if (!events.containsKey(eventId)) return null;
         return events.get(eventId);
     }
 
@@ -194,6 +196,10 @@ public class MainModel {
         return Color.BLUE;
     }
 
+    public static int getSpouseLineColor()
+    {
+        return Color.RED;
+    }
 
     public static void dump(String msg)
     {

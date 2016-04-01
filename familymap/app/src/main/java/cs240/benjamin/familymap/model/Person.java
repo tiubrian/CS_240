@@ -75,6 +75,12 @@ public class Person {
         return (sorted.size() > 0) ? sorted.get(0).getId() : "";
     }
 
+    public Event getEarliestEvent()
+    {
+        ArrayList<Event> sorted = getSortedEvents();
+        return (sorted.size() > 0) ? sorted.get(0) : null;
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder("Person{" +

@@ -29,6 +29,12 @@ public class Event implements Comparable{
         this.personId = personId;
     }
 
+
+    public Person getPerson()
+    {
+        return MainModel.getPerson(personId);
+    }
+
     public int compareTo(Event other)
     {
         if (other.getDescription().equals("birth") && !description.equals("birth")) return 1;
