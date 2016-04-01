@@ -21,7 +21,9 @@ public class PersonActivity extends AppCompatActivity {
     private TextView gender;
     private Person person;
     private ExpandableListView eventList;
+    private ExpandableListView relativeList;
     private EventExpandableListAdapter eventAdapter;
+    private PersonExpandableListAdapter relativeAdapter;
 
 
     @Override
@@ -43,6 +45,7 @@ public class PersonActivity extends AppCompatActivity {
         gender = (TextView)findViewById(R.id.person_gender);
 
         eventList = (ExpandableListView)findViewById(R.id.person_events);
+        relativeList = (ExpandableListView)findViewById(R.id.person_relatives);
 
         populateView();
     }
@@ -54,7 +57,9 @@ public class PersonActivity extends AppCompatActivity {
         lname.setText(person.getLastName());
         gender.setText(person.getFullGenderName());
 
-        this.eventAdapter = new EventExpandableListAdapter(getApplicationContext(), person.getEventIds());
+        this.eventAdapter = new EventExpandableListAdapter(getApplicationContext(), person.getSortedEvents());
+        this.relativeAdapter = new PersonExpandableListAdapter(getApplicationContext(), MainModel.getImmediateRelatives(personId));
         eventList.setAdapter(eventAdapter);
+        relativeList.setAdapter(relativeAdapter);
     }
 }

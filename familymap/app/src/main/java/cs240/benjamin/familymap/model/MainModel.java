@@ -1,9 +1,12 @@
 package cs240.benjamin.familymap.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
+import android.graphics.Color;
 import android.util.Log;
+import android.util.Pair;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,6 +100,7 @@ public class MainModel {
            person.setGender(person_obj.getString("gender"));
            person.setFatherId(fatherId);
            person.setMotherId(motherId);
+           person.setId(id);
            addPerson(id, person);
        }
     }
@@ -124,9 +128,41 @@ public class MainModel {
             String eventId = event_obj.getString("eventID");
             String personId = event_obj.getString("personID");
             event.setPersonId(personId);
+            event.setId(eventId);
     //        dump("filled event obj");
             addEvent(personId, eventId, event);
         }
+    }
+
+    public static ArrayList<Pair<String, String>> getImmediateRelatives(String personId)
+    {
+        ArrayList<Pair<String, String>> relatives = new ArrayList<Pair<String, String>>();
+
+        Person p = getPerson(personId);
+        String motherId = p.getMotherId();
+        if (personExists(motherId)) relatives.add(new Pair<String, String>(motherId, "Mother"));
+
+        String fatherId = p.getFatherId();
+        if (personExists(fatherId)) relatives.add(new Pair<String, String>(fatherId, "Father"));
+
+        String spouseId = p.getSpouseId();
+        if (personExists(spouseId)) relatives.add(new Pair<String, String>(spouseId, "Spouse"));
+
+        for (String childId : people.keySet())
+        {
+            Person child = getPerson(childId);
+            if (child.getMotherId().equals(personId) || child.getFatherId().equals(personId) ) {
+                relatives.add(new Pair<String, String>(childId, "Child"));
+            }
+
+        }
+        return relatives;
+    }
+
+    public static boolean personExists(String personId)
+    {
+        if (personId == null) return false;
+        return people.containsKey(personId);
     }
 
     public static void addPerson(String id, Person person)
@@ -151,6 +187,13 @@ public class MainModel {
     {
         return true;
     }
+
+    public static int getLifeStoryColor()
+    {
+        //TODO: use settings to determine this
+        return Color.BLUE;
+    }
+
 
     public static void dump(String msg)
     {

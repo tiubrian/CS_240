@@ -2,6 +2,7 @@ package cs240.benjamin.familymap.ui;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +16,36 @@ import com.joanzapata.android.iconify.Iconify;
 import java.util.ArrayList;
 
 import cs240.benjamin.familymap.R;
-import cs240.benjamin.familymap.model.Event;
 import cs240.benjamin.familymap.model.MainModel;
 import cs240.benjamin.familymap.model.Person;
 
 /**
  * Created by benjamin on 3/31/16.
  */
-public class EventExpandableListAdapter extends BaseExpandableListAdapter {
+public class PersonExpandableListAdapter  extends BaseExpandableListAdapter {
     private Context context;
-    private ArrayList<Event> events;
-    public static final String tag = "familyeventlist";
+    private ArrayList<Person> people;
+    private ArrayList<String> relationships;
+    public static final String tag = "familypersonlist";
     public LayoutInflater inflater;
 
-    public EventExpandableListAdapter(Context context, ArrayList<Event> events)
+    public PersonExpandableListAdapter (Context context, ArrayList<Pair<String, String>> people)
     {
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.events = events;
-        Log.e(tag, "Creating event list adapter");
+        this.people = new ArrayList<Person>();
+        this.relationships = new ArrayList<String>();
+        Log.e(tag, "Creating person list adapter");
+        for (int i = 0; i < people.size(); i++)
+        {
+            Pair<String, String> data = people.get(i);
+            String id = data.first;
+            String relationship = data.second;
+            this.people.add(MainModel.getPerson(id));
+            this.relationships.add(relationship);
+        }
+
+        //TODO: sort people properly
     }
 
 
@@ -46,25 +58,22 @@ public class EventExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        Log.e(tag, "calling getChildrenCount with gp "+groupPosition+" returning "+events.size());
-        return events.size();
+        Log.e(tag, "calling getChildrenCount with gp "+groupPosition+" returning "+people.size());
+        return people.size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        Log.e(tag, "calling get Group with "+groupPosition);
-        return "Life Events";
+        return null;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        Log.e(tag, "calling getChild with g "+groupPosition + " ch "+childPosition);
-        return events.get(childPosition);
+        return people.get(childPosition);
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        Log.e(tag, "calling getGroup Id with groupPosition "+groupPosition);
         return groupPosition;
     }
 
@@ -84,9 +93,8 @@ public class EventExpandableListAdapter extends BaseExpandableListAdapter {
         Log.e(tag, "getting group view");
         if (convertView == null)
         {
-            convertView = inflater.inflate(R.layout.event_header,null);
+            convertView = inflater.inflate(R.layout.person_list_header,null);
         }
-
         return convertView;
     }
 
@@ -99,15 +107,29 @@ public class EventExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView itemText = (TextView)convertView.findViewById(R.id.list_item_text);
-        Event event = events.get(childPosition);
-        Person person  = MainModel.getPerson(event.getPersonId());
+        Person person = people.get(childPosition);
 
-        String item_content = event.fullDescription()+System.getProperty("line.separator")+person.getFullName();
+        //TODO: get relation to source node
+        String item_content = person.getFullName() + System.getProperty("line.separator") + relationships.get(childPosition);
         Log.e(tag, "setting text to "+item_content);
         itemText.setText(item_content);
 
         ImageView markerImage = (ImageView)convertView.findViewById(R.id.list_item_icon);
-        markerImage.setImageDrawable(new IconDrawable(context, Iconify.IconValue.fa_map_marker));
+
+        //TODO:Abstract this
+        Iconify.IconValue icon = Iconify.IconValue.fa_android;
+        switch (person.getGender().toUpperCase())
+        {
+            case "M":
+                icon = Iconify.IconValue.fa_male;
+                break;
+            case "F":
+                icon = Iconify.IconValue.fa_female;
+                break;
+            default:
+                break;
+        }
+        markerImage.setImageDrawable(new IconDrawable(context, icon));
         return convertView;
     }
 

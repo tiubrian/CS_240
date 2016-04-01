@@ -1,6 +1,7 @@
 package cs240.benjamin.familymap.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Person {
      * */
     private String gender;
     private HashSet<String> events;
+    private String Id;
     public static final String tag = "familyperson";
 
     Person()
@@ -45,10 +47,6 @@ public class Person {
         events.add(id);
     }
 
-    public HashSet<String> getEvents()
-    {
-        return events;
-    }
 
     public ArrayList<String> getEventIds()
     {
@@ -58,6 +56,23 @@ public class Person {
             ids.add(id);
         }
         return ids;
+    }
+
+    public ArrayList<Event> getSortedEvents()
+    {
+        ArrayList<Event> result = new ArrayList<Event>();
+        for (String id: events)
+        {
+            result.add(MainModel.getEvent(id));
+        }
+        Collections.sort(result);
+        return result;
+    }
+
+    public String getEarliestEventId()
+    {
+        ArrayList<Event> sorted = getSortedEvents();
+        return (sorted.size() > 0) ? sorted.get(0).getId() : "";
     }
 
     @Override
@@ -123,6 +138,14 @@ public class Person {
     public String getFullName()
     {
         return firstName + " " + lastName;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getFirstName() {

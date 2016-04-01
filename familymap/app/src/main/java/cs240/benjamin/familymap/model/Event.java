@@ -3,7 +3,7 @@ package cs240.benjamin.familymap.model;
 /**
  * Created by benjamin on 3/26/16.
  */
-public class Event {
+public class Event implements Comparable{
     private String description;
     private double lat;
     private double lng;
@@ -11,6 +11,7 @@ public class Event {
     private String city;
     private String year;
     private String personId;
+    private String Id;
 
     public Event()
     {
@@ -90,6 +91,14 @@ public class Event {
                 '}';
     }
 
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -144,5 +153,14 @@ public class Event {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    @Override
+    public int compareTo(Object another) {
+        if (another instanceof Event)
+        {
+            return this.compareTo((Event)another);
+        }
+        return -1;
     }
 }

@@ -36,10 +36,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.vision.face.Landmark;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import com.joanzapata.android.iconify.*;
@@ -62,6 +65,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private ImageView gender_image_view;
     private String selPersonId;
     private String selEventId;
+    private ArrayList<Polygon> lifeStory;
+    public static final int LIFE_STORY_WIDTH = 10;
 
     public static final float DEFAULT_MARKER_COLOR = BitmapDescriptorFactory.HUE_AZURE;
 
@@ -70,6 +75,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Log.e(tag, "initializing the mapfragment without an activity");
         this.selPersonId = null;
         this.selEventId = null;
+        lifeStory = new ArrayList<Polygon>();
     }
 
     @Override
@@ -97,7 +103,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 Log.e(tag, "clicked on gender image");
-                //TODO: transition to person activity
                 startPersonActivity();
             }
         });
@@ -106,7 +111,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 Log.e(tag, "clicked on event description");
-                //TODO: transition to person activity
                 startPersonActivity();
             }
         });
@@ -165,7 +169,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void startPersonActivity()
     {
-        Log.e(tag, "trying to start person activity with id "+selPersonId);
+        Log.e(tag, "trying to start person activity with id " + selPersonId);
         if (selPersonId == null) return;
         Intent intent = new Intent(getActivity(), PersonActivity.class);
         intent.putExtra("personId",selPersonId);
@@ -173,10 +177,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void setUpMap() {
-        // For showing a move to my loction button
-//        mMap.setMyLocationEnabled(true);
-        // For dropping a marker at a point on the Map
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -190,6 +190,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 event_text.setText(eventText);
                 selPersonId = e.getPersonId();
                 selEventId = eventId;
+                updateLifeStory();
 
                 showGenderImage(p.getGender());
                 return false;
@@ -203,10 +204,42 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 showEvent(eventId);
             }
         }
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
-        // For zooming automatically to the Dropped PIN Location
 //        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
   //              longitude), 12.0f));
+    }
+
+    private void updateLifeStory()
+    {
+        Log.e(tag, "updating life story");
+        ArrayList<Event> events = MainModel.getPerson(selPersonId).getSortedEvents();
+        ArrayList<Event> visibleEvents = new ArrayList<Event>();
+        for (int i=0; i < events.size(); i++)
+        {
+            Event curr_event = events.get(i);
+            if (MainModel.isEventVisible(curr_event.getId()))
+            {
+                visibleEvents.add(curr_event);
+                Log.e(tag, "visible event: "+curr_event.toString());
+            }
+        }
+
+        clearLifeStory();
+        for (int j = 1; j < visibleEvents.size(); j++)
+        {
+            Event event1 = visibleEvents.get(j-1);
+            Event event2 = visibleEvents.get(j);
+            lifeStory.add(drawLine(event1, event2, LIFE_STORY_WIDTH, MainModel.getLifeStoryColor()));
+        }
+
+    }
+
+    public void clearLifeStory()
+    {
+        for (int i =0; i < lifeStory.size(); i++)
+        {
+            lifeStory.get(i).remove();
+        }
+        lifeStory.clear();
     }
 
     private void showEvent(String eventId)
@@ -219,7 +252,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .position(pos)
                 .snippet(eventId)
                 .icon(BitmapDescriptorFactory.defaultMarker(event_color)));
-        //TODO: determine color here
+    }
+
+    /**
+     * */
+    private Polygon drawLine(Event event1, Event event2, int width, int color)
+    {
+        return mMap.addPolygon(new PolygonOptions()
+                .add(new LatLng(event1.getLat(), event1.getLng()) ,
+                new LatLng(event2.getLat(), event2.getLng()))
+                .strokeWidth(width)
+                .strokeColor(color)
+        );
     }
 
     @Override
