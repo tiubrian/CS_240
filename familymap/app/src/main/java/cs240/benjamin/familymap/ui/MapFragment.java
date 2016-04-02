@@ -47,6 +47,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import com.joanzapata.android.iconify.*;
 
+
 /**
  * Created by benjamin on 3/23/16.
  */
@@ -71,6 +72,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public static final int LIFE_STORY_WIDTH = 10;
     public static final int SPOUSE_LINE_WIDTH = 10;
+    /**
+     * To avoid markers landing on top of one another, a random fudge factor is added to the coordinates of each marker.
+     * The fudge factor is of the form random() / MARKER_FUDGE_DENOM. Higher values of the denominator mean less fudging.
+     * */
+    public static final int MARKER_FUDGE_DENOM = 100000;
 
     public static final float DEFAULT_MARKER_COLOR = BitmapDescriptorFactory.HUE_AZURE;
 
@@ -79,6 +85,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Log.e(tag, "initializing the mapfragment without an activity");
         this.selPersonId = null;
         this.selEventId = null;
+        Log.e(tag, "Map fragment has event id "+this.selEventId);
         lifeStory = new ArrayList<Polygon>();
         spouseLine = null;
         familyLines = new ArrayList<Polygon>();
@@ -182,23 +189,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         startActivity(intent);
     }
 
+    private void setEvent(String eventId)
+    {
+        Event e = MainModel.getEvent(eventId);
+        Person p = MainModel.getPerson(e.getPersonId());
+        String eventText = p.getFirstName() + " " + p.getLastName() + System.getProperty("line.separator")
+                + e.fullDescription();
+//        Log.e(tag, "setting event text to " + eventText);
+        event_text.setText(eventText);
+        selPersonId = e.getPersonId();
+        selEventId = eventId;
+        updateLines();
+
+        showGenderImage(p.getGender());
+    }
+
     private void setUpMap() {
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.e(tag, "clicked on marker");
+  //              Log.e(tag, "clicked on marker");
                 String eventId = marker.getSnippet();
-                Event e = MainModel.getEvent(eventId);
-                Person p = MainModel.getPerson(e.getPersonId());
-                String eventText = p.getFirstName() + " " + p.getLastName() + System.getProperty("line.separator")
-                        + e.fullDescription();
-                Log.e(tag, "setting event text to " + eventText);
-                event_text.setText(eventText);
-                selPersonId = e.getPersonId();
-                selEventId = eventId;
-                updateLines();
-
-                showGenderImage(p.getGender());
+                setEvent(eventId);
                 return false;
             }
         });
@@ -207,6 +219,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         showEvents();
 
+        selEventId = ((MapActivityInterface)getActivity()).getEventId();
+        if (selEventId != null)
+        {
+            Log.e(tag, "Setting up initial event");
+            setEvent(selEventId);
+            Event e = MainModel.getEvent(selEventId);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(e.getLat(), e.getLng()), 12.0f));
+        }
 //        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,
   //              longitude), 12.0f));
     }
@@ -249,25 +269,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (spouseLine != null) spouseLine.remove();
     }
 
-    private void recDrawFamilyStoryLines(Person p, int width)
+    private void recDrawFamilyStoryLines(Event event, int width)
     {
+    //    Log.e(tag, "Called recDraw with event "+event.toString()+" width: "+width);
+        Person p = event.getPerson();
         Person mother = MainModel.getPerson(p.getMotherId());
         Person father = MainModel.getPerson(p.getFatherId());
         if (mother != null)
         {
-
+            Event firstMotherEvent = mother.getEarliestEvent();
+            drawFamilyStoryLine(event, firstMotherEvent, width);;
+            recDrawFamilyStoryLines(firstMotherEvent, width - Settings.FAMILY_LINE_DEC);
         }
 
         if (father != null)
         {
-
+            Event firstFatherEvent = father.getEarliestEvent();
+            drawFamilyStoryLine(event, firstFatherEvent, width);
+            recDrawFamilyStoryLines(firstFatherEvent, width - Settings.FAMILY_LINE_DEC);
         }
     }
 
     private void updateFamilyStoryLines()
     {
         clearFamilyStoryLines();
-        recDrawFamilyStoryLines(MainModel.getPerson(selPersonId), Settings.START_FAMILY_LINE_WIDTH);
+        recDrawFamilyStoryLines(MainModel.getEvent(selEventId), Settings.START_FAMILY_LINE_WIDTH);
     }
 
     /**
@@ -276,6 +302,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
      * */
     private void drawFamilyStoryLine(Event source, Event target, int width)
     {
+        if (source == null || target == null) return;
         if (MainModel.isEventVisible(source.getId()) && MainModel.isEventVisible(target.getId()))
         {
             familyLines.add(drawLine(source, target, width, Settings.getFamilyStoryColor()));
@@ -293,7 +320,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void updateLifeStory()
     {
-        Log.e(tag, "updating life story");
+  //      Log.e(tag, "updating life story");
         ArrayList<Event> events = MainModel.getPerson(selPersonId).getSortedEvents();
         ArrayList<Event> visibleEvents = new ArrayList<Event>();
         for (int i=0; i < events.size(); i++)
@@ -302,7 +329,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             if (MainModel.isEventVisible(curr_event.getId()))
             {
                 visibleEvents.add(curr_event);
-                Log.e(tag, "visible event: "+curr_event.toString());
+//                Log.e(tag, "visible event: "+curr_event.toString());
             }
         }
 
@@ -328,7 +355,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void showEvent(String eventId)
     {
         Event e = MainModel.getEvent(eventId);
-        LatLng pos = new LatLng(e.getLat(), e.getLng());
+        LatLng pos = new LatLng(e.getLat() + Math.random()/MARKER_FUDGE_DENOM, e.getLng() + Math.random()/MARKER_FUDGE_DENOM);
         String description = e.getDescription();
         float event_color = (description_hues.containsKey(description)) ? description_hues.get(description) : DEFAULT_MARKER_COLOR;
         mMap.addMarker(new MarkerOptions()
@@ -341,6 +368,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
      * */
     private Polygon drawLine(Event event1, Event event2, int width, int color)
     {
+    //    Log.e(tag, "calling drawline with events "+event1.toString()+" and "+event2.toString());
         return mMap.addPolygon(new PolygonOptions()
                 .add(new LatLng(event1.getLat(), event1.getLng()) ,
                 new LatLng(event2.getLat(), event2.getLng()))
@@ -363,18 +391,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    /**** The mapfragment's id must be removed from the FragmentManager
-     **** or else if the same it is passed on the next time then
-     **** app will crash ****/
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mMap != null) {
-            getChildFragmentManager().beginTransaction()
-                    .remove(getChildFragmentManager().findFragmentById(R.id.map_fragment)).commit();
-            mMap = null;
-        }
-    }
+//    /**** The mapfragment's id must be removed from the FragmentManager
+//     **** or else if the same it is passed on the next time then
+//     **** app will crash ****/
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        if (mMap != null) {
+//            getChildFragmentManager().beginTransaction()
+//                    .remove(getChildFragmentManager().findFragmentById(R.id.map_fragment)).commit();
+//            mMap = null;
+//        }
+//    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

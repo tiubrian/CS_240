@@ -8,13 +8,15 @@ import android.util.Log;
 import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.ui.*;
 
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity implements MapActivityInterface {
 
     public final static String tag = "familyMainActivity";
     public static FragmentManager fragmentManager;
+    private String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        eventId = null;
         Log.e(tag, "creating main activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -34,6 +36,12 @@ public class MainActivity extends ActionBarActivity{
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment()).commit();
         Log.e(tag, "showed map");
     }
+
+    public String getEventId()
+    {
+        return this.eventId;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

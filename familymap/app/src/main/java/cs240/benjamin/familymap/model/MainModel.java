@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
+import android.app.Application;
 import android.graphics.Color;
 import android.util.Log;
 import android.util.Pair;
@@ -17,7 +18,7 @@ import cs240.benjamin.familymap.client.HTTPClient;
 /**
  * Created by benjamin on 3/14/16.
  */
-public class MainModel {
+public class MainModel extends Application {
     public static final String tag = "familymainmodel";
 
     public static String authToken = "";
