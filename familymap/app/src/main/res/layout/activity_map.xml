@@ -7,10 +7,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cs240.benjamin.familymap.MainActivity">
-    <FrameLayout
-        android:id="@+id/main_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/action_toolbar"></FrameLayout>
+    tools:context="cs240.benjamin.familymap.ui.MapActivity">
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_map_fragment"></FrameLayout>
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,11 +105,63 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         gender_image_view = (ImageView)view.findViewById(R.id.map_gender_image);
         gender_image_view.setImageDrawable(andIcon);
         setWidgetClickListeners();
+        setHasOptionsMenu(true);
 
         setUpMapIfNeeded(); // For setting up the MapFragment
 
         return view;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        Log.e(tag, "calling create options menu in fragment");
+        inflater.inflate(R.menu.action_menu, menu);
+        setMenuItem(menu, R.id.action_settings, Iconify.IconValue.fa_gear);
+        setMenuItem(menu, R.id.action_filter, Iconify.IconValue.fa_filter);
+        setMenuItem(menu, R.id.action_search, Iconify.IconValue.fa_search);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        Log.e(tag, "called frag item selected");
+        int id = item.getItemId();
+
+        switch (id)
+        {
+            case R.id.action_filter:
+                Log.e(tag, "clicked on filter action");
+                break;
+            case R.id.action_search:
+                Log.e(tag, "clicked on search action");
+                break;
+            case R.id.action_settings:
+                Log.e(tag, "clicked on settings action");
+                break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void setMenuItem(Menu menu, int id, Iconify.IconValue value)
+    {
+
+        MenuItem item = menu.findItem(id);
+        if (item == null)
+        {
+            Log.e(tag, "menu item is null");
+        }
+
+        else item.setIcon(new IconDrawable(getActivity().getApplicationContext(), value).color(Color.LTGRAY).sizeDp(40));
+    }
+
 
     private void setWidgetClickListeners()
     {
