@@ -26,6 +26,7 @@ public class MainModel extends Application {
     public static HashMap<String, Person> people = new HashMap<String, Person>();
     public static HashMap<String, Event> events = new HashMap<String, Event>();
     public static TreeSet<String> descriptions = new TreeSet<String>();
+    public static Filters filters = null;
 
     public static Person getPerson(String id)
     {
@@ -38,28 +39,79 @@ public class MainModel extends Application {
         Log.e(tag, msg);
     }
 
+    public static void clear()
+    {
+        authToken = "";
+        userID = "";
+        people.clear();
+        events.clear();
+    }
+
+
     /**
      * @return true for success, false on failure
      * */
     public static boolean sync()
     {
+        HashMap<String, Person> temp_people = (HashMap<String, Person>)people.clone();
+        HashMap<String, Event> temp_events = (HashMap<String, Event>)events.clone();
         try {
             people.clear();
             events.clear();
             loadPeople();
             loadEvents();
             computeDescriptionSet();
+            filters = new Filters(descriptions);
+            computeFamilySides();
 //            dumpAllToLog();
             return true;
         }
         catch (Exception e)
         {
+            //It may be that the data was cleared, but sync failed
+            //If so, we need to restore the old data
+            events = (HashMap<String, Event>)temp_events.clone();
+            people = (HashMap<String, Person>)temp_people.clone();
+            computeDescriptionSet();
             error("exception in sync "+ e.toString());
             return false;
         }
     }
 
+    private static void recSetFatherSide(Person person)
+    {
+        if (person == null) return;
+        person.setOnFatherSide(true);
+        recSetFatherSide(person.getMother());
+        recSetFatherSide(person.getFather());
+        return;
+    }
+
+    private static void recSetMotherSide(Person person)
+    {
+        if (person == null) return;
+        person.setOnMotherSide(true);
+        recSetMotherSide(person.getMother());
+        recSetMotherSide(person.getFather());
+        return;
+
+    }
+
+    private static void computeFamilySides()
+    {
+        Person person = getPerson(userID);
+        if (person == null)
+        {
+            Log.e(tag, "Uh-Oh, the current user is null!");
+            return;
+        }
+
+        recSetFatherSide(person.getFather());
+        recSetMotherSide(person.getMother());
+    }
+
     private static void computeDescriptionSet() {
+        descriptions.clear();
         for (Event e: events.values()) {
             descriptions.add(e.getDescription());
         }
@@ -186,9 +238,15 @@ public class MainModel extends Application {
         return events.get(eventId);
     }
 
+    //should not be called if filters is null
     public static boolean isEventVisible(String eventId)
     {
-        return true;
+        if (filters == null)
+        {
+            Log.e(tag, "Error! Trying to check event visibility when filters are null.");
+            return true;
+        }
+        return filters.eventVisible(getEvent(eventId));
     }
 
     public static int getLifeStoryColor()

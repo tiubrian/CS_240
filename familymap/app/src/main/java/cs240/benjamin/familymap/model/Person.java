@@ -23,6 +23,8 @@ public class Person {
     private String gender;
     private HashSet<String> events;
     private String Id;
+    private boolean onMotherSide = false;
+    private boolean onFatherSide = false;
     public static final String tag = "familyperson";
 
     Person()
@@ -41,6 +43,31 @@ public class Person {
         this.gender = gender;
     }
 
+    public Person getMother()
+    {
+        return MainModel.getPerson(motherId);
+    }
+
+    public Person getFather()
+    {
+        return MainModel.getPerson(fatherId);
+    }
+
+    public boolean isOnMotherSide() {
+        return onMotherSide;
+    }
+
+    public void setOnMotherSide(boolean onMotherSide) {
+        this.onMotherSide = onMotherSide;
+    }
+
+    public boolean isOnFatherSide() {
+        return onFatherSide;
+    }
+
+    public void setOnFatherSide(boolean onFatherSide) {
+        this.onFatherSide = onFatherSide;
+    }
 
     public void addEvent(String id)
     {

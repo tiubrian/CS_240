@@ -99,6 +99,7 @@ public class LoginFragment extends Fragment {
 
     public void failLogin()
     {
+        doingAsyncTask = false;
         Log.e(tag, "failing login");
         Toast toast= Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_LONG);
         toast.show();
@@ -113,6 +114,7 @@ public class LoginFragment extends Fragment {
 
     public void showUserData(String fname, String lname)
     {
+        doingAsyncTask = false;
         Log.e(tag, "calling show user data with fname: "+fname+" lname "+lname);
         Toast toast = Toast.makeText(getActivity().getApplicationContext(), "First Name "+fname+ " Last Name "+lname, Toast.LENGTH_LONG);
         toast.show();

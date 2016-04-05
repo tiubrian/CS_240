@@ -28,12 +28,31 @@ public class MainActivity extends ActionBarActivity implements MapActivityInterf
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         Log.e(tag, "creating main activity");
+
         if (savedInstanceState == null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.main_fragment , new LoginFragment()).commit();
-            Log.e(tag, "added loginfragment");
+            showLogin();
         }
+        else
+        {
+            Log.e(tag, "saved instance state non-null");
+           if (savedInstanceState.containsKey("showMap"))
+           {
+               Log.e(tag, "showmap in instance state.");
+               boolean showMap = savedInstanceState.getBoolean("showMap");
+               if (showMap) showMap();
+               else showLogin();
+           }
+           else showLogin();
+        }
+
         Log.e(tag, "adding map fragment");
+    }
+
+    public void showLogin()
+    {
+        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment , new LoginFragment()).commit();
+        Log.e(tag, "added loginfragment");
     }
 
     public void showMap()

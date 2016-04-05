@@ -16,7 +16,9 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import cs240.benjamin.familymap.MainActivity;
 import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.model.*;
 
@@ -221,19 +223,42 @@ public class SettingsActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Log.e(tag, "clicked on logout");
                 //TODO: do logout
+                logout();
             }
         });
 
         resync.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Log.e(tag, "clicked on ");
                 //TODO: do resync
+                resync();
             }
         });
     }
 
+
+    public void logout()
+    {
+        MainModel.clear();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void resync()
+    {
+        if (!MainModel.sync())
+        {
+            Toast.makeText(getApplicationContext(), "Sync Failed", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("showMap", true);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
