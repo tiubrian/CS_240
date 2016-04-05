@@ -22,9 +22,10 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.sun.net.httpserver:http:20070405'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.joanzapata.android:android-iconify:1.0.9'
+    compile 'com.android.support:support-v4:23.2.0'
 }

@@ -174,7 +174,11 @@ public class LoginFragment extends Fragment {
             HTTPClient.setPort(portText);
             Log.e(tag, "made request body "+body.toString());
             JSONObject res = HTTPClient.doPostAction("user/login", body);
-            Log.e(tag, "did post action, res: "+res.toString());
+            if (res != null) Log.e(tag, "did post action, res: "+res.toString());
+            else {
+                Log.e(tag, " res is null");
+                return new JSONObject();
+            }
             return res;
         }
 
@@ -193,7 +197,13 @@ public class LoginFragment extends Fragment {
                     MainModel.userID = result.getString("personId");
                     MainModel.authToken = result.getString("Authorization");}
                 catch (JSONException e) {
-                    Log.e(tag, e.getMessage()+" str "+e.toString());
+                    Log.e(tag, "json exception "+ e.getMessage()+" str "+e.toString());
+                    failLogin();
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Log.e(tag, "auth exception "+e.getMessage()+" str "+e.toString());
                     failLogin();
                     return;
                 }

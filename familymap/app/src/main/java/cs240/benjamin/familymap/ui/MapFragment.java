@@ -130,17 +130,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // as you specify a parent activity in AndroidManifest.xml.
         Log.e(tag, "called frag item selected");
         int id = item.getItemId();
-
+        Intent intent;
         switch (id)
         {
             case R.id.action_filter:
                 Log.e(tag, "clicked on filter action");
+                intent = new Intent(getActivity().getApplicationContext(), FilterActivity.class);
+                startActivity(intent);
                 break;
             case R.id.action_search:
                 Log.e(tag, "clicked on search action");
+                intent = new Intent(getActivity().getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
                 break;
             case R.id.action_settings:
                 Log.e(tag, "clicked on settings action");
+                intent = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -268,6 +274,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        mMap.setMapType(Settings.getMapType());
+
         computeMarkerColors();
 
         showEvents();
@@ -303,6 +311,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void updateSpouseLines()
     {
         clearSpouseLine();
+
+        if (!Settings.isSpouseLinesEnabled()) return;
+
         Event selEvent = MainModel.getEvent(selEventId);
         Person p = selEvent.getPerson();
         Person spouse = MainModel.getPerson(p.getSpouseId());
@@ -346,6 +357,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void updateFamilyStoryLines()
     {
         clearFamilyStoryLines();
+        if (!Settings.isFamilyLinesEnabled()) return;
         recDrawFamilyStoryLines(MainModel.getEvent(selEventId), Settings.START_FAMILY_LINE_WIDTH);
     }
 
@@ -387,6 +399,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
 
         clearLifeStory();
+        if (!Settings.isLifeLinesEnabled()) return;
+
         for (int j = 1; j < visibleEvents.size(); j++)
         {
             Event event1 = visibleEvents.get(j-1);
