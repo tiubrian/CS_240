@@ -1,6 +1,7 @@
 package cs240.benjamin.familymap.ui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class FilterAdapter extends ArrayAdapter<FilterView> {
     private ArrayList<FilterView> filters;
     private Context mContext;
     private LayoutInflater mInflater;
+    public static final String tag = "familyfilteradapter";
 
     public FilterAdapter(Context context, int resourceId, ArrayList<FilterView> filters)
     {
@@ -26,6 +28,20 @@ public class FilterAdapter extends ArrayAdapter<FilterView> {
         this.mContext = context;
         this.filters = filters;
         this.mInflater = (LayoutInflater)(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+    }
+
+    @Override
+    public int getCount()
+    {
+        Log.e(tag, "calling getCOunt");
+        return filters.size();
+    }
+
+    @Override
+    public Context getContext()
+    {
+        Log.e(tag, "getting context");
+        return mContext;
     }
 
     @Override
@@ -53,6 +69,7 @@ public class FilterAdapter extends ArrayAdapter<FilterView> {
             holder.superText.setText(filter.getSuperText());
             holder.subText.setText(filter.getSubText());
             holder.enabled.setChecked(filter.isEnabled());
+            holder.enabled.setOnCheckedChangeListener(filter.getListener());
         }
 
         return row;

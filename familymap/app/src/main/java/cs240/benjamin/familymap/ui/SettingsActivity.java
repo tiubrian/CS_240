@@ -1,6 +1,7 @@
 package cs240.benjamin.familymap.ui;
 
 
+import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -83,8 +84,14 @@ public class SettingsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+        if (super.getActionBar() == null) Log.e(tag, "Super action bar is null");
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Settings");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         initViews();
     }
+
 
     public void initSpinners()
     {
@@ -263,13 +270,24 @@ public class SettingsActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return true;
+
+        }
     }
+
 
 }

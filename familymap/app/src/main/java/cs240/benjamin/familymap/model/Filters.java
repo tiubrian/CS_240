@@ -34,6 +34,7 @@ public class Filters {
     {
         description = description.toLowerCase();
         eventsEnabled.put(description, value);
+        MainModel.setChanged(true);
     }
 
     public boolean eventTypeVisible(String description)
@@ -64,5 +65,41 @@ public class Filters {
         if (!fatherSide && p.isOnFatherSide()) return false;
         if (!motherSide && p.isOnMotherSide()) return false;
         return true;
+    }
+
+    public boolean isMotherSide() {
+        return motherSide;
+    }
+
+    public void setMotherSide(boolean motherSide) {
+        this.motherSide = motherSide;
+        MainModel.setChanged(true);
+    }
+
+    public boolean isFatherSide() {
+        return fatherSide;
+    }
+
+    public void setFatherSide(boolean fatherSide) {
+        this.fatherSide = fatherSide;
+        MainModel.setChanged(true);
+    }
+
+    public boolean isMaleEnabled() {
+        return maleEnabled;
+    }
+
+    public void setMaleEnabled(boolean maleEnabled) {
+        this.maleEnabled = maleEnabled;
+        MainModel.setChanged(true);
+    }
+
+    public boolean isFemaleEnabled() {
+        return femaleEnabled;
+    }
+
+    public void setFemaleEnabled(boolean femaleEnabled) {
+        this.femaleEnabled = femaleEnabled;
+        MainModel.setChanged(true);
     }
 }

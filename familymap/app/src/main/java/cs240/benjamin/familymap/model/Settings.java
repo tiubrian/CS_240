@@ -25,6 +25,7 @@ public class Settings extends Application {
 
     public static void setLifeLinesEnabled(boolean lifeLinesEnabled) {
         Settings.lifeLinesEnabled = lifeLinesEnabled;
+        MainModel.setChanged(true);
     }
 
     public static boolean isFamilyLinesEnabled() {
@@ -33,6 +34,7 @@ public class Settings extends Application {
 
     public static void setFamilyLinesEnabled(boolean familyLinesEnabled) {
         Settings.familyLinesEnabled = familyLinesEnabled;
+        MainModel.setChanged(true);
     }
 
     public static boolean isSpouseLinesEnabled() {
@@ -41,6 +43,7 @@ public class Settings extends Application {
 
     public static void setSpouseLinesEnabled(boolean spouseLinesEnabled) {
         Settings.spouseLinesEnabled = spouseLinesEnabled;
+        MainModel.setChanged(true);
     }
 
     public static int getMapType() {
@@ -57,6 +60,7 @@ public class Settings extends Application {
 
     public static void setFamilyStoryColor(int familyStoryColor) {
         Settings.familyStoryColor = familyStoryColor;
+        MainModel.setChanged(true);
     }
 
     public static int getSpouseLineColor() {
@@ -65,6 +69,7 @@ public class Settings extends Application {
 
     public static void setSpouseLineColor(int spouseLineColor) {
         Settings.spouseLineColor = spouseLineColor;
+        MainModel.setChanged(true);
     }
 
     public static int getLifeStoryColor() {
@@ -73,5 +78,6 @@ public class Settings extends Application {
 
     public static void setLifeStoryColor(int lifeStoryColor) {
         Settings.lifeStoryColor = lifeStoryColor;
+        MainModel.setChanged(true);
     }
 }

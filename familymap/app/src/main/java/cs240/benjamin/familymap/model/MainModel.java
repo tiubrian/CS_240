@@ -27,6 +27,7 @@ public class MainModel extends Application {
     public static HashMap<String, Event> events = new HashMap<String, Event>();
     public static TreeSet<String> descriptions = new TreeSet<String>();
     public static Filters filters = null;
+    private static boolean changed = false;
 
     public static Person getPerson(String id)
     {
@@ -53,6 +54,7 @@ public class MainModel extends Application {
      * */
     public static boolean sync()
     {
+        Log.e(tag, "trying to sync");
         HashMap<String, Person> temp_people = (HashMap<String, Person>)people.clone();
         HashMap<String, Event> temp_events = (HashMap<String, Event>)events.clone();
         try {
@@ -249,15 +251,12 @@ public class MainModel extends Application {
         return filters.eventVisible(getEvent(eventId));
     }
 
-    public static int getLifeStoryColor()
-    {
-        //TODO: use settings to determine this
-        return Color.BLUE;
+    public static boolean isChanged() {
+        return changed;
     }
 
-    public static int getSpouseLineColor()
-    {
-        return Color.RED;
+    public static void setChanged(boolean changed) {
+        MainModel.changed = changed;
     }
 
     public static void dump(String msg)

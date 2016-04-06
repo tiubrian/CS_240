@@ -86,7 +86,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Log.e(tag, "initializing the mapfragment without an activity");
         this.selPersonId = null;
         this.selEventId = null;
-        Log.e(tag, "Map fragment has event id "+this.selEventId);
+        Log.e(tag, "Map fragment has event id " + this.selEventId);
         lifeStory = new ArrayList<Polygon>();
         spouseLine = null;
         familyLines = new ArrayList<Polygon>();
@@ -120,7 +120,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         setMenuItem(menu, R.id.action_settings, Iconify.IconValue.fa_gear);
         setMenuItem(menu, R.id.action_filter, Iconify.IconValue.fa_filter);
         setMenuItem(menu, R.id.action_search, Iconify.IconValue.fa_search);
-
     }
 
     @Override
@@ -263,6 +262,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         showGenderImage(p.getGender());
     }
 
+    private void refreshIfNeeded()
+    {
+        Log.e(tag, "refreshing");
+        if (MainModel.isChanged()) {
+            clearFamilyStoryLines();
+            clearLifeStory();
+            clearSpouseLine();
+            mMap.clear();
+            mMap.setMapType(Settings.getMapType());
+            showEvents();
+        }
+        MainModel.setChanged(false);
+    }
+
     private void setUpMap() {
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -270,6 +283,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
   //              Log.e(tag, "clicked on marker");
                 String eventId = marker.getSnippet();
                 setEvent(eventId);
+                refreshIfNeeded();
                 return false;
             }
         });
