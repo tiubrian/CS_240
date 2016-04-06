@@ -1,11 +1,18 @@
 package cs240.benjamin.familymap.ui;
 
+import android.graphics.Color;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
 
 import java.util.ArrayList;
 
@@ -22,7 +29,14 @@ public class FilterActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(new IconDrawable(this, Iconify.IconValue.fa_arrow_left).color(Color.LTGRAY));
+        actionBar.setTitle("Filters");
+
+
         filterList = (ListView)findViewById(R.id.filter_list);
+
 
 
         filters = new ArrayList<FilterView>();
@@ -97,7 +111,30 @@ public class FilterActivity extends ActionBarActivity {
 
         filterList.setAdapter(filterAdapter);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                Log.e(tag, "clicking on home button");
+                finish();
+                return true;
+            default:
+                return true;
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 }
+
 
 class eventFilterListener implements CompoundButton.OnCheckedChangeListener
 {

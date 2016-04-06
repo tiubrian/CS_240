@@ -98,7 +98,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (container == null) {
             return null;
         }
-//        view = (ScrollView) inflater.inflate(R.layout.map_layout, container, false);
         view = (RelativeLayout) inflater.inflate(R.layout.map_layout, container, false);
         event_text = (TextView)view.findViewById(R.id.map_event_text);
         Drawable andIcon = new IconDrawable(getActivity(), Iconify.IconValue.fa_android);
@@ -116,10 +115,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         Log.e(tag, "calling create options menu in fragment");
-        inflater.inflate(R.menu.action_menu, menu);
-        setMenuItem(menu, R.id.action_settings, Iconify.IconValue.fa_gear);
-        setMenuItem(menu, R.id.action_filter, Iconify.IconValue.fa_filter);
-        setMenuItem(menu, R.id.action_search, Iconify.IconValue.fa_search);
+        if (((MapActivityInterface)getActivity()).showActions()) {
+            inflater.inflate(R.menu.action_menu, menu);
+            setMenuItem(menu, R.id.action_settings, Iconify.IconValue.fa_gear);
+            setMenuItem(menu, R.id.action_filter, Iconify.IconValue.fa_filter);
+            setMenuItem(menu, R.id.action_search, Iconify.IconValue.fa_search);
+        }
+        else
+        {
+            inflater.inflate(R.menu.back_menu, menu);
+            setMenuItem(menu, R.id.go_to_top, Iconify.IconValue.fa_angle_double_up);
+        }
     }
 
     @Override
@@ -132,6 +138,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         Intent intent;
         switch (id)
         {
+            case android.R.id.home:
+                getActivity().finish();
+                break;
             case R.id.action_filter:
                 Log.e(tag, "clicked on filter action");
                 intent = new Intent(getActivity().getApplicationContext(), FilterActivity.class);
@@ -145,6 +154,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             case R.id.action_settings:
                 Log.e(tag, "clicked on settings action");
                 intent = new Intent(getActivity().getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.go_to_top:
+                intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
             default:

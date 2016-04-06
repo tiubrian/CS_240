@@ -1,6 +1,8 @@
 package cs240.benjamin.familymap.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,12 +49,14 @@ public class SearchActivity extends ActionBarActivity {
         setContentView(R.layout.activity_search);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(new IconDrawable(this, Iconify.IconValue.fa_arrow_left).color(Color.LTGRAY));
         actionBar.setTitle("Search");
         query = "";
 
 
         if (savedInstanceState != null)
         {
+            Log.e(tag, "creating from saved instance state");
             query = savedInstanceState.getString("query");
         }
 
@@ -79,6 +84,33 @@ public class SearchActivity extends ActionBarActivity {
 
         ResultAdapter adapter = new ResultAdapter(this, R.id.search_list, new ArrayList<Result>());
         resultList.setAdapter(adapter);
+
+        resultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(tag, "cliked on result");
+                Result result = (Result)parent.getAdapter().getItem(position);
+                Intent intent;
+                switch (result.type)
+                {
+                    case "person":
+                        Log.e(tag, "starting person activity");
+                        intent = new Intent(getApplicationContext(), PersonActivity.class);
+                        intent.putExtra("personId", result.id);
+                        startActivity(intent);
+                        break;
+                    case "event":
+                        Log.e(tag, "starting map event activity");
+                        intent = new Intent(getApplicationContext(), MapActivity.class);
+                        intent.putExtra("eventId", result.id);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         if (query.length() > 0) doSearch();
     }
 
@@ -97,7 +129,7 @@ public class SearchActivity extends ActionBarActivity {
         {
             if (p.containsString(query))
             {
-                newResults.add(new Result(p.getFullName(), p.getGenderIcon()));
+                newResults.add(new Result(p.getFullName(), p.getGenderIcon(), "person", p.getId()));
             }
         }
 
@@ -110,7 +142,7 @@ public class SearchActivity extends ActionBarActivity {
             {
                 Person p = e.getPerson();
                 String text = e.fullDescription()+System.getProperty("line.separator")+p.getFullName();
-                newResults.add(new Result(text, Iconify.IconValue.fa_map_marker));
+                newResults.add(new Result(text, Iconify.IconValue.fa_map_marker, "event", e.getId()));
             }
         }
 
@@ -162,10 +194,14 @@ class Result
 {
     String text;
     Iconify.IconValue imageId;
-    public Result(String text, Iconify.IconValue imageId)
+    String type;
+    String id;
+    public Result(String text, Iconify.IconValue imageId, String type, String id)
     {
         this.text = text;
         this.imageId = imageId;
+        this.type = type;
+        this.id = id;
     }
 
 
@@ -207,6 +243,13 @@ class ResultAdapter extends ArrayAdapter<Result> {
     }
 
     @Override
+    public Result getItem(int position)
+    {
+        Log.e(tag, "calling getItem");
+        return results.get(position);
+    }
+
+    @Override
     public Context getContext()
     {
         Log.e(tag, "getting context");
@@ -240,7 +283,6 @@ class ResultAdapter extends ArrayAdapter<Result> {
 
         return row;
     }
-
 }
 
 class ResultViewHolder

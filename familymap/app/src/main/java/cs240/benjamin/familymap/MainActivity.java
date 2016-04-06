@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity implements MapActivityInterf
         return this.eventId;
     }
 
-
+    public boolean showActions() {return true;}
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

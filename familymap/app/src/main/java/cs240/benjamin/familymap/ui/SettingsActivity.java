@@ -25,6 +25,9 @@ import cs240.benjamin.familymap.model.*;
 
 import java.util.HashMap;
 import com.google.android.gms.maps.GoogleMap;
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
+
 import java.util.List;
 
 public class SettingsActivity extends ActionBarActivity {
@@ -89,6 +92,8 @@ public class SettingsActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Settings");
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(new IconDrawable(this, Iconify.IconValue.fa_arrow_left).color(Color.LTGRAY));
+
         initViews();
     }
 

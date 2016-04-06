@@ -6,4 +6,5 @@ package cs240.benjamin.familymap.ui;
 public interface MapActivityInterface {
 
     public String getEventId();
+    public boolean showActions();
 }

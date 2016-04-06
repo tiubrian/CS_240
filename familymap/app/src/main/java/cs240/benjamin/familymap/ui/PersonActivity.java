@@ -1,11 +1,16 @@
 package cs240.benjamin.familymap.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -14,15 +19,18 @@ import android.widget.TextView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.joanzapata.android.iconify.IconDrawable;
+import com.joanzapata.android.iconify.Iconify;
 
 import java.util.ArrayList;
 
+import cs240.benjamin.familymap.MainActivity;
 import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.model.Event;
 import cs240.benjamin.familymap.model.MainModel;
 import cs240.benjamin.familymap.model.Person;
 
-public class PersonActivity extends AppCompatActivity {
+public class PersonActivity extends ActionBarActivity {
     private String personId;
     public static final String tag = "familypersonactivity";
 
@@ -44,6 +52,12 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(new IconDrawable(this, Iconify.IconValue.fa_arrow_left).color(Color.LTGRAY));
+        actionBar.setTitle("Person Activity");
+
+
         if (savedInstanceState == null) {
             Intent intent = getIntent();
             if (intent.hasExtra("personId")) {
@@ -57,6 +71,8 @@ public class PersonActivity extends AppCompatActivity {
             setPersonId(savedInstanceState.getString("personId"));
             Log.e(tag, "initialized from savedstate with id "+this.personId);
         }
+
+
 
         fname = (TextView) findViewById(R.id.person_fname);
         lname = (TextView) findViewById(R.id.person_lname);
@@ -131,6 +147,49 @@ public class PersonActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                Log.e(tag, "clicking on home button");
+                finish();
+                return true;
+            case R.id.go_to_top:
+                Log.e(tag, "clicking on go to top");
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return true;
+
+        }
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.back_menu, menu);
+        setMenuItem(menu, R.id.go_to_top, Iconify.IconValue.fa_angle_double_up);
+        return true;
+    }
+
+    private void setMenuItem(Menu menu, int id, Iconify.IconValue value)
+    {
+
+        MenuItem item = menu.findItem(id);
+        if (item == null)
+        {
+            Log.e(tag, "menu item is null");
+        }
+
+        else item.setIcon(new IconDrawable(getApplicationContext(), value).color(Color.LTGRAY).sizeDp(40));
     }
 
 }
