@@ -29,6 +29,15 @@ public class Event implements Comparable{
         this.personId = personId;
     }
 
+    public boolean containsString(String query)
+    {
+        query = query.toLowerCase();
+        return (description.toLowerCase().contains(query) ||
+                year.toLowerCase().contains(query) ||
+                country.toLowerCase().contains(query)||
+                city.toLowerCase().contains(query)
+        );
+    }
 
     public Person getPerson()
     {

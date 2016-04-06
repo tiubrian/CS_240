@@ -1,5 +1,9 @@
 package cs240.benjamin.familymap.model;
 
+import android.graphics.drawable.Icon;
+
+import com.joanzapata.android.iconify.Iconify;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,6 +47,19 @@ public class Person {
         this.gender = gender;
     }
 
+    public Iconify.IconValue getGenderIcon()
+    {
+        switch (gender.toLowerCase())
+        {
+            case "m":
+                return Iconify.IconValue.fa_male;
+            case "f":
+                return Iconify.IconValue.fa_female;
+            default:
+                return Iconify.IconValue.fa_android;
+        }
+    }
+
     public Person getMother()
     {
         return MainModel.getPerson(motherId);
@@ -74,6 +91,12 @@ public class Person {
         events.add(id);
     }
 
+
+    public boolean containsString(String query)
+    {
+        query = query.toLowerCase();
+        return (firstName.toLowerCase().contains(query) || lastName.toLowerCase().contains(query));
+    }
 
     public ArrayList<String> getEventIds()
     {
