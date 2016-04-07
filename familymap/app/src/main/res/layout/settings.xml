@@ -18,6 +18,7 @@
         android:layout_toLeftOf="@+id/life_story_switch"
         android:layout_toRightOf="@+id/life_story_text"
         android:id="@+id/life_story_color"
+        android:gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></Spinner>
     <Switch
@@ -49,6 +50,7 @@
             android:layout_toLeftOf="@+id/family_tree_switch"
             android:layout_toRightOf="@+id/family_tree_text"
             android:id="@+id/family_tree_color"
+            android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></Spinner>
         <Switch
@@ -81,6 +83,7 @@
         <Spinner
             android:layout_toLeftOf="@+id/spouse_switch"
             android:layout_toRightOf="@+id/spouse_text"
+            android:gravity="right"
             android:id="@+id/spouse_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></Spinner>
@@ -115,6 +118,8 @@
         <Spinner
             android:layout_toRightOf="@+id/map_text"
             android:id="@+id/map_type"
+            android:gravity="end"
+            android:textAlignment="textEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"></Spinner>

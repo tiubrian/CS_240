@@ -147,7 +147,7 @@ class eventFilterListener implements CompoundButton.OnCheckedChangeListener
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Log.e(tag, " clicking on event switch "+description);
+        Log.e(tag, " clicking on event switch "+description+" val "+Boolean.toString(isChecked));
         MainModel.filters.setEvent(this.description, isChecked);
     }
 }

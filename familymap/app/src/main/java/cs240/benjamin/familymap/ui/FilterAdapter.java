@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -62,14 +63,22 @@ public class FilterAdapter extends ArrayAdapter<FilterView> {
             holder = (FilterViewHolder)row.getTag();
         }
 
+        final int pos = position;
         FilterView filter = filters.get(position);
 
         if (filter != null)
         {
             holder.superText.setText(filter.getSuperText());
             holder.subText.setText(filter.getSubText());
+            holder.enabled.setOnCheckedChangeListener(
+                    new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            filters.get(pos).setEnabled(isChecked);
+                            filters.get(pos).getListener().onCheckedChanged(buttonView, isChecked);
+                        }
+                    });
             holder.enabled.setChecked(filter.isEnabled());
-            holder.enabled.setOnCheckedChangeListener(filter.getListener());
         }
 
         return row;

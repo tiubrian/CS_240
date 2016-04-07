@@ -12,6 +12,7 @@ import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
 import cs240.benjamin.familymap.R;
+import cs240.benjamin.familymap.model.MainModel;
 import cs240.benjamin.familymap.ui.*;
 
 public class MainActivity extends ActionBarActivity implements MapActivityInterface {
@@ -32,6 +33,11 @@ public class MainActivity extends ActionBarActivity implements MapActivityInterf
         if (savedInstanceState == null)
         {
             showLogin();
+            Log.e(tag, "saved instance state null");
+            Log.e(tag, "Main Model uid "+ MainModel.userID);
+
+            //a filthy hack to get resync to work properly
+            if (MainModel.userID.length() > 0) showMap();
         }
         else
         {
