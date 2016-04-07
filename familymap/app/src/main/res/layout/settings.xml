@@ -5,14 +5,15 @@
 
 <RelativeLayout
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"><TextView
+    android:layout_width="match_parent">
+    <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
     android:text="Life Story Lines"
     android:id="@+id/life_story_text"
-    android:textColor="#000000"
-    />
+        style="@style/supertext"
+        />
     <Spinner
         android:layout_toLeftOf="@+id/life_story_switch"
         android:layout_toRightOf="@+id/life_story_text"
@@ -31,6 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/subtext"
         android:text="SHOW LIFE STORY LINES"/>
     <View android:layout_height="3dp" android:layout_width="match_parent" android:background="#aaaaaa"></View>
     <RelativeLayout
@@ -41,7 +43,7 @@
         android:layout_alignParentLeft="true"
         android:text="Family Tree Lines"
         android:id="@+id/family_tree_text"
-        android:textColor="#000000"
+        style="@style/supertext"
         />
         <Spinner
             android:layout_toLeftOf="@+id/family_tree_switch"
@@ -61,6 +63,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/subtext"
         android:text="SHOW TREE LINES"/>
     <View android:layout_height="3dp" android:layout_width="match_parent" android:background="#aaaaaa"></View>
 
@@ -73,7 +76,7 @@
         android:layout_alignParentLeft="true"
         android:text="Spouse Lines"
         android:id="@+id/spouse_text"
-        android:textColor="#000000"
+        style="@style/supertext"
         />
         <Spinner
             android:layout_toLeftOf="@+id/spouse_switch"
@@ -94,7 +97,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SHOW SPOUSE LINES"/>
+        android:text="SHOW SPOUSE LINES"
+        android:textSize="10dp"/>
     <View android:layout_height="3dp" android:layout_width="match_parent" android:background="#aaaaaa"></View>
 
     <RelativeLayout
@@ -106,7 +110,7 @@
             android:layout_alignParentLeft="true"
             android:text="Map Type"
             android:id="@+id/map_text"
-            android:textColor="#000000"
+            style="@style/supertext"
             />
         <Spinner
             android:layout_toRightOf="@+id/map_text"
@@ -119,6 +123,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/subtext"
         android:text="BACKGROUND DISPLAY ON MAP"/>
     <View android:layout_height="3dp" android:layout_width="match_parent" android:background="#aaaaaa"></View>
 
@@ -126,10 +131,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/resync"
+        style="@style/supertext"
         android:text="Resync Data"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/subtext"
         android:text="FROM FAMILYMAP SERVICE"/>
     <View android:layout_height="3dp" android:layout_width="match_parent" android:background="#aaaaaa"></View>
 
@@ -138,10 +145,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/logout"
+        style="@style/supertext"
         android:text="Logout"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/subtext"
         android:text="RETURNS TO LOGIN SCREEN"/>
     <View android:layout_height="3dp" android:layout_width="match_parent" android:background="#aaaaaa"></View>
 

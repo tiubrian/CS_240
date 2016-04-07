@@ -45,8 +45,6 @@ public class MainActivity extends ActionBarActivity implements MapActivityInterf
            }
            else showLogin();
         }
-
-        Log.e(tag, "adding map fragment");
     }
 
     public void showLogin()

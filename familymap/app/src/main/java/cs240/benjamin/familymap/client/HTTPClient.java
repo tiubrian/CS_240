@@ -23,16 +23,19 @@ public class HTTPClient {
 
     public static JSONObject doAuthAction(String action, String auth_token)
     {
+        Log.e(tag, "called with action "+action+" token "+auth_token);
         URL url;
         JSONObject result;
         try {
             url = new URL("http://" + serverIP + ":" + serverPort + "/" + action);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
             connection.setRequestProperty("Authorization", auth_token);
+            Log.e(tag, "connecting");
             connection.connect();
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                Log.e(tag, "got good response code");
                 // Get response body input stream
                 InputStream responseBody = connection.getInputStream();
 
@@ -48,8 +51,13 @@ public class HTTPClient {
                 String responseBodyData = baos.toString();
                 return new JSONObject(responseBodyData);
             }
+            else
+            {
+                Log.e(tag, "got bad response code");
+            }
         }
-        catch (Exception e) { Log.e(tag, e.getMessage());}
+
+        catch (Exception e) { Log.e(tag, "exception in auth action msg" + e.getMessage()+" tostring "+e.toString());}
 
         return null;
     }
@@ -64,9 +72,11 @@ public class HTTPClient {
             connection.setRequestMethod("POST");
             OutputStream reqBody = connection.getOutputStream();
             reqBody.write(payload.toString().getBytes());
+            Log.e(tag, "connecting");
             connection.connect();
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                Log.e(tag, "got good response code");
                 // Get response body input stream
                 InputStream responseBody = connection.getInputStream();
 
@@ -82,8 +92,12 @@ public class HTTPClient {
                 String responseBodyData = baos.toString();
                 return new JSONObject(responseBodyData);
             }
+            else
+            {
+                Log.e(tag, "got bad response code");
+            }
         }
-        catch (Exception e) { Log.e(tag, e.getMessage());}
+        catch (Exception e) { Log.e(tag, "exception in post action "+ e.getMessage());}
 
         return null;
 

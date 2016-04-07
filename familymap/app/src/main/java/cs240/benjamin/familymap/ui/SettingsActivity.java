@@ -1,6 +1,7 @@
 package cs240.benjamin.familymap.ui;
 
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import cs240.benjamin.familymap.MainActivity;
 import cs240.benjamin.familymap.R;
 import cs240.benjamin.familymap.model.*;
 
+import java.net.URL;
 import java.util.HashMap;
 import com.google.android.gms.maps.GoogleMap;
 import com.joanzapata.android.iconify.IconDrawable;
@@ -260,17 +262,23 @@ public class SettingsActivity extends ActionBarActivity {
 
     public void resync()
     {
-        if (!MainModel.sync())
-        {
-            Toast.makeText(getApplicationContext(), "Sync Failed", Toast.LENGTH_LONG).show();
-            return;
-        }
+        ResyncTask task = new ResyncTask();
+        task.execute();
+    }
 
+    public void onSyncFailed()
+    {
+        Toast.makeText(getApplicationContext(), "Sync Failed", Toast.LENGTH_LONG).show();
+    }
+
+    public void onSyncSucceeded()
+    {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("showMap", true);
         startActivity(intent);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -291,6 +299,34 @@ public class SettingsActivity extends ActionBarActivity {
             default:
                 return true;
 
+        }
+    }
+
+
+    public class ResyncTask extends AsyncTask<URL, Integer, Boolean>
+    {
+        public static final String tag = "familyudatatask";
+
+        @Override
+        public Boolean doInBackground(URL... urls)
+        {
+            Log.e(tag, "called doinbackground");
+            return MainModel.sync();
+        }
+
+        public void onProgressUpdate(Integer... progress)
+        {
+
+        }
+
+        public void onPostExecute(Boolean success)
+        {
+            if (!success) {
+                onSyncFailed();
+            }
+            else {
+                onSyncSucceeded();
+            }
         }
     }
 

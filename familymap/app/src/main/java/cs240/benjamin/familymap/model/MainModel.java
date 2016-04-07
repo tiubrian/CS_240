@@ -140,7 +140,7 @@ public class MainModel extends Application {
 
        for (int i=0; i < data.length(); i++)
        {
-      //     dump("on person "+Integer.toString(i));
+           dump("on person "+Integer.toString(i));
            JSONObject person_obj =  data.getJSONObject(i);
            String id = person_obj.getString("personID");
            String motherId = safeJSONGet(person_obj, "mother");
