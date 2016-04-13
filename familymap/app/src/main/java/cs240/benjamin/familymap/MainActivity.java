@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity implements MapActivityInterf
     public final static String tag = "familyMainActivity";
     public static FragmentManager fragmentManager;
     private String eventId;
+    public boolean showMap = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements MapActivityInterf
     public void showMap()
     {
         Log.e(tag,"called show map");
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment()).commit();
+        if (showMap) getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new MapFragment()).commit();
         Log.e(tag, "showed map");
     }
 

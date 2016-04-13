@@ -23,7 +23,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<MainActivity> {
     private MainActivity mActivity;
 
     //I wish there was a way to set these, as hardcoding isn't a versatile solution
-    private String hostText = "10.24.66.76";
+    private String hostText = "192.168.1.115";
     private String portText = "8080";
 
     private String uname = "u";
@@ -83,8 +83,9 @@ public class LoginTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
         Button loginButton = (Button)mActivity.findViewById(R.id.login_button1);
         clickButton(loginButton);
+        mActivity.showMap = false;
 
-        int num_tries = 30;
+        int num_tries = 60;
         while (MainModel.people.size() <= 0 || MainModel.events.size() <= 0)
         {
             num_tries--;
@@ -131,10 +132,11 @@ public class LoginTest extends ActivityInstrumentationTestCase2<MainActivity> {
             for (int i = 0; i < num_events; i++)
             {
                 Event curr = events.get(i);
+                Log.e(tag, curr.toString());
                 switch (curr.getDescription().toLowerCase())
                 {
                     case "birth":
-                        assertTrue("The first birth event is not the first event for person "+p.toString(), !seenBirth && i > 0);
+                        assertTrue("The first birth event is not the first event for person "+p.toString(), seenBirth || i == 0);
                         seenBirth = true;
                         break;
 
