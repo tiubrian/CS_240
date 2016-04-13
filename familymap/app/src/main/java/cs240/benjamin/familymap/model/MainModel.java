@@ -21,13 +21,13 @@ import cs240.benjamin.familymap.client.HTTPClient;
 public class MainModel extends Application {
     public static final String tag = "familymainmodel";
 
-    public static String authToken = "";
-    public static String userID = "";
-    public static HashMap<String, Person> people = new HashMap<String, Person>();
-    public static HashMap<String, Event> events = new HashMap<String, Event>();
-    public static TreeSet<String> descriptions = new TreeSet<String>();
-    public static Filters filters = null;
-    private static boolean changed = false;
+    public static volatile String authToken = "";
+    public static volatile String userID = "";
+    public static volatile HashMap<String, Person> people = new HashMap<String, Person>();
+    public static volatile HashMap<String, Event> events = new HashMap<String, Event>();
+    public static volatile TreeSet<String> descriptions = new TreeSet<String>();
+    public static volatile Filters filters = null;
+    private static volatile boolean changed = false;
 
     public static Person getPerson(String id)
     {
